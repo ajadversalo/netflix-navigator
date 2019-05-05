@@ -8,12 +8,15 @@ class App extends Component {
     this.state = {
       titles:  [],
       days: 7,
-      country: 'CA'
+      country: 'CA',
+      netflixid: 60029591,
+      titleDetail : null
     };
   }
 
 componentDidMount = () => {
-  this.fetchTitles();
+  //this.fetchTitles();
+ // this.fetchTitleDetail();
 }
 
 fetchTitles = () => {
@@ -24,10 +27,24 @@ fetchTitles = () => {
   })
 }
 
+fetchTitleDetail = () => {
+  TitleAPI.getTitleDetail(this.state.netflixid, (data) => {
+    let stateCopy = {...this.state};
+    stateCopy.titleDetail = data;
+    this.setState(stateCopy);
+  })
+}
+
 render(){
   if(this.state.titles.length > 0){
     console.log(this.state.titles)
+    
   }
+  
+  if(this.state.titleDetail !== null){
+    console.log(this.state.titleDetail.imdbinfo.plot);
+  }
+
   return (
     <div className="App">
     
