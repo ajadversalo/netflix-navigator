@@ -45,6 +45,7 @@ TitleAPI.getTitleDetail = (id, callback) => {
                     callback(data.RESULT);                    
                 });
         })
+        
         .catch((err) => {
             console.log('error: ' + err);
         }); 
