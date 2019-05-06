@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TitleAPI from '../src/api/TitleAPI';
+import NavBar from '../src/components/NavBar';
 
 class App extends Component {
   constructor(props){
@@ -47,9 +48,8 @@ render(){
 
   return (
     <div className="App">
-    
+      <NavBar/>
       {this.state.titles.map(title => <a href=""><img src={title.image}/></a> )}
-    
     </div>
   );
 }
