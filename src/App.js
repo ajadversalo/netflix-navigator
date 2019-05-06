@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import TitleAPI from '../src/api/TitleAPI';
 import NavBar from '../src/components/NavBar';
+import Header from '../src/components/Header';
+import {Navbar, Nav, NavDropdown, Button, Form, FormControl, Jumbotron} from 'react-bootstrap';
 
 class App extends Component {
   constructor(props){
@@ -16,7 +18,7 @@ class App extends Component {
   }
 
 componentDidMount = () => {
-  //this.fetchTitles();
+  this.fetchTitles();
  // this.fetchTitleDetail();
 }
 
@@ -48,7 +50,8 @@ render(){
 
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar />
+      <Header />
       {this.state.titles.map(title => <a href=""><img src={title.image}/></a> )}
     </div>
   );
