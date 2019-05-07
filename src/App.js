@@ -3,6 +3,7 @@ import './App.css';
 import TitleAPI from '../src/api/TitleAPI';
 import NavBar from '../src/components/NavBar';
 import Header from '../src/components/Header';
+import TableIcon from '../src/components/TableIcon.js';
 import {Navbar, Nav, NavDropdown, Button, Form, FormControl, Jumbotron} from 'react-bootstrap';
 
 class App extends Component {
@@ -52,7 +53,9 @@ render(){
     <div className="App">
       <NavBar />
       <Header />
-      {this.state.titles.map(title => <a href=""><img src={title.image}/></a> )}
+      { this.state.titles &&
+        <TableIcon titles={this.state.titles}/>
+      }
     </div>
   );
 }
