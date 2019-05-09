@@ -70,7 +70,8 @@ render(){
       <NavBar 
         fetchTitles = {this.fetchTitles}
         fetchNewTitles = {this.fetchNewTitles}
-        toggleSearch = {this.toggleSearch} 
+        toggleSearch = {this.toggleSearch}
+        endYear = {this.state.endYear} 
       />
       {/* <Header 
         fetchNewTitles = {this.fetchNewTitles}

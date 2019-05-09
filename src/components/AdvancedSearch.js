@@ -24,7 +24,9 @@ render(){
         <div>
             <Form>
                 <Form.Group>
-                    <Form.Label><h3>Advanced Search</h3></Form.Label>
+                    <Row>
+                    <Form.Label><h4>Advanced Search</h4></Form.Label>
+                    </Row>
                     <Row>
                         <Form.Label>Production Year</Form.Label>
                         <Form.Control type="text" placeholder="Start" name="startYear" onChange={this.handleChange}/>
