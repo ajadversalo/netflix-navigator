@@ -3,9 +3,10 @@ import './App.css';
 import TitleAPI from '../src/api/TitleAPI';
 import NavBar from '../src/components/NavBar';
 import Header from '../src/components/Header';
-import TableIcon from '../src/components/TableIcon.js';
+import Table from '../src/components/Table.js';
 import AdvancedSearch from '../src/components/AdvancedSearch.js';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Jumbotron} from 'react-bootstrap';
+
 
 class App extends Component {
   constructor(props){
@@ -19,7 +20,9 @@ class App extends Component {
       title: null,
       startYear:null,
       endYear:null,
-      advancedSearch:false
+      advancedSearch:false,
+      currentScreen:'home',
+      view: 'icon'
 
     };
   }
@@ -34,7 +37,7 @@ fetchNewTitles = (days, country) => {
     stateCopy.titles = data;
     this.setState(stateCopy);
   })
-  //alert(days + " " + country);
+  this.switchScreen('new');
 }
 
 toggleSearch = () => {
@@ -50,7 +53,9 @@ fetchTitles = (title, startYear, endYear, type, genreID) => {
     this.setState(stateCopy);
   })
   console.log(title);
+  
 }
+
 
 fetchTitleDetail = () => {
   TitleAPI.getTitleDetail(this.state.netflixid, (data) => {
@@ -60,24 +65,49 @@ fetchTitleDetail = () => {
   })
 }
 
+changeView = (view) => {
+  let stateCopy = {...this.state};
+  stateCopy.view = view;
+  this.setState(stateCopy);
+}
+
+switchScreen = (screen) => {
+    let stateCopy = {...this.state};
+    stateCopy.currentScreen = screen;
+    stateCopy.titles = [];
+    this.setState(stateCopy);
+}
+
 render(){
   if(this.state.titles.length > 0){
     console.log(this.state.titles)
   }
+
   
+  //console.log(currentDate);
   return (
     <div>
+
+      <Container>
       <NavBar 
         fetchTitles = {this.fetchTitles}
         fetchNewTitles = {this.fetchNewTitles}
         toggleSearch = {this.toggleSearch}
         endYear = {this.state.endYear} 
+        switchScreen = {this.switchScreen}
+        changeView = {this.changeView} 
       />
+
+      {
+        this.state.currentScreen ==='home' &&
+        <Header></Header>
+      }
+
       {/* <Header 
         fetchNewTitles = {this.fetchNewTitles}
       /> */}
       
-      { this.state.advancedSearch &&
+      { this.state.currentScreen === 'advanced' &&
         <Container >
           <Row>
             <Col></Col>
@@ -86,14 +116,29 @@ render(){
         fetchTitles = {this.fetchTitles}
         />
         </Col>
-        <Col></Col>
+        <Col>
+        </Col>
         </Row>
         </Container>
-      }
-
-        
-        <TableIcon titles={this.state.titles}/>
-        
+      } 
+      {
+        this.state.currentScreen === 'new' &&
+         <div style={{aligSelf:'center', justifyContent: 'center'}}>
+          
+        <Jumbotron fluid>
+              <Container fluid>
+              <p className="lead">New content from May 01 to </p>
+              </Container>
+            </Jumbotron>
+          
+          {/* <TableIcon titles={this.state.titles}/>    */}
+        </div>
+      }        
+        <Table
+          titles={this.state.titles}
+          view={this.state.view}
+        />
+        </Container>
     </div>
   );
 }

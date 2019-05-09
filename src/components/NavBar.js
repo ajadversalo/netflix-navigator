@@ -4,20 +4,20 @@ import QuickSearch from './QuickSearch.js';
 
 let NavBar = (props) => (
     <Navbar bg="dark"  variant="dark" expand="lg">
-        <Navbar.Brand href="#home">Netflix Navigator</Navbar.Brand>
+        <Navbar.Brand href="#home" onClick={() => {props.switchScreen("home")}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
                 {/* <Nav.Link href="#home">Home</Nav.Link> */}
-                <NavDropdown title="View" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Icon</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Detail</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">List</NavDropdown.Item>
+                <NavDropdown title="Change View" id="basic-nav-dropdown">
+                    <NavDropdown.Item onClick={() => {props.changeView('icon')}}>Icon</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => {props.changeView('detail')}}>Detail</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => {props.changeView('list')}}>List</NavDropdown.Item>
                     {/* <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
                 </NavDropdown> 
                 <Nav.Link href="#link" onClick={() => {props.fetchNewTitles(7, 'CA')}}>What's New?</Nav.Link>
-                <Nav.Link href="#link" onClick={() => {props.toggleSearch()}}>Advanced Search</Nav.Link>
+                <Nav.Link href="#link" onClick={() => {props.switchScreen("advanced")}}>Advanced Search</Nav.Link>
 
 
                 
