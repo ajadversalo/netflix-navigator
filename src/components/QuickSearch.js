@@ -11,7 +11,7 @@ handleTextChange = (event) => {
 }
 
 handleSubmit = () => {
-    this.props.fetchTitles(this.state.title, 1900, 2019)
+    this.props.fetchTitles(this.state.title, 1900, 2019, "Any", "Any")
 }
 
 render(){

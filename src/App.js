@@ -5,6 +5,7 @@ import NavBar from '../src/components/NavBar';
 import Header from '../src/components/Header';
 import TableIcon from '../src/components/TableIcon.js';
 import AdvancedSearch from '../src/components/AdvancedSearch.js';
+import {Container, Row, Col} from 'react-bootstrap';
 
 class App extends Component {
   constructor(props){
@@ -18,6 +19,7 @@ class App extends Component {
       title: null,
       startYear:null,
       endYear:null,
+      advancedSearch:false
 
     };
   }
@@ -35,14 +37,11 @@ fetchNewTitles = (days, country) => {
   //alert(days + " " + country);
 }
 
-// fetchTitles = (countryCode, title, startYear, endYear) => {
-//   TitleAPI.getTitles(countryCode, title, startYear, endYear, (data) => {
-//     let stateCopy = {...this.state};
-//     stateCopy.titles = data;
-//     this.setState(stateCopy);
-//   })
-//   console.log(title);
-// }
+toggleSearch = () => {
+  let stateCopy = {...this.state};
+  stateCopy.advancedSearch = !stateCopy.advancedSearch;
+  this.setState(stateCopy);
+}
 
 fetchTitles = (title, startYear, endYear, type, genreID) => {
   TitleAPI.getTitles(title, startYear, endYear, type, genreID, (data) => {
@@ -67,19 +66,33 @@ render(){
   }
   
   return (
-    <div className="App">
+    <div>
       <NavBar 
         fetchTitles = {this.fetchTitles}
+        fetchNewTitles = {this.fetchNewTitles}
+        toggleSearch = {this.toggleSearch} 
       />
       {/* <Header 
         fetchNewTitles = {this.fetchNewTitles}
       /> */}
-      <AdvancedSearch
-      fetchTitles = {this.fetchTitles}
-      ></AdvancedSearch>
-      { this.state.titles &&
-        <TableIcon titles={this.state.titles}/>
+      
+      { this.state.advancedSearch &&
+        <Container >
+          <Row>
+            <Col></Col>
+        <Col>
+        <AdvancedSearch 
+        fetchTitles = {this.fetchTitles}
+        />
+        </Col>
+        <Col></Col>
+        </Row>
+        </Container>
       }
+
+        
+        <TableIcon titles={this.state.titles}/>
+        
     </div>
   );
 }

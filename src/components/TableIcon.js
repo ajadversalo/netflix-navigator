@@ -1,10 +1,10 @@
 import React from 'react';
-
+import {Container} from 'react-bootstrap';
 const TableIcon = (props) => {
     return (
-        <div>
+        <Container>
             {props.titles.map(title => <a href=""><img src={title.image}/></a> )}
-        </div>
+            </Container>
     )
 }
 
