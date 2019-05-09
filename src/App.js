@@ -4,7 +4,7 @@ import TitleAPI from '../src/api/TitleAPI';
 import NavBar from '../src/components/NavBar';
 import Header from '../src/components/Header';
 import TableIcon from '../src/components/TableIcon.js';
-import {Navbar, Nav, NavDropdown, Button, Form, FormControl, Jumbotron} from 'react-bootstrap';
+import AdvancedSearch from '../src/components/AdvancedSearch.js';
 
 class App extends Component {
   constructor(props){
@@ -13,22 +13,44 @@ class App extends Component {
       titles:  [],
       days: 7,
       country: 'CA',
-      netflixid: 60029591,
-      titleDetail : null
+      netflixid: null,
+      titleDetail : null,
+      title: null,
+      startYear:null,
+      endYear:null,
+
     };
   }
 
 componentDidMount = () => {
-  this.fetchTitles();
- // this.fetchTitleDetail();
+  console.log('component did mount');
 }
 
-fetchTitles = () => {
-  TitleAPI.getNew(this.state.days, this.state.country, (data) => {
+fetchNewTitles = (days, country) => {
+  TitleAPI.getNewTitles(days, country, (data) => {
     let stateCopy = {...this.state};
     stateCopy.titles = data;
     this.setState(stateCopy);
   })
+  //alert(days + " " + country);
+}
+
+// fetchTitles = (countryCode, title, startYear, endYear) => {
+//   TitleAPI.getTitles(countryCode, title, startYear, endYear, (data) => {
+//     let stateCopy = {...this.state};
+//     stateCopy.titles = data;
+//     this.setState(stateCopy);
+//   })
+//   console.log(title);
+// }
+
+fetchTitles = (title, startYear, endYear, type, genreID) => {
+  TitleAPI.getTitles(title, startYear, endYear, type, genreID, (data) => {
+    let stateCopy = {...this.state};
+    stateCopy.titles = data;
+    this.setState(stateCopy);
+  })
+  console.log(title);
 }
 
 fetchTitleDetail = () => {
@@ -42,17 +64,19 @@ fetchTitleDetail = () => {
 render(){
   if(this.state.titles.length > 0){
     console.log(this.state.titles)
-    
   }
   
-  if(this.state.titleDetail !== null){
-    console.log(this.state.titleDetail.imdbinfo.plot);
-  }
-
   return (
     <div className="App">
-      <NavBar />
-      <Header />
+      <NavBar 
+        fetchTitles = {this.fetchTitles}
+      />
+      {/* <Header 
+        fetchNewTitles = {this.fetchNewTitles}
+      /> */}
+      <AdvancedSearch
+      fetchTitles = {this.fetchTitles}
+      ></AdvancedSearch>
       { this.state.titles &&
         <TableIcon titles={this.state.titles}/>
       }

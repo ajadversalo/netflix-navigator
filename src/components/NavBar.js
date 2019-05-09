@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import {Navbar, Nav, NavDropdown, Button, Form, FormControl} from 'react-bootstrap';
+import React from 'react';
+import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import QuickSearch from './QuickSearch.js';
 
-let NavBar = ({}) => (
+let NavBar = (props) => (
     <Navbar bg="light" expand="lg">
         <Navbar.Brand href="#home">Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -18,10 +19,13 @@ let NavBar = ({}) => (
                 </NavDropdown>
                 <Nav.Link href="#link">Advanced Search</Nav.Link>
             </Nav>
-            <Form inline>
+            {/* <Form inline>
                 <FormControl type="text" placeholder="Enter Title" className="mr-sm-2" />
                 <Button variant="outline-success">Search</Button>
-            </Form>
+            </Form> */}
+            <QuickSearch 
+                fetchTitles = {props.fetchTitles}
+            />
         </Navbar.Collapse>
     </Navbar>
 )
