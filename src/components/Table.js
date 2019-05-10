@@ -7,7 +7,7 @@ import TitleDetail from './TitleDetail.js'
 const Table = (props) => {
     return (     
             <div>
-            { 
+            {       
                 props.titles.length === 0 && 
                 <div class="alert alert-danger" role="alert">
                     Search entry returned no results.

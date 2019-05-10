@@ -4,11 +4,12 @@ import TitleAPI from '../src/api/TitleAPI';
 import NavBar from '../src/components/NavBar';
 import HomePage from '../src/components/HomePage';
 import FullDetailPage from '../src/components/FullDetailPage';
-import WhatsNewPage from '../src/components/WhatsNewPage';
-import AdvancedSearch from '../src/components/AdvancedSearch.js';
+import NewPage from '../src/components/NewPage';
+import SearchPage from '../src/components/SearchPage.js';
 import Footer from '../src/components/Footer.js'; //remove for now
 import {Container, Row, Col, Jumbotron} from 'react-bootstrap';
 import Table from '../src/components/Table.js';
+import FormTest from '../src/components/FormTest.js';
 
 
 class App extends Component {
@@ -23,10 +24,11 @@ class App extends Component {
       title: null,
       startYear: 1900, 
       endYear: 2019,
-      //advancedSearch:false,
       currentScreen:'homePage',
       view: 'icon',
-      searchString: ''
+      searchString: '',
+      type:'movie',
+      genreID: ''
 
     };
   }
@@ -76,16 +78,10 @@ changeView = (view) => {
 switchScreen = (screen) => {
     let stateCopy = {...this.state};
     stateCopy.currentScreen = screen;
-    // stateCopy.titles = [];
     this.setState(stateCopy);
 }
 
-
 submitQuickSearch = () => {
-  //let currentDate = new Date();
-  //const startYear = 1900;
-  //let endYear = currentDate.getFullYear();
-  
   this.fetchTitles(this.state.searchString, this.state.startYear, this.state.endYear, "Any", "Any")
   this.switchScreen("quickSearch");
 }
@@ -98,7 +94,6 @@ render(){
         <NavBar 
           fetchTitles    = {this.fetchTitles}
           fetchNewTitles = {this.fetchNewTitles}
-          //toggleSearch   = {this.toggleSearch}
           startYear        = {this.state.startYear} 
           endYear        = {this.state.endYear} 
           switchScreen   = {this.switchScreen}
@@ -106,31 +101,43 @@ render(){
           handleQuickSearchTextChange = {this.handleQuickSearchTextChange}
           handleChange = {this.handleChange}
           searchString = {this.state.searchString}
-          submitQuickSearch = {this.submitQuickSearch} 
+          submitQuickSearch = {this.submitQuickSearch}
+          fetchTitles = {this.fetchTitles}
+          type = {this.state.type}
+            view={this.state.view} 
         />
 
         {/* --- Home Screen --- */}
         { this.state.currentScreen ==='homePage' && <HomePage/> }
 
         {/* --- Advanced Search Screen --- */}
-        { this.state.currentScreen === 'advanced' && <AdvancedSearch fetchTitles = {this.fetchTitles} /> } 
+        { this.state.currentScreen === 'advanced' && 
+          <SearchPage
+            titles = {this.state.titles}
+            fetchTitles = {this.fetchTitles}
+            handleChange = {this.handleChange}
+            startYear = {this.state.startYear}
+            endYear = {this.state.endYear}
+            changeView     = {this.changeView}
+            type = {this.state.type}
+            view={this.state.view}
+          />
+        }
         
         {/* --- What's New Screen --- */}
         {
           this.state.currentScreen === 'new' && 
-            <WhatsNewPage 
+            <NewPage 
               titles={this.state.titles} 
               view={this.state.view}
               fetchTitleDetail={this.fetchTitleDetail}
               changeView     = {this.changeView}
-            />
-          
+            />        
         }
 
         {/* --- Full Detail Screen --- */}
         {
-          this.state.currentScreen === 'full' && <FullDetailPage titleDetail={this.state.titleDetail}/>
-           
+          this.state.currentScreen === 'full' && <FullDetailPage titleDetail={this.state.titleDetail}/>         
         }
 
         {/* --- Quick Search Screen --- */}
@@ -141,13 +148,6 @@ render(){
           fetchTitleDetail={this.fetchTitleDetail}
           />
         </div> }
-          
-        {/*Will render on all screens  */}
-        {/* <Table 
-          titles={this.state.titles} 
-          view={this.state.view}
-          fetchTitleDetail={this.fetchTitleDetail}
-          /> */}
       </Container>
     </div>
   );

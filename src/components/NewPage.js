@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from './Table.js';
 
-const WhatsNewPage = (props) => {
+const NewPage = (props) => {
     return (  
         <div>
             <div class="alert alert-success" role="alert">
@@ -17,6 +17,6 @@ const WhatsNewPage = (props) => {
     )
 }
 
-export default WhatsNewPage;
+export default NewPage;
 
 
