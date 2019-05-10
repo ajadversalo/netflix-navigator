@@ -7,12 +7,12 @@ import TitleDetail from './TitleDetail.js'
 const Table = (props) => {
     return (     
             <div>
-            {       
+            {/* {       
                 props.titles.length === 0 && 
                 <div class="alert alert-danger" role="alert">
                     Search entry returned no results.
                 </div>
-            }
+            } */}
 
             <div className="d-flex justify-content-center" style={{marginBottom:"10px"}}>
                 <ButtonGroup size="sm" className="mt-4">

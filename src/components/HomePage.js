@@ -1,10 +1,10 @@
 import React from 'react';
-import Intro from './Intro';
+// import Intro from './Intro';
 
 const HomePage = () => {
     return (  
         <div>
-           <Intro/>
+           {/* <Intro/> */}
         </div>
     )
 }

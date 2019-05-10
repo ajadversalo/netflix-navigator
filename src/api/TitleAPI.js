@@ -28,9 +28,9 @@ TitleAPI.getNewTitles = (days, country, callback) => {
         }); 
 }
 
-TitleAPI.getTitles = (title, startYear, endYear, type, genreID, callback) => {
+TitleAPI.getTitles = (searchString, startYear, endYear, type, genreID, callback) => {
     //let request = new Request(`${baseUrl}/aaapi.cgi?q=${title}-!1900,2019-!0,5-!0,10-!0,10-!Any-!Any-!Any-!Any-!I%20Don&cl=21,23,26,29,33,307,45,39,327,331,334,337,336,269,267,357,65,67,392,400,402,408,412,348,270,73,34,425,46,78&st=adv&ob=Relevance&p=1&ao=and`, {
-        let request = new Request(`${baseUrl}/aaapi.cgi?q=${title}-!${startYear},${endYear}-!0,5-!0,10-!${genreID}-!${type}-!Any-!Any-!gt100-!{downloadable}&t=ns&cl=33&st=adv&ob=Relevance&p=1&sa=and`, {
+        let request = new Request(`${baseUrl}/aaapi.cgi?q=${searchString}-!${startYear},${endYear}-!0,5-!0,10-!${genreID}-!${type}-!Any-!Any-!gt100-!{downloadable}&t=ns&cl=33&st=adv&ob=Relevance&p=1&sa=and`, {
         method: 'GET',
         headers: _headers,
         mode: 'cors'
