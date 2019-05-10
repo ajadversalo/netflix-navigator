@@ -1,23 +1,15 @@
 import React from 'react';
-import {Card, Row, Col} from 'react-bootstrap';
 
 const TitleDetail = (props) => {
-    return (
-        <div>
-        <Card>
-            <Card.Header>{props.title.title}</Card.Header>
-            <Card.Body>
-                <Row>
-                    <Col><img src={props.title.image}></img></Col>
-                    <Col>
-                        <p>{props.title.synopsis}</p>
-                        <p>Released: {props.title.released}</p>
-                        <p>RunTime: {props.title.runtime}</p>
-                        <p>IMDB Rating: {props.title.rating}</p>
-                    </Col>
-                </Row>
-            </Card.Body>
-        </Card>
+    return (  
+        <div class="media" style={{margin:'10px'}}>
+            <img class="align-self-start mr-3" src={props.title.image} alt="Generic placeholder image" />
+            <div class="media-body">
+                <h5 class="mt-0">{props.title.title}</h5>
+                <p>{props.title.synopsis}</p>
+                <p>Runtime: {props.title.runtime}</p>
+                <p>Rating: {props.title.rating}</p>
+            </div>
         </div>
     )
 }

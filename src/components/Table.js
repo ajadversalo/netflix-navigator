@@ -4,14 +4,24 @@ import TitleDetail from './TitleDetail.js'
 
 const Table = (props) => {
     return (
-        <Container>
+       
+            <div>
+            { 
+                props.titles.length === 0 && 
+                <div class="alert alert-danger" role="alert">
+                    Search entry returned no results.
+                </div>
+            }
+
+            {/* Icon View */}
             { 
                 props.view === 'icon' &&
                 <div className="d-flex justify-content-center" style={{ flexWrap: 'wrap'}}>
-                    {props.titles.map(title => <a href=""><img src={title.image} style={{margin: '5px' ,width: '120px'}}/></a> )}
+                    {props.titles.map(title => <a href="#" onClick={()=>{props.fetchTitleDetail(title.netflixid)}}><img src={title.image} style={{margin: '5px' ,width: '120px'}}/></a> )}
                 </div>    
             } 
-            
+
+            {/* Detail View */}
             {
                 props.view === 'detail' &&
                 <div >
@@ -19,6 +29,7 @@ const Table = (props) => {
                 </div>
             }
 
+            {/* List View */}
             {
                 props.view === 'list' &&
                 <div >
@@ -29,7 +40,9 @@ const Table = (props) => {
                     </ul>
                 </div>
             }
-        </Container>
+            </div>
+        
+       
     )
 }
 

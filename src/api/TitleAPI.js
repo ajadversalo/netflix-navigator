@@ -50,28 +50,6 @@ TitleAPI.getTitles = (title, startYear, endYear, type, genreID, callback) => {
         });
 }
 
-// TitleAPI.getTitles = (title, callback) => {
-//     //let request = new Request(`${baseUrl}/aaapi.cgi?q=hangover-!1900,2019-!0,5-!0,10-!0,10-!Any-!Any-!Any-!Any-!I%20Don&cl=21,23,26,29,33,307,45,39,327,331,334,337,336,269,267,357,65,67,392,400,402,408,412,348,270,73,34,425,46,78&st=adv&ob=Relevance&p=1&ao=and`, {
-//         let request = new Request(`${baseUrl}/aaapi.cgi?q=${title}-!1900,2018-!0,5-!0,10-!0-!Any-!Any-!Any-!gt100-!{downloadable}&t=ns&cl=all&st=adv&ob=Relevance&p=1&sa=and`, {
-//         method: 'GET',
-//         headers: _headers,
-//         mode: 'cors'
-//     });
-
-//     fetch(request)
-//         .then((response) => {
-//             console.log('response: ' + response);
-//             response.json()
-//                 .then((data) => {
-//                     console.log(data);
-//                     callback(data.ITEMS);                    
-//                 });
-//         })
-//         .catch((err) => {
-//             console.log('error: ' + err);
-//         });
-// }
-
 TitleAPI.getTitleDetail = (id, callback) => {
     let request = new Request(`${baseUrl}/aaapi.cgi?t=loadvideo&q=${id}`,  {
         method: 'GET',

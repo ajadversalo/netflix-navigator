@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import TitleAPI from '../src/api/TitleAPI';
 import NavBar from '../src/components/NavBar';
-import Header from '../src/components/Header';
-import Table from '../src/components/Table.js';
+import HomePage from '../src/components/HomePage';
+import FullDetailPage from '../src/components/FullDetailPage';
+import WhatsNewPage from '../src/components/WhatsNewPage';
 import AdvancedSearch from '../src/components/AdvancedSearch.js';
+import Footer from '../src/components/Footer.js'; //remove for now
 import {Container, Row, Col, Jumbotron} from 'react-bootstrap';
+import Table from '../src/components/Table.js';
 
 
 class App extends Component {
@@ -14,36 +17,26 @@ class App extends Component {
     this.state = {
       titles:  [],
       days: 7,
-      country: 'CA',
-      netflixid: null,
-      titleDetail : null,
+      country: 'CA',//remove
+      netflixid: null,//remove
+      titleDetail : [],
       title: null,
-      startYear:null,
-      endYear:null,
-      advancedSearch:false,
-      currentScreen:'home',
-      view: 'icon'
+      startYear: 1900, 
+      endYear: 2019,
+      //advancedSearch:false,
+      currentScreen:'homePage',
+      view: 'icon',
+      searchString: ''
 
     };
   }
-
-componentDidMount = () => {
-  console.log('component did mount');
-}
-
+//remove country for now
 fetchNewTitles = (days, country) => {
   TitleAPI.getNewTitles(days, country, (data) => {
     let stateCopy = {...this.state};
     stateCopy.titles = data;
     this.setState(stateCopy);
   })
-  this.switchScreen('new');
-}
-
-toggleSearch = () => {
-  let stateCopy = {...this.state};
-  stateCopy.advancedSearch = !stateCopy.advancedSearch;
-  this.setState(stateCopy);
 }
 
 fetchTitles = (title, startYear, endYear, type, genreID) => {
@@ -52,17 +45,25 @@ fetchTitles = (title, startYear, endYear, type, genreID) => {
     stateCopy.titles = data;
     this.setState(stateCopy);
   })
-  console.log(title);
-  
+  console.log(title);  
 }
-
-
-fetchTitleDetail = () => {
-  TitleAPI.getTitleDetail(this.state.netflixid, (data) => {
+//rename to something
+fetchTitleDetail = (id) => {
+  TitleAPI.getTitleDetail(id, (data) => {
     let stateCopy = {...this.state};
     stateCopy.titleDetail = data;
+    //this has to be removed
+    stateCopy.currentScreen = "full";
     this.setState(stateCopy);
   })
+}
+
+handleChange = (event) => {
+  this.setState({[event.target.name]: event.target.value});
+}
+
+handleQuickSearchTextChange = (event) => {
+  this.setState({searchString: event.target.value});
 }
 
 changeView = (view) => {
@@ -71,74 +72,82 @@ changeView = (view) => {
   this.setState(stateCopy);
 }
 
+//rename to renderScreen
 switchScreen = (screen) => {
     let stateCopy = {...this.state};
     stateCopy.currentScreen = screen;
-    stateCopy.titles = [];
+    // stateCopy.titles = [];
     this.setState(stateCopy);
 }
 
-render(){
-  if(this.state.titles.length > 0){
-    console.log(this.state.titles)
-  }
 
+submitQuickSearch = () => {
+  //let currentDate = new Date();
+  //const startYear = 1900;
+  //let endYear = currentDate.getFullYear();
   
-  //console.log(currentDate);
+  this.fetchTitles(this.state.searchString, this.state.startYear, this.state.endYear, "Any", "Any")
+  this.switchScreen("quickSearch");
+}
+
+render(){
   return (
     <div>
-
       <Container>
-      <NavBar 
-        fetchTitles = {this.fetchTitles}
-        fetchNewTitles = {this.fetchNewTitles}
-        toggleSearch = {this.toggleSearch}
-        endYear = {this.state.endYear} 
-        switchScreen = {this.switchScreen}
-        changeView = {this.changeView} 
-      />
-
-      {
-        this.state.currentScreen ==='home' &&
-        <Header></Header>
-      }
-
-      {/* <Header 
-        fetchNewTitles = {this.fetchNewTitles}
-      /> */}
-      
-      { this.state.currentScreen === 'advanced' &&
-        <Container >
-          <Row>
-            <Col></Col>
-        <Col>
-        <AdvancedSearch 
-        fetchTitles = {this.fetchTitles}
+        {/* --- Navigation --- */}
+        <NavBar 
+          fetchTitles    = {this.fetchTitles}
+          fetchNewTitles = {this.fetchNewTitles}
+          //toggleSearch   = {this.toggleSearch}
+          startYear        = {this.state.startYear} 
+          endYear        = {this.state.endYear} 
+          switchScreen   = {this.switchScreen}
+          changeView     = {this.changeView}
+          handleQuickSearchTextChange = {this.handleQuickSearchTextChange}
+          handleChange = {this.handleChange}
+          searchString = {this.state.searchString}
+          submitQuickSearch = {this.submitQuickSearch} 
         />
-        </Col>
-        <Col>
-        </Col>
-        </Row>
-        </Container>
-      } 
-      {
-        this.state.currentScreen === 'new' &&
-         <div style={{aligSelf:'center', justifyContent: 'center'}}>
+
+        {/* --- Home Screen --- */}
+        { this.state.currentScreen ==='homePage' && <HomePage/> }
+
+        {/* --- Advanced Search Screen --- */}
+        { this.state.currentScreen === 'advanced' && <AdvancedSearch fetchTitles = {this.fetchTitles} /> } 
+        
+        {/* --- What's New Screen --- */}
+        {
+          this.state.currentScreen === 'new' && 
+            <WhatsNewPage 
+              titles={this.state.titles} 
+              view={this.state.view}
+              fetchTitleDetail={this.fetchTitleDetail}
+            />
           
-        <Jumbotron fluid>
-              <Container fluid>
-              <p className="lead">New content from May 01 to </p>
-              </Container>
-            </Jumbotron>
-          
-          {/* <TableIcon titles={this.state.titles}/>    */}
-        </div>
-      }        
-        <Table
-          titles={this.state.titles}
+        }
+
+        {/* --- Full Detail Screen --- */}
+        {
+          this.state.currentScreen === 'full' && <FullDetailPage titleDetail={this.state.titleDetail}/>
+           
+        }
+
+        {/* --- Quick Search Screen --- */}
+        { this.state.currentScreen === 'quickSearch' && <div>
+        <Table 
+          titles={this.state.titles} 
           view={this.state.view}
-        />
-        </Container>
+          fetchTitleDetail={this.fetchTitleDetail}
+          />
+        </div> }
+          
+        {/*Will render on all screens  */}
+        {/* <Table 
+          titles={this.state.titles} 
+          view={this.state.view}
+          fetchTitleDetail={this.fetchTitleDetail}
+          /> */}
+      </Container>
     </div>
   );
 }

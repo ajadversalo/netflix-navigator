@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, NavDropdown, Form, FormControl, FormGroup, FormLabel, Row, Col, Button} from 'react-bootstrap';
+import {Form, Row, Button, Card} from 'react-bootstrap';
+
 class AdvancedSearch extends Component {
     constructor(props){
         super(props);
@@ -21,28 +22,36 @@ handleSubmit = () => {
 
 render(){
     return (
-        <div>
+        <div style={{margin:'10px'}}>
+           <Card>
+            <Card.Header><h5>Advanced Search</h5></Card.Header>
+            <Card.Body>            
             <Form>
-                <Form.Group>
-                    <Row>
-                    <Form.Label><h4>Advanced Search</h4></Form.Label>
-                    </Row>
-                    <Row>
-                        <Form.Label>Production Year</Form.Label>
-                        <Form.Control type="text" placeholder="Start" name="startYear" onChange={this.handleChange}/>
-                        <Form.Label>Production End</Form.Label>
-                        <Form.Control type="text" placeholder="End" name="endYear" onChange={this.handleChange}/>
-                    </Row>
-                    <Row>
-                        <Form.Label>Type</Form.Label>
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2"> Production Year </Form.Label>
+                    <Form.Label column sm="10">
+                        <Form.Control type="text" placeholder="Start Year" defaultValue={this.state.startYear} name="startYear" onChange={this.handleChange}/>
+                    </Form.Label>   
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2"> </Form.Label>
+                    <Form.Label column sm="10">
+                        <Form.Control type="text" placeholder="End Year" defaultValue={this.state.endYear} name="endYear"  onChange={this.handleChange}/>
+                    </Form.Label>   
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2"> Type </Form.Label>
+                    <Form.Label column sm="10">
                         <Form.Control as="select" name ="type" onChange={this.handleChange}>
                             <option value="movie">Movie</option>
                             <option value="series">Series</option>
-                            <option value="Any">Both</option>              
+                            <option value="Any">Movies and Series</option>              
                         </Form.Control>
-                    </Row>
-                    <Row>
-                        <Form.Label>Genre</Form.Label>
+                    </Form.Label>   
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2">Genre</Form.Label>
+                    <Form.Label column sm="10">
                         <Form.Control as="select" name="genreID" onChange={this.handleChange}>
                             <option value="1365">Action and Adventure</option>
                             <option value="783">Family Movies</option>
@@ -52,13 +61,27 @@ render(){
                             <option value="6839">Documentary</option>
                             <option value="8711">Horror</option>              
                         </Form.Control>
-                    </Row>
+                    </Form.Label>   
                 </Form.Group>
-                <Button variant="primary" value="Search" onClick={()=>{this.handleSubmit()}}>
-                    Search
-                </Button>
-            </Form>
-            <br />
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2"> </Form.Label>
+                    <Form.Label column sm="10">
+                        <Button variant="primary" 
+                            value="Search" 
+                            onClick={()=>{
+                                if (this.state.startYear < 1900 || this.state.endYear > 2019){
+                                    alert("Year cannot be less than 1900 and more than 2019");
+                                } else {
+                                    this.handleSubmit();
+                                }
+                            }}>
+                             Search
+                        </Button>
+                    </Form.Label>   
+                </Form.Group>             
+             </Form>
+             </Card.Body>
+            </Card>
         </div> 
     );
 }
