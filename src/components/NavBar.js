@@ -3,17 +3,17 @@ import {Navbar, Nav, NavDropdown, Row, Col} from 'react-bootstrap';
 
 let NavBar = (props) => (
     <Navbar bg="dark"  variant="dark" expand="lg">
-        <Navbar.Brand href="/" onClick={() => {props.switchScreen("homePage")}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
+        <Navbar.Brand href="#" onClick={() => {props.switchScreen("homePage")}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto"> 
-                <Nav.Link href="#link" onClick={() => {props.fetchNewTitles(7, 'CA'); props.switchScreen('new')}}>What's New?</Nav.Link>
-                <Nav.Link href="#link" onClick={() => {props.switchScreen("advanced")}}>Advanced Search</Nav.Link>             
-                <NavDropdown title="Change View" id="basic-nav-dropdown">
+                <Nav.Link href="#" onClick={() => {props.fetchNewTitles(7, 'CA'); props.switchScreen('new')}}>What's New?</Nav.Link>
+                <Nav.Link href="#" onClick={() => {props.switchScreen("advanced")}}>Advanced Search</Nav.Link>             
+                {/* <NavDropdown title="Change View" id="basic-nav-dropdown">
                     <NavDropdown.Item onClick={() => {props.changeView('icon')}}>Icon</NavDropdown.Item>
                     <NavDropdown.Item onClick={() => {props.changeView('detail')}}>Detail</NavDropdown.Item>
                     <NavDropdown.Item onClick={() => {props.changeView('list')}}>List</NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
             </Nav>
             {/* <QuickSearch 
                 fetchTitles = {props.fetchTitles} 

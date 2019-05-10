@@ -122,6 +122,7 @@ render(){
               titles={this.state.titles} 
               view={this.state.view}
               fetchTitleDetail={this.fetchTitleDetail}
+              changeView     = {this.changeView}
             />
           
         }

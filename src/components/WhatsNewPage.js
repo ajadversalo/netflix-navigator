@@ -11,6 +11,7 @@ const WhatsNewPage = (props) => {
                 titles={props.titles} 
                 view={props.view}
                 fetchTitleDetail={props.fetchTitleDetail}
+                changeView     = {props.changeView}
             />              
         </div>
     )

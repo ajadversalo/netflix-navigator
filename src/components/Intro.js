@@ -3,7 +3,8 @@ import {Jumbotron, Badge} from 'react-bootstrap';
 
 let Intro = () => (
     <Jumbotron >
-        <h1 class="display-4">Welcome to <span style={{color:'red'}}>Netflix Navigator</span></h1>
+        {/* <h1 class="display-4">Welcome to <span style={{color:'red'}}>Netflix Navigator</span></h1> */}
+        <h1 class="display-4">Welcome!</h1>
         <hr class="my-4"></hr>
         <h4><Badge variant="danger">To help you get started</Badge></h4>
         <hr class="my-4"></hr>
