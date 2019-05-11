@@ -103,7 +103,7 @@ render(){
           view={this.state.view}
         />
 
-        <span class="badge badge-warning">Query returned {this.state.titles.length} results</span>
+        <span class="badge badge-danger">Query returned {this.state.titles.length} results</span>
 
         {/* --- Full Detail Screen --- */}
         {

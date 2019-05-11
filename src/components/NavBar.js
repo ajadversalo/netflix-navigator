@@ -11,7 +11,7 @@ let NavBar = (props) => (
                 <Nav.Link href="#" onClick={() => {props.fetchNewTitles(7, 'CA'); }}>What's New?</Nav.Link>
                 {/* Advanced Search Form */}
                 <Dropdown>
-                <Dropdown.Toggle variant="danger" id="dropdown-basic">
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                     Advanced Search
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -41,13 +41,10 @@ let NavBar = (props) => (
                 <button 
                     className="btn btn-outline-danger my-2 my-sm-0" 
                     type="button" 
-                    onClick={() => {
-                            if(props.searchString.length > 2){                    
+                    onClick = {() => {
+                            if(props.searchString.length > 2){ 
                                 props.fetchTitles(props.searchString, props.startYear, props.endYear, "Any", "Any")
-                            } else {
-                                alert("Minimum search entry is 3 characters.");
-                            }
-                        }
+                            } else { alert("Minimum search entry is 3 characters."); }}
                     }>Search
                 </button>
             </Nav>

@@ -7,13 +7,9 @@ import TitleDetail from './TitleDetail.js'
 const Table = (props) => {
     return (     
             <div>
-            {/* {       
-                props.titles.length === 0 && 
-                <div class="alert alert-danger" role="alert">
-                    Search entry returned no results.
-                </div>
-            } */}
-
+            
+            {/* TO DO: tie button clicked to view state */}
+            { props.titles.length > 0 &&
             <div className="d-flex justify-content-center" style={{marginBottom:"10px"}}>
                 <ButtonGroup size="sm" className="mt-4">
                     <Button variant="danger" onClick={() => {props.changeView('icon')}}>Icon</Button>
@@ -21,6 +17,7 @@ const Table = (props) => {
                     <Button variant="danger" onClick={() => {props.changeView('list')}}>List</Button>
                 </ButtonGroup>
             </div>
+            }
 
             {/* Icon View */}
             { 
