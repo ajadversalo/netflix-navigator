@@ -4,6 +4,8 @@ import NavBar from '../src/components/NavBar';
 import FullDetailPage from '../src/components/FullDetailPage';
 import {Container} from 'react-bootstrap';
 import Table from '../src/components/Table.js';
+import Context from '../src/contexts/NetflixContext';
+import ContextProvider from './provider/ContextProvider';
 
 class App extends Component {
   constructor(props){
@@ -18,13 +20,13 @@ class App extends Component {
       startYear: 1900, 
       endYear: 2019,
       earliestYear: 1900,
-      currentYear:'',
-      currentScreen:'homePage',
+      currentYear:null,
+      //currentScreen:'homePage',
       view: 'icon',
-      searchString: '',
+      searchString: null,
       type:'movie',
-      genreID: '',
-      status:''
+      genreID: null,
+      status:null
 
     };
   }
@@ -47,22 +49,14 @@ fetchTitles = (searchString, startYear, endYear, type, genreID) => {
     let stateCopy = {...this.state};
     stateCopy.titles = data;
     this.setState(stateCopy);
-  })
-  console.log(searchString);  
-}
-//rename to something
-fetchTitleDetail = (id) => {
-  TitleAPI.getTitleDetail(id, (data) => {
-    let stateCopy = {...this.state};
-    stateCopy.titleDetail = data;
-    this.setState(stateCopy);
-  })
+  }) 
 }
 
-handleChange = (event) => {
-  this.setState({[event.target.name]: event.target.value});
-}
 
+
+
+
+//Calculates current year and sets to state
 setCurrentYear = () => {
   let currentYear = new Date();
   let stateCopy = {...this.state};
@@ -70,11 +64,7 @@ setCurrentYear = () => {
   this.setState(stateCopy);
 }
 
-changeView = (view) => {
-  let stateCopy = {...this.state};
-  stateCopy.view = view;
-  this.setState(stateCopy);
-}
+
 
 //rename to renderScreen
 switchScreen = (screen) => {
@@ -85,22 +75,25 @@ switchScreen = (screen) => {
 
 render(){
   return (
+    <ContextProvider>
+    
     <div>
+      
       <Container>
         <NavBar 
-          fetchTitles    = {this.fetchTitles}
+          fetchTitles = {this.fetchTitles}
           fetchNewTitles = {this.fetchNewTitles}
-          startYear        = {this.state.startYear} 
-          endYear        = {this.state.endYear} 
-          switchScreen   = {this.switchScreen}
-          changeView     = {this.changeView}
+          startYear = {this.state.startYear} 
+          endYear = {this.state.endYear} 
+          switchScreen = {this.switchScreen}
+          changeView = {this.changeView}
           handleQuickSearchTextChange = {this.handleQuickSearchTextChange}
           handleChange = {this.handleChange}
           searchString = {this.state.searchString}
           submitQuickSearch = {this.submitQuickSearch}
           fetchTitles = {this.fetchTitles}
           type = {this.state.type}
-          view={this.state.view}
+          view = {this.state.view}
         />
 
         <span class="badge badge-danger">Query returned {this.state.titles.length} results</span>
@@ -110,14 +103,12 @@ render(){
           this.state.currentScreen === 'full' && <FullDetailPage titleDetail={this.state.titleDetail}/>         
         }
 
-        <Table 
-          titles={this.state.titles} 
-          view={this.state.view}
-          fetchTitleDetail={this.fetchTitleDetail}
-          changeView     = {this.changeView}
-          />
+        <Table/>
       </Container>
+      
     </div>
+    
+    </ContextProvider>
   );
 }
 }
