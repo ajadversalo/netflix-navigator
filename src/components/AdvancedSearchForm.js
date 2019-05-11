@@ -7,7 +7,7 @@ const AdvancedSearch = (props) => {
         <Context.Consumer>
             {({state, handleChange, fetchTitles}) => 
             <div style={{margin:'10px'}}>
-            {state.currentYear}
+            {/* {state.currentYear} */}
             <Card>
             <Card.Header><h5>Advanced Search</h5></Card.Header>
             <Card.Body>            

@@ -20,7 +20,8 @@ class ContextProvider extends Component {
       searchString: null,
       type:'movie',
       genreID: null,
-      status:null
+      status:null,
+      count:0
 
         }
     }
@@ -46,7 +47,8 @@ setCurrentYear = () => {
 fetchTitles = (searchString, startYear, endYear, type, genreID) => {
     TitleAPI.getTitles(searchString, startYear, endYear, type, genreID, (data) => {
       let stateCopy = {...this.state};
-      stateCopy.titles = data;
+      stateCopy.titles = data.ITEMS;
+      stateCopy.count = data.COUNT;
       this.setState(stateCopy);
     }) 
   }
@@ -71,7 +73,8 @@ fetchTitleDetail = (id) => {
 fetchNewTitles = (days, country) => {
     TitleAPI.getNewTitles(days, country, (data) => {
       let stateCopy = {...this.state};
-      stateCopy.titles = data;
+      stateCopy.titles = data.ITEMS;
+      stateCopy.count = data.COUNT;
       this.setState(stateCopy);
     })
   }

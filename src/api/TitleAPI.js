@@ -17,7 +17,7 @@ TitleAPI.getNewTitles = (days, country, callback) => {
             response.json()
                 .then((data) => {
                     console.log(data);
-                    callback(data.ITEMS);                    
+                    callback(data);                    
                 });
         })
         .catch((err) => {
@@ -38,7 +38,7 @@ TitleAPI.getTitles = (searchString, startYear, endYear, type, genreID, callback)
             response.json()
                 .then((data) => {
                     console.log(data);
-                    callback(data.ITEMS);                    
+                    callback(data);                    
                 });
         })
         .catch((err) => {

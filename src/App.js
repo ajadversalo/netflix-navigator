@@ -31,9 +31,6 @@ class App extends Component {
     };
   }
 
-componentDidMount = () => {
-  this.setCurrentYear();
-}
 
 //remove country for now
 fetchNewTitles = (days, country) => {
@@ -52,13 +49,7 @@ fetchTitles = (searchString, startYear, endYear, type, genreID) => {
   }) 
 }
 
-//Calculates current year and sets to state
-setCurrentYear = () => {
-  let currentYear = new Date();
-  let stateCopy = {...this.state};
-  stateCopy.currentYear = currentYear.getFullYear();
-  this.setState(stateCopy);
-}
+
 
 //rename to renderScreen
 switchScreen = (screen) => {
@@ -67,18 +58,18 @@ switchScreen = (screen) => {
     this.setState(stateCopy);
 }
 
-render(){
-  return (
-    <ContextProvider>
-      <Container>
-        <NavBar/>
-        <Context.Consumer>{({state}) => 
-          <span class="badge badge-danger">Query returned {state.titles.length} results</span>}
-        </Context.Consumer>
-        <Table/>
-      </Container>
-    </ContextProvider>
-  );
-}
+  render(){
+    return (
+      <ContextProvider>
+        <Container>
+          <NavBar/>
+          <Context.Consumer>{({state}) => 
+            <span class="badge badge-danger">Query returned {state.count} results</span>}
+          </Context.Consumer>
+          <Table/>
+        </Container>
+      </ContextProvider>
+    );
+  }
 }
 export default App;
