@@ -6,22 +6,19 @@ class ContextProvider extends Component {
     constructor(){
         super()
         this.state = {
-            titles:  [],
-      days: 7,
-      country: 'CA',//remove
-      netflixid: null,//remove
-      titleDetail : [],
-      title: null,
-      startYear: 1900, 
-      endYear: 2019,
-      earliestYear: 1900,
-      currentYear:null,
-      view: 'icon',
-      searchString: null,
-      type:'movie',
-      genreID: null,
-      status:null,
-      count:0
+          titles:  [],
+          titleDetail : [],
+          title: null,
+          startYear: 1900, 
+          endYear: 2019,
+          earliestYear: 1900,
+          currentYear: null,
+          view: 'icon',
+          searchString: null,
+          type:'movie',
+          genreID: null,
+          status:null,
+          count:0
 
         }
     }
@@ -70,14 +67,20 @@ fetchTitleDetail = (id) => {
   }
 
   //remove country for now
-fetchNewTitles = (days, country) => {
-    TitleAPI.getNewTitles(days, country, (data) => {
+fetchNewTitles = () => {
+    TitleAPI.getNewTitles((data) => {
       let stateCopy = {...this.state};
       stateCopy.titles = data.ITEMS;
       stateCopy.count = data.COUNT;
       this.setState(stateCopy);
     })
   }
+
+clearTitles = () => {
+  let stateCopy = {...this.state};
+  stateCopy.titles = [];
+  this.setState(stateCopy);
+}
 
 render(){
     return(
@@ -87,7 +90,8 @@ render(){
             fetchTitles: this.fetchTitles,
             changeView: this.changeView,
             fetchTitleDetail: this.fetchTitleDetail,
-            fetchNewTitles: this.fetchNewTitles
+            fetchNewTitles: this.fetchNewTitles,
+            clearTitles: this.clearTitles
             }}>
         {this.props.children}
         </Context.Provider>

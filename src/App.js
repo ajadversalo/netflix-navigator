@@ -63,9 +63,9 @@ switchScreen = (screen) => {
       <ContextProvider>
         <Container>
           <NavBar/>
-          <Context.Consumer>{({state}) => 
-            <span class="badge badge-danger">Query returned {state.count} results</span>}
-          </Context.Consumer>
+          {/* <Context.Consumer>{({state}) => 
+            
+          </Context.Consumer> */}
           <Table/>
         </Container>
       </ContextProvider>
