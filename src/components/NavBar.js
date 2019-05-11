@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, Nav, Dropdown} from 'react-bootstrap';
+import {Navbar, Nav, Dropdown, ButtonGroup, Button} from 'react-bootstrap';
 import AdvancedSearch from './AdvancedSearchForm';
 import Context from '../contexts/NetflixContext'
 
@@ -12,15 +12,15 @@ let NavBar = (props) => (
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto"> 
                 <Nav.Link href="#" onClick={() => {fetchNewTitles(7, 'CA'); }}>What's New?</Nav.Link>
-                {/* Advanced Search Form */}
-                <Dropdown>
+                
+                {/* <Dropdown>
                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                     Advanced Search
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <AdvancedSearch/>
                 </Dropdown.Menu>
-                </Dropdown>
+                </Dropdown> */}
             </Nav>  
             {/* Quick Search Form */}
             <Nav>
@@ -31,7 +31,8 @@ let NavBar = (props) => (
                     value={state.searchString} 
                     onChange={handleChange}
                 />
-                <button 
+            </Nav>
+                {/* <button 
                     className="btn btn-outline-danger my-2 my-sm-0" 
                     type="button" 
                     onClick = {() => {
@@ -39,8 +40,25 @@ let NavBar = (props) => (
                                 fetchTitles(state.searchString, state.startYear, state.endYear, "Any", "Any")
                             } else { alert("Minimum search entry is 3 characters."); }}
                     }>Search
-                </button>
-            </Nav>
+                </button> */}
+            <Dropdown as={ButtonGroup}>
+                <Button 
+                    variant="danger"
+                    onClick = {() => {
+                        if(state.searchString.length > 2){ 
+                            fetchTitles(state.searchString, state.startYear, state.endYear, "Any", "Any")
+                        } else { alert("Minimum search entry is 3 characters."); }}
+                    }>Search
+                </Button>
+
+                <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
+
+                <Dropdown.Menu>
+                    {/* Advanced Search Form */}
+                    <AdvancedSearch/>
+                </Dropdown.Menu>
+            </Dropdown>;
+            
         </Navbar.Collapse>
     </Navbar>}
     </Context.Consumer> 

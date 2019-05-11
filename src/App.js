@@ -11,22 +11,22 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      titles:  [],
-      days: 7,
-      country: 'CA',//remove
-      netflixid: null,//remove
-      titleDetail : [],
-      title: null,
-      startYear: 1900, 
-      endYear: 2019,
-      earliestYear: 1900,
-      currentYear:null,
-      //currentScreen:'homePage',
-      view: 'icon',
-      searchString: null,
-      type:'movie',
-      genreID: null,
-      status:null
+      // titles:  [],
+      // days: 7,
+      // country: 'CA',//remove
+      // netflixid: null,//remove
+      // titleDetail : [],
+      // title: null,
+      // startYear: 1900, 
+      // endYear: 2019,
+      // earliestYear: 1900,
+      // currentYear:null,
+      // //currentScreen:'homePage',
+      // view: 'icon',
+      // searchString: null,
+      // type:'movie',
+      // genreID: null,
+      // status:null
 
     };
   }
@@ -52,10 +52,6 @@ fetchTitles = (searchString, startYear, endYear, type, genreID) => {
   }) 
 }
 
-
-
-
-
 //Calculates current year and sets to state
 setCurrentYear = () => {
   let currentYear = new Date();
@@ -63,8 +59,6 @@ setCurrentYear = () => {
   stateCopy.currentYear = currentYear.getFullYear();
   this.setState(stateCopy);
 }
-
-
 
 //rename to renderScreen
 switchScreen = (screen) => {
@@ -76,38 +70,13 @@ switchScreen = (screen) => {
 render(){
   return (
     <ContextProvider>
-    
-    <div>
-      
       <Container>
-        <NavBar 
-          fetchTitles = {this.fetchTitles}
-          fetchNewTitles = {this.fetchNewTitles}
-          startYear = {this.state.startYear} 
-          endYear = {this.state.endYear} 
-          switchScreen = {this.switchScreen}
-          changeView = {this.changeView}
-          handleQuickSearchTextChange = {this.handleQuickSearchTextChange}
-          handleChange = {this.handleChange}
-          searchString = {this.state.searchString}
-          submitQuickSearch = {this.submitQuickSearch}
-          fetchTitles = {this.fetchTitles}
-          type = {this.state.type}
-          view = {this.state.view}
-        />
-
-        <span class="badge badge-danger">Query returned {this.state.titles.length} results</span>
-
-        {/* --- Full Detail Screen --- */}
-        {
-          this.state.currentScreen === 'full' && <FullDetailPage titleDetail={this.state.titleDetail}/>         
-        }
-
+        <NavBar/>
+        <Context.Consumer>{({state}) => 
+          <span class="badge badge-danger">Query returned {state.titles.length} results</span>}
+        </Context.Consumer>
         <Table/>
       </Container>
-      
-    </div>
-    
     </ContextProvider>
   );
 }

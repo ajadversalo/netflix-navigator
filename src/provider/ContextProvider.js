@@ -25,9 +25,22 @@ class ContextProvider extends Component {
         }
     }
 
+
+    componentDidMount = () => {
+        this.setCurrentYear();
+      }
+      
 //General input handling
 handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value});
+}
+
+//Calculates current year and sets to state
+setCurrentYear = () => {
+  let currentYear = new Date();
+  let stateCopy = {...this.state};
+  stateCopy.currentYear = currentYear.getFullYear();
+  this.setState(stateCopy);
 }
 
 fetchTitles = (searchString, startYear, endYear, type, genreID) => {
@@ -50,6 +63,15 @@ fetchTitleDetail = (id) => {
     TitleAPI.getTitleDetail(id, (data) => {
       let stateCopy = {...this.state};
       stateCopy.titleDetail = data;
+      this.setState(stateCopy);
+    })
+  }
+
+  //remove country for now
+fetchNewTitles = (days, country) => {
+    TitleAPI.getNewTitles(days, country, (data) => {
+      let stateCopy = {...this.state};
+      stateCopy.titles = data;
       this.setState(stateCopy);
     })
   }
