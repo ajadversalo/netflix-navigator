@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import Context from '../contexts/NetflixContext';
-import TitleAPI from '../api/TitleAPI';
+import NetflixAPI from '../api/NetflixAPI';
 
 class ContextProvider extends Component {
     constructor(){
         super()
         this.state = {
-          titles:  [],
+          allTitles:  [],
           titleDetail : null,
           startYear: 1900, 
           endYear: 2019,
@@ -16,7 +16,7 @@ class ContextProvider extends Component {
           searchString: null,
           type:'movie',
           genreID: null,
-          status:null,
+          //status:null,
           count:0,
           imdbMin:0,
           imdbMax:10
@@ -41,9 +41,9 @@ setCurrentYear = () => {
 }
 
 fetchTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax) => {
-    TitleAPI.getTitles(searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, (data) => {
+    NetflixAPI.getTitles(searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, (data) => {
       let stateCopy = {...this.state};
-      stateCopy.titles = data.ITEMS;
+      stateCopy.allTitles = data.ITEMS;
       stateCopy.count = data.COUNT;
       this.setState(stateCopy);
     }) 
@@ -58,7 +58,7 @@ changeView = (view) => {
 
   //rename to something
 fetchTitleDetail = (id) => {
-    TitleAPI.getTitleDetail(id, (data) => {
+    NetflixAPI.getTitleDetail(id, (data) => {
       let stateCopy = {...this.state};
       stateCopy.titleDetail = data;
       this.setState(stateCopy);
@@ -66,9 +66,9 @@ fetchTitleDetail = (id) => {
   }
 
 fetchNewTitles = () => {
-    TitleAPI.getNewTitles((data) => {
+    NetflixAPI.getNewTitles((data) => {
       let stateCopy = {...this.state};
-      stateCopy.titles = data.ITEMS;
+      stateCopy.allTitles = data.ITEMS;
       stateCopy.count = data.COUNT;
       this.setState(stateCopy);
     })
@@ -76,7 +76,7 @@ fetchNewTitles = () => {
 
 clearTitles = () => {
   let stateCopy = {...this.state};
-  stateCopy.titles = [];
+  stateCopy.allTitles = [];
   this.setState(stateCopy);
 }
 
@@ -88,7 +88,7 @@ clearTitle = () => {
 
 clearAllTitles = () => {
   let stateCopy = {...this.state};
-  stateCopy.titles = [];
+  stateCopy.allTitles = [];
   stateCopy.titleDetail = '';
   this.setState(stateCopy);
 }

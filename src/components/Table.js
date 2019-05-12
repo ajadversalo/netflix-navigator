@@ -6,14 +6,14 @@ import Intro from '../components/Intro.js'
 
 /*This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
 
-const Table = (props) => {
+const Table = () => {
     return (     
             <Context.Consumer>
             {({state, changeView, fetchTitleDetail}) => 
             <div>
             {/* TO DO: tie button clicked to view state */}
             
-            { state.titles.length > 0 &&
+            { state.allTitles.length > 0 &&
             <div>
                 <span class="badge badge-light">Query returned {state.count} results</span>
                 <div className="d-flex justify-content-center" style={{marginBottom:"10px"}}>     
@@ -26,7 +26,7 @@ const Table = (props) => {
             </div>
             }
 
-            { state.titles.length === 0 &&
+            { state.allTitles.length === 0 &&
                 
                <Intro/>
             }
@@ -35,7 +35,7 @@ const Table = (props) => {
             { 
                 state.view === 'icon' &&
                 <div className="d-flex justify-content-center" style={{ flexWrap: 'wrap'}}>
-                    {state.titles.map(title => <a href="#" onClick={()=>{fetchTitleDetail(title.netflixid)}}><img src={title.image} alt={title.title} style={{margin: '5px' ,width: '120px'}}/></a> )}
+                    {state.allTitles.map(title => <a href="#" onClick={()=>{fetchTitleDetail(title.netflixid)}}><img src={title.image} alt={title.title} style={{margin: '5px' ,width: '120px'}}/></a> )}
                 </div>    
             } 
 
@@ -43,7 +43,7 @@ const Table = (props) => {
             {
                 state.view === 'detail' &&
                 <div >
-                    {state.titles.map(title => <TitleDetail title={title}/>)}
+                    {state.allTitles.map(title => <TitleDetail title={title}/>)}
                 </div>
             }
 
@@ -52,7 +52,7 @@ const Table = (props) => {
                 state.view === 'list' &&
                 <div >
                     <ol class="list-group">
-                        {state.titles.map(title => 
+                        {state.allTitles.map(title => 
                             <li > 
                             <b>{title.title}</b> <p>{title.synopsis}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
                         }
