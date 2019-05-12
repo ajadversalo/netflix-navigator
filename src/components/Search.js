@@ -1,7 +1,6 @@
 import React from 'react';
-import { Navbar, Nav, Dropdown, ButtonGroup, Button, Row, Col} from 'react-bootstrap';
+import {Dropdown, ButtonGroup, Button, Row, Col} from 'react-bootstrap';
 import Context from '../contexts/NetflixContext'
-import AdvancedSearch from '../components/AdvancedSearch'
 
 const Search = () => {
     return (
@@ -22,19 +21,37 @@ const Search = () => {
                     <Button 
                         variant="danger"
                         onClick = {() => {
-                            if(state.searchString.length > 2){ 
-                                fetchTitles(state.searchString, state.earliestYear, state.currentYear, "Any", "Any")
-                            } else { alert("Minimum search entry is 3 characters."); }}
+                            if(state.searchString === null || state.searchString.length < 3){ 
+                                alert("Minimum search entry is 3 characters.");                   
+                            } else {  
+                                fetchTitles(state.searchString, state.earliestYear, state.currentYear, "Any", "Any", 0, 10)
+                            }}
                         }>Search
                     </Button>
                     <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
                     <Dropdown.Menu>
-                        <AdvancedSearch/>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 1365)}}>Action and Adventure</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 7424)}}>Anime</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 783)}}>Children and Family Movies</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 31574)}}>Classic Movies</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 6548)}}>Comedy</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 5763)}}>Documentaries</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 26835)}}>Drama</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 8711)}}>Horror</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 7077)}}>Independent</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 1701)}}>Music</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 8883)}}>Romantic</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 1492)}}>Sci-Fi</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 4370)}}>Sports Movies</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 8933)}}>Thrillers</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 83)}}>TV Shows</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item href="#action/3.4">Top Rated</Dropdown.Item>
                     </Dropdown.Menu>
                     </Dropdown>  
                 </Col>
             </Row>
-        </div>}
+            </div>}
         </Context.Consumer> 
     );
 }

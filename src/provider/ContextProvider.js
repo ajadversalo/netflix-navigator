@@ -7,8 +7,7 @@ class ContextProvider extends Component {
         super()
         this.state = {
           titles:  [],
-          titleDetail : [],
-          title: null,
+          titleDetail : null,
           startYear: 1900, 
           endYear: 2019,
           earliestYear: 1900,
@@ -18,15 +17,15 @@ class ContextProvider extends Component {
           type:'movie',
           genreID: null,
           status:null,
-          count:0
-
+          count:0,
+          imdbMin:0,
+          imdbMax:10
         }
     }
 
-
-    componentDidMount = () => {
-        this.setCurrentYear();
-      }
+componentDidMount = () => {
+    this.setCurrentYear();
+  }
       
 //General input handling
 handleChange = (event) => {
@@ -41,8 +40,8 @@ setCurrentYear = () => {
   this.setState(stateCopy);
 }
 
-fetchTitles = (searchString, startYear, endYear, type, genreID) => {
-    TitleAPI.getTitles(searchString, startYear, endYear, type, genreID, (data) => {
+fetchTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax) => {
+    TitleAPI.getTitles(searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, (data) => {
       let stateCopy = {...this.state};
       stateCopy.titles = data.ITEMS;
       stateCopy.count = data.COUNT;
@@ -66,7 +65,6 @@ fetchTitleDetail = (id) => {
     })
   }
 
-  //remove country for now
 fetchNewTitles = () => {
     TitleAPI.getNewTitles((data) => {
       let stateCopy = {...this.state};
@@ -82,6 +80,19 @@ clearTitles = () => {
   this.setState(stateCopy);
 }
 
+clearTitle = () => {
+  let stateCopy = {...this.state};
+  stateCopy.titleDetail = '';
+  this.setState(stateCopy);
+}
+
+clearAllTitles = () => {
+  let stateCopy = {...this.state};
+  stateCopy.titles = [];
+  stateCopy.titleDetail = '';
+  this.setState(stateCopy);
+}
+
 render(){
     return(
         <Context.Provider value={{
@@ -91,7 +102,9 @@ render(){
             changeView: this.changeView,
             fetchTitleDetail: this.fetchTitleDetail,
             fetchNewTitles: this.fetchNewTitles,
-            clearTitles: this.clearTitles
+            clearTitles: this.clearTitles,
+            clearAllTitles: this.clearAllTitles,
+            clearTitle: this.clearTitle
             }}>
         {this.props.children}
         </Context.Provider>

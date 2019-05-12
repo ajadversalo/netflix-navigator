@@ -25,8 +25,8 @@ TitleAPI.getNewTitles = (callback) => {
         }); 
 }
 
-TitleAPI.getTitles = (searchString, startYear, endYear, type, genreID, callback) => {
-        let request = new Request(`${baseUrl}/aaapi.cgi?q=${searchString}-!${startYear},${endYear}-!0,5-!0,10-!${genreID}-!${type}-!english-!Any-!gt100-!{downloadable}&t=ns&cl=33&st=adv&ob=Relevance&p=1&sa=and`, {
+TitleAPI.getTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, callback) => {
+        let request = new Request(`${baseUrl}/aaapi.cgi?q=${searchString}-!${startYear},${endYear}-!0,5-!${imdbMin},${imdbMax}-!${genreID}-!${type}-!english-!Any-!gt100-!{downloadable}&t=ns&cl=33&st=adv&ob=Relevance&p=1&sa=and`, {
         method: 'GET',
         headers: _headers,
         mode: 'cors'

@@ -1,21 +1,29 @@
 import React from 'react';
-import {Jumbotron, Badge} from 'react-bootstrap';
+import {Jumbotron, Badge,Row, Col} from 'react-bootstrap';
+import AdvancedSearch from '../components/AdvancedSearch'
 
 let Intro = () => (
-    <Jumbotron >
-        {/* <h1 class="display-4">Welcome to <span style={{color:'red'}}>Netflix Navigator</span></h1> */}
-        <h1 class="display-4">Welcome!</h1>
-        <hr class="my-4"></hr>
-        <h4><Badge variant="danger">To help you get started</Badge></h4>
-        <hr class="my-4"></hr>
-        <p><Badge variant="secondary">What's New</Badge></p>
+    <Jumbotron >  
+        {/* <h1 className="d-flex justify-content-center">Welcome!</h1> */}
+        {/* <hr class="my-4"></hr> */}
+        {/* <h4 className="d-flex justify-content-center"><Badge variant="danger">To help you get started</Badge></h4>
+        <hr class="my-4"></hr> */}
+        <Row>
+        <Col>
+        <p><Badge variant="danger">What's New</Badge></p>
         <p> Displays new content from the past week</p>
-        <p><Badge variant="secondary">Advanced Search</Badge></p>
-        <p> If you want to be more specific on your searches</p>  
-        <p><Badge variant="secondary">Change View Dropdown</Badge></p> 
-        <p>Switches the search results to Icon, Detail or List view</p>  
-        <p><Badge variant="secondary">Quick Search</Badge></p>
-        <p> Allows searching for titles, actors and even genre</p>         
+        <p><Badge variant="danger">Lucky Pick</Badge></p>
+        <p> Picks a random title for you</p>  
+        <p><Badge variant="danger">Filters</Badge></p> 
+        <p> Contains list of genre filters</p>  
+        <p><Badge variant="danger">Quick Search</Badge></p>
+        <p> Allows searching for titles, actors or genre</p>
+        </Col>
+        <Col>
+            <p><Badge variant="danger">If you prefer a more granular search </Badge></p>   
+            <AdvancedSearch></AdvancedSearch>
+        </Col>
+        </Row>
     </Jumbotron>
 )
 

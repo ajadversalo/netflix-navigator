@@ -15,14 +15,14 @@ const Table = (props) => {
             
             { state.titles.length > 0 &&
             <div>
-            <span class="badge badge-light">Query returned {state.count} results</span>
-            <div className="d-flex justify-content-center" style={{marginBottom:"10px"}}>     
-                <ButtonGroup size="sm" className="mt-4">
-                    <Button variant="danger" onClick={() => {changeView('icon')}}>Icon</Button>
-                    <Button variant="danger" onClick={() => {changeView('detail')}}>Detail</Button>
-                    <Button variant="danger" onClick={() => {changeView('list')}}>List</Button>
-                </ButtonGroup>
-            </div>
+                <span class="badge badge-light">Query returned {state.count} results</span>
+                <div className="d-flex justify-content-center" style={{marginBottom:"10px"}}>     
+                    <ButtonGroup size="sm" className="mt-4">
+                        <Button variant="danger" onClick={() => {changeView('icon')}}>Icon</Button>
+                        <Button variant="danger" onClick={() => {changeView('detail')}}>Detail</Button>
+                        <Button variant="danger" onClick={() => {changeView('list')}}>List</Button>
+                    </ButtonGroup>
+                </div>
             </div>
             }
 
@@ -51,12 +51,12 @@ const Table = (props) => {
             {
                 state.view === 'list' &&
                 <div >
-                    <ul class="list-group">
+                    <ol class="list-group">
                         {state.titles.map(title => 
-                            <li class="list-group-item d-flex justify-content-between align-items-center"> 
-                            {title.title}<span class="badge badge-warning badge-pill">{title.rating}</span></li>)
+                            <li > 
+                            <b>{title.title}</b> <p>{title.synopsis}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
                         }
-                    </ul>
+                    </ol>
                 </div>
             }
             </div>}
