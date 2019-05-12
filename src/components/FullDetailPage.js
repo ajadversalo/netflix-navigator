@@ -12,7 +12,7 @@ const FullDetailPage = () => {
             </div>   
             <h1>{state.titleDetail.nfinfo.title}</h1>
             <Row>
-                <Col><img src={state.titleDetail.nfinfo.image1}></img></Col>
+                <Col><img src={state.titleDetail.nfinfo.image1} alt={state.titleDetail.nfinfo.title}></img></Col>
                 <Col>
                     <h5>Plot</h5>
                     <p>{state.titleDetail.imdbinfo.plot}</p>

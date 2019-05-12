@@ -7,9 +7,9 @@ import Context from '../src/contexts/NetflixContext';
 import ContextProvider from './provider/ContextProvider';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
+  // constructor(props){
+  //   super(props);
+  // }
   render(){
     return (
       <ContextProvider>

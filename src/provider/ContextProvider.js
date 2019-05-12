@@ -16,7 +16,7 @@ class ContextProvider extends Component {
           searchString: null,
           type:'movie',
           genreID: null,
-          //status:null,
+          episodes: [],
           count:0,
           imdbMin:0,
           imdbMax:10
@@ -25,6 +25,7 @@ class ContextProvider extends Component {
 
 componentDidMount = () => {
     this.setCurrentYear();
+    this.fetchNewEpisodes();
   }
       
 //General input handling
@@ -49,6 +50,8 @@ fetchTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax
     }) 
   }
 
+
+
   //Sets table view to Icon, Detail or List
 changeView = (view) => {
     let stateCopy = {...this.state};
@@ -70,6 +73,14 @@ fetchNewTitles = () => {
       let stateCopy = {...this.state};
       stateCopy.allTitles = data.ITEMS;
       stateCopy.count = data.COUNT;
+      this.setState(stateCopy);
+    })
+  }
+
+  fetchNewEpisodes = () => {
+    NetflixAPI.getNewEpisodes((data) => {
+      let stateCopy = {...this.state};
+      stateCopy.episodes = data.results;
       this.setState(stateCopy);
     })
   }

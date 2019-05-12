@@ -25,6 +25,27 @@ TitleAPI.getNewTitles = (callback) => {
         }); 
 }
 
+TitleAPI.getNewEpisodes = (callback) => {
+    let request = new Request(`${baseUrl}/aaapi.cgi?t=weeklynew&cl=CA&q={query}&st=1`,  {
+        method: 'GET',
+        headers: _headers,
+        mode: 'cors'
+    });
+
+    fetch(request)
+        .then((response) => {
+            console.log('response: ' + response);
+            response.json()
+                .then((data) => {
+                    console.log(data);
+                    callback(data);                    
+                });
+        })
+        .catch((err) => {
+            console.log('error: ' + err);
+        }); 
+}
+
 TitleAPI.getTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, callback) => {
         let request = new Request(`${baseUrl}/aaapi.cgi?q=${searchString}-!${startYear},${endYear}-!0,5-!${imdbMin},${imdbMax}-!${genreID}-!${type}-!english-!Any-!gt100-!{downloadable}&t=ns&cl=33&st=adv&ob=Relevance&p=1&sa=and`, {
         method: 'GET',

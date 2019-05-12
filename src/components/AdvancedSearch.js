@@ -42,11 +42,25 @@ const AdvancedSearch = () => {
                 </Form.Row>
                 <Form.Row>
                     <Col>
-                        <Form.Label>Min IMDB Rating: </Form.Label>
-                        <Form.Control type="text" placeholder="Minimum IMDB score" defaultValue={state.imdbMin} name="imdbMin" onChange={handleChange}/>       
+                        <Form.Label>Lowest IMDB Score: </Form.Label>
+                        {/* <Form.Control type="text" placeholder="Minimum IMDB score" defaultValue={state.imdbMin} name="imdbMin" onChange={handleChange}/>        */}
+
+                            <Form.Control as="select" name ="imdbMin" onChange={handleChange}>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option> 
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>               
+                        </Form.Control>
                     </Col>
                     <Col>
-                        <Form.Label>Max IMDB Rating: </Form.Label>
+                        <Form.Label>Highest IMDB Score: </Form.Label>
                         <Form.Control type="text" placeholder="Maximum IMDB score" defaultValue={state.imdbMax} name="imdbMax"  onChange={handleChange}/>   
                 </Col>
                 </Form.Row>

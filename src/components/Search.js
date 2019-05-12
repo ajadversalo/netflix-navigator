@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dropdown, ButtonGroup, Button, Row, Col} from 'react-bootstrap';
+import {Dropdown, ButtonGroup, Button, Row, Col, Form, FormControl} from 'react-bootstrap';
 import Context from '../contexts/NetflixContext'
 
 const Search = () => {
@@ -8,7 +8,7 @@ const Search = () => {
             {({state, handleChange, fetchTitles}) => 
             <div>
             <Row>
-                <Col>
+                <Col style={{paddingRight:'1px'}}>
                 <input className="form-control mr-sm-2" 
                     type="text"
                     placeholder="Quick Search"
@@ -16,8 +16,8 @@ const Search = () => {
                     value={state.searchString} 
                     onChange={handleChange}/>
                 </Col>
-                <Col>      
-                    <Dropdown as={ButtonGroup}>
+                <Col style={{paddingLeft:'1px'}}>      
+                    {/* <Dropdown as={ButtonGroup}> */}
                     <Button 
                         variant="danger"
                         onClick = {() => {
@@ -28,9 +28,9 @@ const Search = () => {
                             }}
                         }>Search
                     </Button>
-                    <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
+                    {/* <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 1365)}}>Action and Adventure</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 1365,0,10)}}>Action and Adventure</Dropdown.Item>
                         <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 7424)}}>Anime</Dropdown.Item>
                         <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 783)}}>Children and Family Movies</Dropdown.Item>
                         <Dropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 31574)}}>Classic Movies</Dropdown.Item>
@@ -48,9 +48,10 @@ const Search = () => {
                         <Dropdown.Divider />
                         <Dropdown.Item href="#action/3.4">Top Rated</Dropdown.Item>
                     </Dropdown.Menu>
-                    </Dropdown>  
+                    </Dropdown>   */}
                 </Col>
             </Row>
+            
             </div>}
         </Context.Consumer> 
     );

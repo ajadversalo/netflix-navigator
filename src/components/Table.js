@@ -15,7 +15,7 @@ const Table = () => {
             
             { state.allTitles.length > 0 &&
             <div>
-                <span class="badge badge-light">Query returned {state.count} results</span>
+                <span className="badge badge-light">Query returned {state.count} results</span>
                 <div className="d-flex justify-content-center" style={{marginBottom:"10px"}}>     
                     <ButtonGroup size="sm" className="mt-4">
                         <Button variant="danger" onClick={() => {changeView('icon')}}>Icon</Button>
@@ -27,7 +27,6 @@ const Table = () => {
             }
 
             { state.allTitles.length === 0 &&
-                
                <Intro/>
             }
 
@@ -51,7 +50,7 @@ const Table = () => {
             {
                 state.view === 'list' &&
                 <div >
-                    <ol class="list-group">
+                    <ol className="list-group">
                         {state.allTitles.map(title => 
                             <li > 
                             <b>{title.title}</b> <p>{title.synopsis}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class TitleDetail extends Component {
-    constructor(props) {
-        super(props);
-    }
 
 render () {
     let synopsis = this.props.title.synopsis;
@@ -14,7 +11,7 @@ render () {
     
     return (
         <div class="media" style={{margin:'10px'}}>
-            <img class="align-self-start mr-3" src={this.props.title.image} alt="Generic placeholder image" style={{margin: '5px' ,width: '120px'}}/>
+            <img class="align-self-start mr-3" src={this.props.title.image} alt={this.props.title.title} style={{margin: '5px' ,width: '120px'}}/>
             <div class="media-body">
                 <h4 class="mt-0">{this.props.title.title}</h4>
                 <p><b>Synopsis:</b>{synopsis}</p>
