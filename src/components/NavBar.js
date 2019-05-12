@@ -1,8 +1,8 @@
 import React from 'react';
-import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
-import Search from './Search';
+import {Navbar, Nav, NavDropdown, Form, FormControl, Button, Dropdown, DropdownButton} from 'react-bootstrap';
+//import Search from './Search';
 import Context from '../contexts/NetflixContext'
-import Genres from '../data/enums';
+import Constants from '../data/enums';
 
 let NavBar = () => (
     <Context.Consumer>
@@ -16,27 +16,27 @@ let NavBar = () => (
                 <Nav.Link href="#" onClick={() => {fetchNewTitles()}}>Lucky Pick</Nav.Link>             
                 <NavDropdown title="Filters" id="basic-nav-dropdown" >
                     {/* CREATE A LOOP THAN RENDERS THIS */}
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Genres.ACTION, 0, 10)}}>Action and Adventure</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 7424, 0, 10)}}>Anime</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 783, 0, 10)}}>Children and Family Movies</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 31574, 0, 10)}}>Classic Movies</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 6548, 0, 10)}}>Comedy</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 5763, 0, 10)}}>Documentaries</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 26835, 0, 10)}}>Drama</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 8711, 0, 10)}}>Horror</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 7077, 0, 10)}}>Independent</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 1701, 0, 10)}}>Music</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 8883, 0, 10)}}>Romantic</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 1492, 0, 10)}}>Sci-Fi</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 4370, 0, 10)}}>Sports Movies</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 8933, 0, 10)}}>Thrillers</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", 83, 0, 10)}}>TV Shows</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.ACTION, Constants.IMDB_MINIMUM_SCORE, 10)}}>Action and Adventure</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.ANIME, 0, 10)}}>Anime</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.CHILDREN, 0, 10)}}>Children and Family</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.CLASSIC, 0, 10)}}>Classic Movies</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.COMEDY, 0, 10)}}>Comedy</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.DOCUMENTARY, 0, 10)}}>Documentary</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.DRAMA, 0, 10)}}>Drama</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.HORROR, 0, 10)}}>Horror</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.INDEPENDENT, 0, 10)}}>Independent</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.MUSIC, 0, 10)}}>Music</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.ROMANTIC, 0, 10)}}>Romantic</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.SCIFI, 0, 10)}}>Sci-Fi</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.SPORTS, 0, 10)}}>Sports Movies</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.THRILLER, 0, 10)}}>Thriller</NavDropdown.Item>
+                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.TVSHOWS, 0, 10)}}>TV Shows</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Top Rated</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
             <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" className="form-control mr-sm-2" 
+                <FormControl className="mr-sm-2" //className="form-control mr-sm-2" 
                     type="text"
                     placeholder="Quick Search"
                     name="searchString" 

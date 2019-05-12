@@ -16,6 +16,7 @@ const FullDetailPage = () => {
                 <Col>
                     <h5>Plot</h5>
                     <p>{state.titleDetail.imdbinfo.plot}</p>
+                    <Button href={"https://www.netflix.com/title/" + state.titleDetail.nfinfo.netflixid} onClick={() => {clearTitle()}}>Watch Now</Button>
                     </Col>
                     <Col>
                     <b>Cast</b>
