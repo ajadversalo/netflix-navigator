@@ -52,7 +52,7 @@ let NetflixNav = () => (
                             performSearch();
                         }}
                     }              
-                    />
+                />
                 <Button 
                     variant="outline-danger"
                     onClick={() => {performSearch()}}
