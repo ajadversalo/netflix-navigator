@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-class TitleDetail extends Component {
+{/* Renders image with synopsis in the table component*/}
 
+class TitleDetail extends Component {
 render () {
+    //Removes extra characters from the synopsis field
     let synopsis = this.props.title.synopsis;
     let pos = synopsis.indexOf("<");
     synopsis = synopsis.substr(0,pos);

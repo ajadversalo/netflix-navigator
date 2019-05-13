@@ -4,15 +4,15 @@ import TitleDetail from './TitleDetail.js'
 import Context from '../contexts/NetflixContext'
 import Intro from '../components/Intro.js'
 
-/*This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
+/* This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
 
 const Table = () => {
     return (     
             <Context.Consumer>
             {({state, changeView, fetchTitleDetail}) => 
             <div>
-            {/* TO DO: tie button clicked to view state */}
-            
+        
+            {/* View type selection buttons */}
             { state.allTitles.length > 0 &&
             <div>
                 <span className="badge badge-light">Query returned {state.count} results</span>

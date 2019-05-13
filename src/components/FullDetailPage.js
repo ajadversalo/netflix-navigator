@@ -2,6 +2,17 @@ import React from 'react';
 import {Row, Col, Button} from 'react-bootstrap';
 import Context from '../contexts/NetflixContext'
 
+{/* This component renders the complete details of a title. Data is saved to titleDetail state variable. 
+    1. Plot 
+    2. Cast 
+    3. Director 
+    4. Producer
+    5. Genre
+    6. Language
+    7. IMDB Rating
+    8. Runtime
+ */}
+
 const FullDetailPage = () => {
     return (
         <Context.Consumer>{({state, clearTitle}) =>     
@@ -20,6 +31,7 @@ const FullDetailPage = () => {
                     </Col>
                     <Col>
                     <b>Cast</b>
+                    {/* Some titles do not have the actor field */}
                     <ol>{state.titleDetail.people[0].actor.map((item, index) => <li key={item.id}>{item}</li>)}</ol>
                 </Col>
                 <Col>

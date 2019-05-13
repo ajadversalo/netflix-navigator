@@ -4,6 +4,14 @@ import Context from '../contexts/NetflixContext'
 import Genres from '../data/genres';
 import ContentTypes from '../data/contentTypes';
 
+{/* Simple component which allows detailed content search using the following data:
+    1. Start Year
+    2. End Year
+    3. Content Type
+    4. Content Genre
+    5. IMDB Minimum Score
+    6. IMDB Maximum Score */}
+
 const AdvancedSearch = () => (
     <Context.Consumer>
         {({state, handleChange, fetchTitles}) => 
@@ -44,7 +52,8 @@ const AdvancedSearch = () => (
             </Col>
             </Form.Row>
             <Button variant="primary" 
-                value="Search" 
+                value="Search"
+                style ={{marginTop:'10px'}} 
                 onClick={()=>{
                     if (state.startYear < 1900 || state.endYear > 2019){
                         alert("Year cannot be less than 1900 or more than 2019");
