@@ -1,10 +1,10 @@
 import React from 'react';
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button, Dropdown, DropdownButton} from 'react-bootstrap';
-//import Search from './Search';
 import Context from '../contexts/NetflixContext'
-import Constants from '../data/enums';
+import * as Constants from '../data/constants';
+import Genres from '../data/genres';
 
-let NavBar = () => (
+let NetflixNav = () => (
     <Context.Consumer>
          {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange}) => 
         <Navbar bg="dark"  variant="dark" expand="lg">
@@ -14,29 +14,27 @@ let NavBar = () => (
             <Nav className="mr-auto"> 
                 <Nav.Link href="#" onClick={() => {fetchNewTitles()}}>What's New</Nav.Link>
                 <Nav.Link href="#" onClick={() => {fetchNewTitles()}}>Lucky Pick</Nav.Link>             
+                
+                {/* Map genre list from genres json  */}
                 <NavDropdown title="Filters" id="basic-nav-dropdown" >
-                    {/* CREATE A LOOP THAN RENDERS THIS */}
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.ACTION, Constants.IMDB_MINIMUM_SCORE, 10)}}>Action and Adventure</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.ANIME, 0, 10)}}>Anime</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.CHILDREN, 0, 10)}}>Children and Family</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.CLASSIC, 0, 10)}}>Classic Movies</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.COMEDY, 0, 10)}}>Comedy</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.DOCUMENTARY, 0, 10)}}>Documentary</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.DRAMA, 0, 10)}}>Drama</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.HORROR, 0, 10)}}>Horror</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.INDEPENDENT, 0, 10)}}>Independent</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.MUSIC, 0, 10)}}>Music</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.ROMANTIC, 0, 10)}}>Romantic</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.SCIFI, 0, 10)}}>Sci-Fi</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.SPORTS, 0, 10)}}>Sports Movies</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.THRILLER, 0, 10)}}>Thriller</NavDropdown.Item>
-                    <NavDropdown.Item href="#" onClick={() => {fetchTitles('', state.earliestYear, state.currentYear, "Any", Constants.TVSHOWS, 0, 10)}}>TV Shows</NavDropdown.Item>
+                    {Genres.map(genre => 
+                        <NavDropdown.Item href="#" 
+                            onClick={() => {fetchTitles('', 
+                            Constants.EARLIEST_PRDUCTION_YEAR,
+                            state.currentYear, 
+                            Constants.DEFAULT_GET_ALL, 
+                            genre.id, 
+                            Constants.IMDB_MINIMUM_SCORE,  
+                            Constants.IMDB_MAXIMUM_SCORE)}}>
+                            {genre.title}
+                        </NavDropdown.Item>)}
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Top Rated</NavDropdown.Item>
+                    <NavDropdown.Item href="#">Top Rated</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
+            {/* Quick Search  */}
             <Form inline>
-                <FormControl className="mr-sm-2" //className="form-control mr-sm-2" 
+                <FormControl className="mr-sm-2"
                     type="text"
                     placeholder="Quick Search"
                     name="searchString" 
@@ -53,10 +51,10 @@ let NavBar = () => (
                     }
                 >Search</Button>
             </Form>             
-            {/* <Search /> */}
+
         </Navbar.Collapse>
         </Navbar>}
-    </Context.Consumer> 
+    </Context.Consumer>
 )
 
-export default NavBar;
+export default NetflixNav;

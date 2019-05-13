@@ -1,0 +1,15 @@
+[
+    {
+        "id": "movies",
+        "title": "Movies"
+    },
+    {
+        "id": "series",
+        "title": "Series"
+    },
+    {
+        "id": "Any",
+        "title": "Movies and Series"
+    }
+
+]
