@@ -140,6 +140,22 @@ clearAllTitles = () => {
   this.setState(stateCopy);
 }
 
+performSearch = () => {
+  if(this.state.searchString === null || this.state.searchString.length < 3){ 
+    alert("Minimum search entry is 3 characters."); 
+  } else {  
+    this.fetchTitles(
+        this.state.searchString, 
+        Constants.EARLIEST_PRODUCTION_YEAR, 
+        this.state.currentYear, 
+        Constants.ALL_GENRES, 
+        Constants.ALL_TYPES, 
+        Constants.IMDB_MINIMUM_SCORE, 
+        Constants.IMDB_MAXIMUM_SCORE
+    )
+  }
+}
+
 render(){
     return(
         <Context.Provider value={{
@@ -152,7 +168,8 @@ render(){
             clearTitles: this.clearTitles,
             clearAllTitles: this.clearAllTitles,
             clearTitle: this.clearTitle,
-            pickRandomTitle: this.pickRandomTitle
+            pickRandomTitle: this.pickRandomTitle,
+            performSearch: this.performSearch
             }}>
         {this.props.children}
         </Context.Provider>

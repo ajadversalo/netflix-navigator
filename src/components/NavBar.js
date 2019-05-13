@@ -12,7 +12,7 @@ import Genres from '../data/genres';
 
 let NetflixNav = () => (
     <Context.Consumer>
-         {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle}) => 
+         {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performSearch}) => 
         <Navbar bg="dark"  variant="dark" expand="lg">
         <Navbar.Brand href="#" onClick={() => {clearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -40,30 +40,22 @@ let NetflixNav = () => (
             </Nav>
             
             {/* Quick Search  */}
-            <Form inline>
+            <Form inline onSubmit={e => { e.preventDefault();}}>
                 <FormControl className="mr-sm-2"
                     type="text"
                     placeholder="Quick Search"
                     name="searchString" 
                     value={state.searchString} 
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    onKeyDown={(event) => {
+                        if(event.keyCode==13){
+                            performSearch();
+                        }}
+                    }              
+                    />
                 <Button 
                     variant="outline-danger"
-                    onClick = {() => {
-                        if(state.searchString === null || state.searchString.length < 3){ 
-                            alert("Minimum search entry is 3 characters.");                   
-                        } else {  
-                            fetchTitles(
-                                state.searchString, 
-                                Constants.EARLIEST_PRODUCTION_YEAR, 
-                                state.currentYear, 
-                                Constants.ALL_GENRES, 
-                                Constants.ALL_TYPES, 
-                                Constants.IMDB_MINIMUM_SCORE, 
-                                Constants.IMDB_MAXIMUM_SCORE
-                            )
-                        }}
-                    }
+                    onClick={() => {performSearch()}}
                 >Search</Button>
             </Form>             
         </Navbar.Collapse>
