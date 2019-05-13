@@ -156,6 +156,15 @@ performSearch = () => {
   }
 }
 
+sanitizeString = (string) => {
+  let sanitizedString = string;
+  let pos = sanitizedString.indexOf("<");
+  sanitizedString = sanitizedString.substr(0,pos);
+  sanitizedString = sanitizedString.replace('&#39;','');
+  sanitizedString = sanitizedString.replace('&rsquo;','');
+  return sanitizedString;
+}
+
 render(){
     return(
         <Context.Provider value={{
@@ -169,7 +178,8 @@ render(){
             clearAllTitles: this.clearAllTitles,
             clearTitle: this.clearTitle,
             pickRandomTitle: this.pickRandomTitle,
-            performSearch: this.performSearch
+            performSearch: this.performSearch,
+            sanitizeString: this.sanitizeString
             }}>
         {this.props.children}
         </Context.Provider>

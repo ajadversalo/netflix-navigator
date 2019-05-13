@@ -9,7 +9,7 @@ import Intro from '../components/Intro.js'
 const Table = () => {
     return (     
             <Context.Consumer>
-            {({state, changeView, fetchTitleDetail}) => 
+            {({state, changeView, fetchTitleDetail, sanitizeString}) => 
             <div>
         
             {/* View type selection buttons */}
@@ -53,7 +53,7 @@ const Table = () => {
                     <ol className="list-group">
                         {state.allTitles.map(title => 
                             <li > 
-                            <b>{title.title}</b> <p>{title.synopsis}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
+                            <b>{ sanitizeString(title.title)}</b> <p>{sanitizeString(title.synopsis)}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
                         }
                     </ol>
                 </div>
