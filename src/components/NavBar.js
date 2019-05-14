@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, Nav, NavDropdown, Form, FormControl, Button, Dropdown, DropdownButton} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 import Context from '../contexts/NetflixContext'
 import * as Constants from '../data/constants';
 import Genres from '../data/genres';
@@ -48,7 +48,7 @@ let NetflixNav = () => (
                     value={state.searchString} 
                     onChange={handleChange}
                     onKeyDown={(event) => {
-                        if(event.keyCode==13){
+                        if(event.keyCode === 13){
                             performSearch();
                         }}
                     }              

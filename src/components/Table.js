@@ -26,8 +26,9 @@ const Table = () => {
             </div>
             }
 
-            { state.allTitles.length === 0 &&
-               <Intro/>
+            {/* Welcome page and advanced search */}
+            { 
+                state.allTitles.length === 0 && <Intro/>
             }
 
             {/* Icon View */}

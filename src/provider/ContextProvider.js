@@ -97,7 +97,7 @@ fetchTitleDetail = (id) => {
     let stateCopy = {...this.state};
     stateCopy.titleDetail = data;
     stateCopy.titleDetailPlot = data.imdbinfo.plot;
-    stateCopy.titleDetailActor = data.people[0].actor;
+    stateCopy.titleDetailActors = data.people[0].actor;
     this.setState(stateCopy);
   })
 }
@@ -167,7 +167,7 @@ sanitizeString = (string) => {
     let pos = sanitizedString.indexOf("<"); 
     sanitizedString = sanitizedString.substr(0,pos);
   }
-  sanitizedString = sanitizedString.replace('&#39;','');
+  sanitizedString = sanitizedString.replace('&#39;',"'");
   sanitizedString = sanitizedString.replace('&rsquo;','');
   sanitizedString = sanitizedString.replace('&amp;#39;',"'");
   return sanitizedString;
