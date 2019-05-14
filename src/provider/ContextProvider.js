@@ -15,20 +15,20 @@ class ContextProvider extends Component {
           titleDetail : null,
           titleDetailPlot: null,
           titleDetailActors: [],
-          startYear: 1900, 
-          endYear: 2019,
-          currentYear: null,
+          startYear: Constants.EARLIEST_PRODUCTION_YEAR, 
+          endYear: null,      // Used in advanced search
+          currentYear: null,  // Used in quick search
           view: 'icon',
           searchString: null,
           type: 'movie',
           genreID: null,     
-          imdbMin: 0,
-          imdbMax: 10,
+          imdbMin: Constants.IMDB_MINIMUM_SCORE,
+          imdbMax: Constants.IMDB_MAXIMUM_SCORE,
           luckyPickItems: []
         }
     }
 
-//Set current year and populate intro page
+//Set current year and default value for end year. Populate intro page
 componentDidMount = () => {
   this.setCurrentYear();
   this.fetchNewEpisodes();
@@ -44,6 +44,7 @@ setCurrentYear = () => {
   let currentYear = new Date();
   let stateCopy = {...this.state};
   stateCopy.currentYear = currentYear.getFullYear();
+  stateCopy.endYear = currentYear.getFullYear();
   this.setState(stateCopy);
 }
 
@@ -78,8 +79,7 @@ displayRandomTitle = () => {
   let luckyPickIndex = 0;
   //Get random number from 1 to number of items in the lucky pick storage
   luckyPickIndex = Math.floor(Math.random() * this.state.luckyPickItems.length);
-
-  if(luckyPickIndex > 0){
+  if(luckyPickIndex >= 0){
     this.fetchTitleDetail(this.state.luckyPickItems[luckyPickIndex].netflixid);
   }
 }
