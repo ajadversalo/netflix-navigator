@@ -13,6 +13,8 @@ class ContextProvider extends Component {
           count: 0,
           episodes: [],
           titleDetail : null,
+          titleDetailPlot: null,
+          titleDetailActors: [],
           startYear: 1900, 
           endYear: 2019,
           currentYear: null,
@@ -94,6 +96,8 @@ fetchTitleDetail = (id) => {
   NetflixAPI.getTitleDetail(id, (data) => {
     let stateCopy = {...this.state};
     stateCopy.titleDetail = data;
+    stateCopy.titleDetailPlot = data.imdbinfo.plot;
+    stateCopy.titleDetailActor = data.people[0].actor;
     this.setState(stateCopy);
   })
 }
@@ -165,6 +169,7 @@ sanitizeString = (string) => {
   }
   sanitizedString = sanitizedString.replace('&#39;','');
   sanitizedString = sanitizedString.replace('&rsquo;','');
+  sanitizedString = sanitizedString.replace('&amp;#39;',"'");
   return sanitizedString;
 }
 

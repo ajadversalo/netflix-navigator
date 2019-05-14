@@ -25,14 +25,26 @@ const FullDetailPage = () => {
             <Row>
                 <Col><img src={state.titleDetail.nfinfo.image1} alt={state.titleDetail.nfinfo.title}></img></Col>
                 <Col>
-                    <h5>Plot</h5>
-                    <p>{state.titleDetail.imdbinfo.plot}</p>
-                    <Button href={"https://www.netflix.com/title/" + state.titleDetail.nfinfo.netflixid} onClick={() => {clearTitle()}}>Watch Now</Button>
-                    </Col>
-                    <Col>
-                    <b>Cast</b>
-                    {/* Some titles do not have the actor field */}
-                    <ol>{state.titleDetail.people[0].actor.map((item, index) => <li key={item.id}>{item}</li>)}</ol>
+                    {/* Only display plot if it's not null */}
+                    { state.titleDetailPlot &&   
+                        <div>
+                            <h5>Plot</h5>
+                            <p>{sanitizeString(state.titleDetailPlot)}</p>
+                        </div>
+                    }
+                    <Button 
+                        href={"https://www.netflix.com/title/" + state.titleDetail.nfinfo.netflixid} 
+                        onClick={() => {clearTitle()}}>Watch Now
+                    </Button>
+                </Col>
+                <Col>
+                    {/* Only display actor list if it's not null */}
+                    { state.titleDetailActors &&
+                        <div>
+                            <b>Cast</b>
+                            <ol>{state.titleDetail.people[0].actor.map((item, index) => <li key={item.id}>{item}</li>)}</ol>
+                        </div>
+                    }
                 </Col>
                 <Col>
                     <b>Produced</b>
