@@ -53,7 +53,7 @@ const Table = () => {
                     <ol className="list-group">
                         {state.allTitles.map(title => 
                             <li > 
-                            <b>{ sanitizeString(title.title)}</b> <p>{sanitizeString(title.synopsis)}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
+                            <b>{title.title}</b> <p>{sanitizeString(title.synopsis)}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
                         }
                     </ol>
                 </div>
