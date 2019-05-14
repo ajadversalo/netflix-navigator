@@ -158,8 +158,11 @@ performSearch = () => {
 
 sanitizeString = (string) => {
   let sanitizedString = string;
-  let pos = sanitizedString.indexOf("<");
-  sanitizedString = sanitizedString.substr(0,pos);
+  //remove html tags at the end of string
+  if(sanitizedString.includes("<")) {
+    let pos = sanitizedString.indexOf("<"); 
+    sanitizedString = sanitizedString.substr(0,pos);
+  }
   sanitizedString = sanitizedString.replace('&#39;','');
   sanitizedString = sanitizedString.replace('&rsquo;','');
   return sanitizedString;
