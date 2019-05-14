@@ -51,7 +51,8 @@ const AdvancedSearch = () => (
                     <Form.Control type="text" placeholder="Maximum IMDB score" defaultValue={state.imdbMax} name="imdbMax"  onChange={handleChange}/>   
             </Col>
             </Form.Row>
-            <Button variant="primary" 
+            <Button 
+                variant="danger" 
                 value="Search"
                 style ={{marginTop:'10px'}} 
                 onClick={()=>{

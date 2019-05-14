@@ -32,7 +32,8 @@ const FullDetailPage = () => {
                             <p>{sanitizeString(state.titleDetailPlot)}</p>
                         </div>
                     }
-                    <Button 
+                    <Button
+                        variant="danger" 
                         href={"https://www.netflix.com/title/" + state.titleDetail.nfinfo.netflixid} 
                         onClick={() => {clearTitle()}}>Watch Now
                     </Button>
