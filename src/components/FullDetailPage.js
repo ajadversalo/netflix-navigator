@@ -35,7 +35,8 @@ const FullDetailPage = () => {
                     <Button
                         variant="danger" 
                         href={"https://www.netflix.com/title/" + state.titleDetail.nfinfo.netflixid} 
-                        onClick={() => {clearTitle()}}>Watch Now
+                        target="_blank"
+                        >Watch Now
                     </Button>
                 </Col>
                 <Col>
@@ -43,18 +44,18 @@ const FullDetailPage = () => {
                     { state.titleDetailActors &&
                         <div>
                             <b>Cast</b>
-                            <ol>{state.titleDetail.people[0].actor.map((item, index) => <li key={item.id}>{item}</li>)}</ol>
+                            <ol>{state.titleDetail.people[0].actor.map((item) => <li key={item.id}>{item}</li>)}</ol>
                         </div>
                     }
                 </Col>
                 <Col>
                     <b>Produced</b>
-                    <ol>{state.titleDetail.people[1].creator.map((item, index) => <li key={item.id}>{item}</li>)}</ol>
+                    <ol>{state.titleDetail.people[1].creator.map((item) => <li key={item.id}>{item}</li>)}</ol>
                     <b>Directed</b>
-                    <ol>{state.titleDetail.people[2].director.map((item, index) => <li key={item.id}>{item}</li>)}</ol>                
+                    <ol>{state.titleDetail.people[2].director.map((item) => <li key={item.id}>{item}</li>)}</ol>                
                     <p><b>Genre </b>{state.titleDetail.imdbinfo.genre}</p>                  
                     <p><b>Language </b>{state.titleDetail.imdbinfo.language}</p>                
-                    <p><b>IMDB Rating </b>{state.titleDetail.imdbinfo.rating}</p>                   
+                    <a href={"https://www.imdb.com/title/" + state.titleDetail.imdbinfo.imdbid} target="_blank"><p><b>IMDB Rating </b>{state.titleDetail.imdbinfo.rating}</p></a>                   
                     <p><b>Runtime </b>{state.titleDetail.imdbinfo.runtime}</p>
                 </Col>
             </Row>

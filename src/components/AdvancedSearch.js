@@ -55,15 +55,7 @@ const AdvancedSearch = () => (
                 variant="danger" 
                 value="Search"
                 style ={{marginTop:'10px'}} 
-                onClick={()=>{ performAdvancedSearch()
-                    // if (state.startYear < 1900 || state.endYear > 2019){
-                    //     alert("Year cannot be less than 1900 or more than 2019");
-                    // } else if (state.imdbMin < 0 || state.imdbMax > 10) {
-                    //     alert("IMDB score cannot be less than 0 or more than 10");
-                    // } else {
-                    //     fetchTitles('', state.startYear, state.endYear, state.type, state.genreID, state.imdbMin, state.imdbMax)
-                    //}
-                }}>
+                onClick={()=>{ performAdvancedSearch()}}>
                     Search
             </Button>
             </Form>
