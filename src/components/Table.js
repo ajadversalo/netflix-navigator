@@ -8,7 +8,7 @@ import Intro from '../components/Intro.js'
 
 const Table = () => {
     return (     
-            <Context.Consumer>
+        <Context.Consumer>
             {({state, changeView, fetchTitleDetail, sanitizeString}) => 
             <div>
         
@@ -52,14 +52,20 @@ const Table = () => {
                 <div >
                     <ol className="list-group">
                         {state.allTitles.map(title => 
-                            <li > 
-                            <b>{ sanitizeString(title.title)}</b> <p>{sanitizeString(title.synopsis)}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
+                            <li> 
+                                <a href="#" 
+                                    onClick={()=>{fetchTitleDetail(title.netflixid)}}><b>{ sanitizeString(title.title)}</b>
+                                </a> 
+                                <p>{sanitizeString(title.synopsis)}</p>
+                                <span class="badge badge-warning badge-pill">IMDB Score: {title.rating}</span>
+                            </li>
+                            )
                         }
                     </ol>
                 </div>
             }
             </div>}
-            </Context.Consumer>     
+        </Context.Consumer>     
     )
 }
 
