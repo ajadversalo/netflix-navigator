@@ -144,7 +144,7 @@ clearAllTitles = () => {
   this.setState(stateCopy);
 }
 
-performSearch = () => {
+performQuickSearch = () => {
   if(this.state.searchString === null || this.state.searchString.length < 3){ 
     alert("Minimum search entry is 3 characters."); 
   } else {  
@@ -157,6 +157,16 @@ performSearch = () => {
         Constants.IMDB_MINIMUM_SCORE, 
         Constants.IMDB_MAXIMUM_SCORE
     )
+  }
+}
+
+performAdvancedSearch = () => {
+  if (this.state.startYear < 1900 || this.state.endYear > 2019){
+    alert("Year cannot be less than 1900 or more than 2019");
+  } else if (this.state.imdbMin < 0 || this.state.imdbMax > 10) {
+    alert("IMDB score cannot be less than 0 or more than 10");
+  } else {
+    this.fetchTitles('', this.state.startYear, this.state.endYear, this.state.type, this.state.genreID, this.state.imdbMin, this.state.imdbMax)
   }
 }
 
@@ -186,7 +196,8 @@ render(){
             clearAllTitles: this.clearAllTitles,
             clearTitle: this.clearTitle,
             pickRandomTitle: this.pickRandomTitle,
-            performSearch: this.performSearch,
+            performQuickSearch: this.performQuickSearch,
+            performAdvancedSearch: this.performAdvancedSearch,
             sanitizeString: this.sanitizeString
             }}>
         {this.props.children}

@@ -12,7 +12,7 @@ import Genres from '../data/genres';
 
 let NetflixNav = () => (
     <Context.Consumer>
-         {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performSearch}) => 
+         {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performQuickSearch}) => 
         <Navbar bg="dark"  variant="dark" expand="lg">
         <Navbar.Brand href="#" onClick={() => {clearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -49,13 +49,13 @@ let NetflixNav = () => (
                     onChange={handleChange}
                     onKeyDown={(event) => {
                         if(event.keyCode === 13){
-                            performSearch();
+                            performQuickSearch();
                         }}
                     }              
                 />
                 <Button 
                     variant="outline-danger"
-                    onClick={() => {performSearch()}}
+                    onClick={() => {performQuickSearch()}}
                 >Search</Button>
             </Form>             
         </Navbar.Collapse>
