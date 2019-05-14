@@ -42,7 +42,7 @@ const Table = () => {
             {
                 state.view === 'detail' &&
                 <div >
-                    {state.allTitles.map(title => <TitleDetail title={title}/>)}
+                    {state.allTitles.map(title => <a onClick={()=>{fetchTitleDetail(title.netflixid)}}><TitleDetail title={title} onclick={()=>{fetchTitleDetail(title.netflixid)}}/></a>)}
                 </div>
             }
 
@@ -53,7 +53,7 @@ const Table = () => {
                     <ol className="list-group">
                         {state.allTitles.map(title => 
                             <li > 
-                            <b>{sanitizeString(title.title)}</b> <p>{sanitizeString(title.synopsis)}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
+                            <b>{ sanitizeString(title.title)}</b> <p>{sanitizeString(title.synopsis)}</p><span class="badge badge-warning badge-pill">{title.rating}</span></li>)
                         }
                     </ol>
                 </div>
