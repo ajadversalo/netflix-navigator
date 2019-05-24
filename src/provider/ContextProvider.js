@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Context from '../contexts/NetflixContext';
 import NetflixAPI from '../api/NetflixAPI';
-import * as Constants from '../data/constants';
+import * as Constants from '../data/Constants';
 
 {/* This ContextProvider class contains all the App's state variables and functions */}
 
@@ -22,9 +22,8 @@ class ContextProvider extends Component {
           searchString: null,
           type: 'movie',
           genreID: null,     
-          imdbMin: Constants.IMDB_MINIMUM_SCORE,
-          imdbMax: Constants.IMDB_MAXIMUM_SCORE,
-          luckyPickItems: []
+          imdbMin: Constants.IMDB_DEFAULT_MIN,
+          imdbMax: Constants.IMDB_DEFAULT_MAX
         }
     }
 
@@ -65,11 +64,11 @@ pickRandomTitle = () => {
     this.state.currentYear, 
     Constants.ALL_TYPES,
     Constants.ALL_GENRES, 
-    Constants.IMDB_LP_MIN, 
-    Constants.IMDB_LP_MAX, 
+    Constants.IMDB_LUCKYPICK_MIN, 
+    Constants.IMDB_LUCKYPICK_MAX, 
     (data) => {
       let stateCopy = {...this.state};
-      stateCopy.luckyPickItems = data.ITEMS;
+      stateCopy.allTitles = data.ITEMS;
       stateCopy.luckyPickItemCount = data.COUNT;
       this.setState(stateCopy, () => {this.displayRandomTitle()});
   }) 
@@ -78,9 +77,9 @@ pickRandomTitle = () => {
 displayRandomTitle = () => {
   let luckyPickIndex = 0;
   //Get random number from 1 to number of items in the lucky pick storage
-  luckyPickIndex = Math.floor(Math.random() * this.state.luckyPickItems.length);
+  luckyPickIndex = Math.floor(Math.random() * this.state.allTitles.length);
   if(luckyPickIndex >= 0){
-    this.fetchTitleDetail(this.state.luckyPickItems[luckyPickIndex].netflixid);
+    this.fetchTitleDetail(this.state.allTitles[luckyPickIndex].netflixid);
   }
 }
 
@@ -154,8 +153,8 @@ performQuickSearch = () => {
         this.state.currentYear, 
         Constants.ALL_GENRES, 
         Constants.ALL_TYPES, 
-        Constants.IMDB_MINIMUM_SCORE, 
-        Constants.IMDB_MAXIMUM_SCORE
+        Constants.IMDB_DEFAULT_MIN, 
+        Constants.IMDB_DEFAULT_MAX
     )
   }
 }
@@ -177,9 +176,9 @@ sanitizeString = (string) => {
     let pos = sanitizedString.indexOf("<"); 
     sanitizedString = sanitizedString.substr(0,pos);
   }
-  sanitizedString = sanitizedString.replace('&#39;',"'");
-  sanitizedString = sanitizedString.replace('&rsquo;','');
-  sanitizedString = sanitizedString.replace('&amp;#39;',"'");
+  sanitizedString = sanitizedString.split("&amp;#39;").join("'");
+  sanitizedString = sanitizedString.split("&#39;").join("'");
+  sanitizedString = sanitizedString.split("&rsquo;").join("'");
   return sanitizedString;
 }
 

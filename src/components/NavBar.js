@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 import Context from '../contexts/NetflixContext'
-import * as Constants from '../data/constants';
+import * as Constants from '../data/Constants';
 import Genres from '../data/genres';
 
 {/*This navbar component links to the following functions
@@ -30,8 +30,8 @@ let NetflixNav = () => (
                             state.currentYear, 
                             Constants.ALL_TYPES, 
                             genre.id, 
-                            Constants.IMDB_MINIMUM_SCORE,  
-                            Constants.IMDB_MAXIMUM_SCORE)}}>
+                            Constants.IMDB_DEFAULT_MIN,  
+                            Constants.IMDB_DEFAULT_MAX)}}>
                             {genre.title}
                         </NavDropdown.Item>)}
                     <NavDropdown.Divider />
