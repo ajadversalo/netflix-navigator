@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.795991f2.chunk.css",
-    "main.js": "/static/js/main.0183500a.chunk.js",
-    "main.js.map": "/static/js/main.0183500a.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/css/2.266e55a5.chunk.css": "/static/css/2.266e55a5.chunk.css",
-    "static/js/2.99653cf2.chunk.js": "/static/js/2.99653cf2.chunk.js",
-    "static/js/2.99653cf2.chunk.js.map": "/static/js/2.99653cf2.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.90718cde2f5f47937570ae7283f9dbfc.js": "/precache-manifest.90718cde2f5f47937570ae7283f9dbfc.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.266e55a5.chunk.css.map": "/static/css/2.266e55a5.chunk.css.map",
-    "static/css/main.795991f2.chunk.css.map": "/static/css/main.795991f2.chunk.css.map"
+    "main.css": "/netflix-navigator/static/css/main.795991f2.chunk.css",
+    "main.js": "/netflix-navigator/static/js/main.14468610.chunk.js",
+    "main.js.map": "/netflix-navigator/static/js/main.14468610.chunk.js.map",
+    "runtime~main.js": "/netflix-navigator/static/js/runtime~main.3cefd054.js",
+    "runtime~main.js.map": "/netflix-navigator/static/js/runtime~main.3cefd054.js.map",
+    "static/css/2.266e55a5.chunk.css": "/netflix-navigator/static/css/2.266e55a5.chunk.css",
+    "static/js/2.99653cf2.chunk.js": "/netflix-navigator/static/js/2.99653cf2.chunk.js",
+    "static/js/2.99653cf2.chunk.js.map": "/netflix-navigator/static/js/2.99653cf2.chunk.js.map",
+    "index.html": "/netflix-navigator/index.html",
+    "precache-manifest.59d7e889fc70140a0da875f296a5cf53.js": "/netflix-navigator/precache-manifest.59d7e889fc70140a0da875f296a5cf53.js",
+    "service-worker.js": "/netflix-navigator/service-worker.js",
+    "static/css/2.266e55a5.chunk.css.map": "/netflix-navigator/static/css/2.266e55a5.chunk.css.map",
+    "static/css/main.795991f2.chunk.css.map": "/netflix-navigator/static/css/main.795991f2.chunk.css.map"
   }
 }
