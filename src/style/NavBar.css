@@ -1,0 +1,10 @@
+.navItem {
+    padding-left:15px;
+    color:gray;
+  
+  }
+
+  .navItem:hover {
+    color:white;
+    text-decoration:none
+  }

@@ -3,7 +3,7 @@ import {ButtonGroup, Button} from 'react-bootstrap';
 import TitleDetail from './TitleDetail.js'
 import Context from '../contexts/NetflixContext'
 import Intro from '../components/Intro.js'
-
+import { Route, Link } from 'react-router-dom'
 /* This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
 
 const Table = () => {
@@ -11,7 +11,6 @@ const Table = () => {
         <Context.Consumer>
             {({state, changeView, fetchTitleDetail, sanitizeString}) => 
             <div>
-        
             {/* View type selection buttons */}
             { state.allTitles.length > 0 &&
             <div>
@@ -26,24 +25,19 @@ const Table = () => {
             </div>
             }
 
-            {/* Welcome page and advanced search */}
-            { 
-                state.allTitles.length === 0 && <Intro/>
-            }
-
             {/* Icon View */}
             { 
-                state.view === 'icon' &&
-                <div className="d-flex justify-content-center" style={{ flexWrap: 'wrap'}}>
-                    {state.allTitles.map(title => <a href="#" onClick={()=>{fetchTitleDetail(title.netflixid)}}><img src={title.image} alt={title.title} style={{margin: '5px' ,width: '120px'}}/></a> )}
-                </div>    
+                 state.view === 'icon' &&
+                 <div className="d-flex justify-content-center" style={{ flexWrap: 'wrap'}}>
+                     {state.allTitles.map(title => <Link to = "/detail"> <img src={title.image} onClick={()=>{fetchTitleDetail(title.netflixid)}} alt={title.title} style={{margin: '5px' ,width: '120px'}}/></Link> )}
+                 </div>       
             } 
 
             {/* Detail View */}
             {
                 state.view === 'detail' &&
                 <div >
-                    {state.allTitles.map(title => <a onClick={()=>{fetchTitleDetail(title.netflixid)}}><TitleDetail title={title} onclick={()=>{fetchTitleDetail(title.netflixid)}}/></a>)}
+                {state.allTitles.map(title => <Link to = "/detail"> <span onClick={()=>{fetchTitleDetail(title.netflixid)}}><TitleDetail title={title} /></span></Link>)}
                 </div>
             }
 

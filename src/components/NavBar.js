@@ -3,6 +3,10 @@ import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstr
 import Context from '../contexts/NetflixContext'
 import * as Constants from '../data/constants';
 import Genres from '../data/genres';
+import { Route, Link } from 'react-router-dom'
+import NavbarToggle from 'react-bootstrap/NavbarToggle';
+import '../style/NavBar.css';
+
 
 {/*This navbar component links to the following functions
     1. What's New - Displays new content from the past 7 days
@@ -14,30 +18,33 @@ let NetflixNav = () => (
     <Context.Consumer>
          {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performQuickSearch}) => 
         <Navbar bg="dark"  variant="dark" expand="lg">
-        <Navbar.Brand href="#" onClick={() => {clearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
+        {/* <Navbar.Brand href="/" onClick={() => {clearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand> */}
+        <Link to = "/">
+            <Navbar.Brand style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto"> 
-                <Nav.Link href="#" onClick={() => {fetchNewTitles()}}>What's New</Nav.Link>
-                <Nav.Link href="#" onClick={() => {pickRandomTitle()}}>Lucky Pick</Nav.Link>             
-                
-                {/* Maps genre list from the genres json file */}
-                <NavDropdown title="Filters" id="basic-nav-dropdown" >
-                    {Genres.map(genre => 
-                        <NavDropdown.Item href="#" 
-                            onClick={() => {fetchTitles('', 
-                            Constants.EARLIEST_PRODUCTION_YEAR,
-                            state.currentYear, 
-                            Constants.ALL_TYPES, 
-                            genre.id, 
-                            Constants.IMDB_MINIMUM_SCORE,  
-                            Constants.IMDB_MAXIMUM_SCORE)}}>
-                            {genre.title}
-                        </NavDropdown.Item>)}
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#">Top Rated</NavDropdown.Item>
-                </NavDropdown>
+            <Nav className="mr-auto">     
+                {/* <Route render={({ history}) => ( 
+                <Nav.Link onClick={() => {history.push('/table'); fetchNewTitles()}}>What's New</Nav.Link>                
+                )} /> */}
+                {/* <Nav.Link href="#" onClick={() => {pickRandomTitle()}}>Lucky Pick</Nav.Link>   */}
+
+                    <Link to = "/search" className="navItem">
+                        <Nav.Item>Search</Nav.Item>
+                    </Link>
+                    <Link to = "/new" className="navItem">
+                        <Nav.Item onClick={() => {fetchNewTitles()}} >What's New</Nav.Item>
+                    </Link>
+                    <Link to = "/luckypick" className="navItem">
+                        <Nav.Item   onClick={() => {pickRandomTitle()}} >Lucky Pick</Nav.Item>
+                    </Link>
+                    <Link to = "/filters" className="navItem">                
+                        <Nav.Item>Filters</Nav.Item>          
+                    </Link>
             </Nav>
+
+            
             
             {/* Quick Search  */}
             <Form inline onSubmit={e => { e.preventDefault();}}>

@@ -17,10 +17,11 @@ let Intro = () => (
                     {state.episodes.map(title => <li>{title.title}</li>)}
                 </div>
             </Col>
-            <Col>
+
+            {/* <Col>
                 <h5><Badge variant="danger">DETAILED SEARCH</Badge></h5>   
                 <AdvancedSearch></AdvancedSearch>
-            </Col>
+            </Col> */}
         </Row>}
         </Context.Consumer>
     </Jumbotron>

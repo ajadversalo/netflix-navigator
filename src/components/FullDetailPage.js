@@ -18,9 +18,9 @@ const FullDetailPage = () => {
         <Context.Consumer>{({state, clearTitle, sanitizeString}) =>     
         <div >
             <hr />
-            <div className="d-flex justify-content-end">
+            {/* <div className="d-flex justify-content-end">
                 <Button onClick={() => {clearTitle()}} variant="danger">X</Button>
-            </div>   
+            </div>    */}
             <h1>{sanitizeString(state.titleDetail.nfinfo.title)}</h1>
             <Row>
                 <Col><img src={state.titleDetail.nfinfo.image1} alt={state.titleDetail.nfinfo.title}></img></Col>

@@ -3,6 +3,7 @@ import {Form, Button, Col} from 'react-bootstrap';
 import Context from '../contexts/NetflixContext'
 import Genres from '../data/genres';
 import ContentTypes from '../data/contentTypes';
+import { Route } from 'react-router-dom'
 
 {/* Simple component which allows detailed content search using the following data:
     1. Start Year
@@ -51,13 +52,18 @@ const AdvancedSearch = () => (
                     <Form.Control type="text" placeholder="Maximum IMDB score" defaultValue={state.imdbMax} name="imdbMax"  onChange={handleChange}/>   
             </Col>
             </Form.Row>
-            <Button 
-                variant="danger" 
-                value="Search"
-                style ={{marginTop:'10px'}} 
-                onClick={()=>{ performAdvancedSearch()}}>
-                    Search
-            </Button>
+            <Route render={({ history}) => (
+                <Button 
+                    variant="danger" 
+                    value="Search"
+                    style ={{marginTop:'10px'}} 
+                    onClick={()=>{  
+                        performAdvancedSearch();
+                        history.push('/table');
+                    }}>
+                        Search
+                </Button>
+            )} />
             </Form>
     </div>}
     </Context.Consumer> 

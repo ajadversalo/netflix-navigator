@@ -24,14 +24,14 @@ class ContextProvider extends Component {
           genreID: null,     
           imdbMin: Constants.IMDB_MINIMUM_SCORE,
           imdbMax: Constants.IMDB_MAXIMUM_SCORE,
-          luckyPickItems: []
+          luckyPickItems: null
         }
     }
 
 //Set current year and default value for end year. Populate intro page
 componentDidMount = () => {
   this.setCurrentYear();
-  this.fetchNewEpisodes();
+  //this.fetchNewEpisodes();
 }
       
 //General input handling
@@ -78,10 +78,13 @@ pickRandomTitle = () => {
 displayRandomTitle = () => {
   let luckyPickIndex = 0;
   //Get random number from 1 to number of items in the lucky pick storage
+ if (typeof this.state.luckyPickItems !== 'undefined') {
   luckyPickIndex = Math.floor(Math.random() * this.state.luckyPickItems.length);
   if(luckyPickIndex >= 0){
     this.fetchTitleDetail(this.state.luckyPickItems[luckyPickIndex].netflixid);
   }
+}
+  
 }
 
 //Sets table view to Icon, Detail or List
