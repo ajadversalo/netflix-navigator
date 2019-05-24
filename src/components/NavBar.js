@@ -30,8 +30,8 @@ let NetflixNav = () => (
                             state.currentYear, 
                             Constants.ALL_TYPES, 
                             genre.id, 
-                            Constants.IMDB_DEFAULT_MIN,  
-                            Constants.IMDB_DEFAULT_MAX)}}>
+                            Constants.DEFAULT_IMDB_MIN,  
+                            Constants.DEFAULT_IMDB_MAX)}}>
                             {genre.title}
                         </NavDropdown.Item>)}
                     <NavDropdown.Divider />

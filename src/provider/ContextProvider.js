@@ -18,12 +18,12 @@ class ContextProvider extends Component {
           startYear: Constants.EARLIEST_PRODUCTION_YEAR, 
           endYear: null,      // Used in advanced search
           currentYear: null,  // Used in quick search
-          view: 'icon',
           searchString: null,
-          type: 'movie',
-          genreID: null,     
-          imdbMin: Constants.IMDB_DEFAULT_MIN,
-          imdbMax: Constants.IMDB_DEFAULT_MAX
+          genreID: null,
+          view: Constants.DEFAULT_VIEW_TYPE,
+          type: Constants.DEFAULT_MEDIA_TYPE,
+          imdbMin: Constants.DEFAULT_IMDB_MIN,
+          imdbMax: Constants.DEFAULT_IMDB_MAX
         }
     }
 
@@ -153,8 +153,8 @@ performQuickSearch = () => {
         this.state.currentYear, 
         Constants.ALL_GENRES, 
         Constants.ALL_TYPES, 
-        Constants.IMDB_DEFAULT_MIN, 
-        Constants.IMDB_DEFAULT_MAX
+        Constants.DEFAULT_IMDB_MIN, 
+        Constants.DEFAULT_IMDB_MAX
     )
   }
 }
