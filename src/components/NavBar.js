@@ -14,8 +14,8 @@ import * as actionCreator from '../actions/actions';
 
 const NetflixNav = (props) => {
     return (
-    <Context.Consumer>
-         {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performQuickSearch}) => 
+    // <Context.Consumer>
+    //      {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performQuickSearch}) => 
         <Navbar bg="dark"  variant="dark" expand="lg">
         <Navbar.Brand href="#" onClick={() => {props.clearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -32,7 +32,7 @@ const NetflixNav = (props) => {
                         <NavDropdown.Item href="#" 
                             onClick={() => {props.fetchTitles('', 
                             Constants.EARLIEST_PRODUCTION_YEAR,
-                            state.currentYear, 
+                            props.currentYear, 
                             Constants.ALL_TYPES, 
                             genre.id, 
                             Constants.DEFAULT_IMDB_MIN,  
@@ -50,29 +50,41 @@ const NetflixNav = (props) => {
                     type="text"
                     placeholder="Quick Search"
                     name="searchString" 
-                    value={state.searchString} 
-                    onChange={handleChange}
+                    value={props.searchString} 
+                    onChange={props.handleChange}
                     onKeyDown={(event) => {
                         if(event.keyCode === 13){
-                            performQuickSearch();
+                            props.performQuickSearch();
                         }}
                     }              
                 />
                 <Button 
                     variant="outline-danger"
-                    onClick={() => {performQuickSearch()}}
-                >Search</Button>
+                    onClick={() => { 
+                        if (props.searchString === null || props.searchString.length < 3){ 
+                            alert("Minimum search entry is 3 characters."); 
+                        } else { 
+                            props.fetchTitles(props.searchString, 
+                            Constants.EARLIEST_PRODUCTION_YEAR, 
+                            props.currentYear, 
+                            Constants.ALL_GENRES, 
+                            Constants.ALL_TYPES, 
+                            Constants.DEFAULT_IMDB_MIN, 
+                            Constants.DEFAULT_IMDB_MAX)}}
+                        }>Search
+                </Button>
             </Form>             
         </Navbar.Collapse>
-        </Navbar>}
-    </Context.Consumer>
+        </Navbar>
+        // }</Context.Consumer>
     )
 }
 
 const mapStateToProps = (state) => {
     console.log('mapStateToProps', state);
     return {
-        currentYear: state.currentYear
+        currentYear: state.currentYear,
+        searchString: state.searchString
     }
 }
 
@@ -89,8 +101,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actionCreator.fetchTitles(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax))  
         },
         luckyPick: (searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax) => {
-                dispatch(actionCreator.luckyPick(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax))  
+            dispatch(actionCreator.luckyPick(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax))  
         },
+        handleChange: (e) => {
+            dispatch(actionCreator.handleChange(e))  
+        }
     }
 }
 

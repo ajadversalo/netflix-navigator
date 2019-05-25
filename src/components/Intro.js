@@ -1,15 +1,12 @@
 import React from 'react';
-import Context from '../contexts/NetflixContext'
 import {Jumbotron, Badge, Row, Col} from 'react-bootstrap';
 import AdvancedSearch from '../components/AdvancedSearch';
 import {connect} from 'react-redux';
-
+import Store from '../store/Store';
 
 {/* Intro page containing a list of the new episodes and the advanced search form*/}
 let Intro = (props) => (
     <Jumbotron >
-        <Context.Consumer>
-            {({state}) =>   
         <Row>
             <Col>
                 <h1 className="d-flex justify-content-start">Welcome!</h1>
@@ -21,10 +18,9 @@ let Intro = (props) => (
             </Col>
             <Col>
                 <h5><Badge variant="danger">DETAILED SEARCH</Badge></h5>   
-                <AdvancedSearch></AdvancedSearch>
+                <AdvancedSearch store={Store}></AdvancedSearch>
             </Col>
         </Row>}
-        </Context.Consumer>
     </Jumbotron>
 )
 
@@ -35,19 +31,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-
-const mapDispatchToProps = (dispatch) => {
-    // console.log('mapDispatchToProps', dispatch);
-    // return {
-    //     onClearAllTitles: () => {
-    //         const action = {type: 'SET_ALLTITLES', val: []}
-    //         dispatch(action);
-    //     },
-
-    //      fetchNewTitles: () => {
-    //         dispatch(actionCreator.fetchNewTitles())  
-    //     }
-    // }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Intro);
+export default connect(mapStateToProps)(Intro);

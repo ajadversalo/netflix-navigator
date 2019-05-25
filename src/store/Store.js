@@ -27,9 +27,6 @@ const reducer = (state = initialState, action) => {
         case 'SET_ALL_TITLES':
             newState.allTitles = action.value;
             break;
-        case 'SET_EPISODES':
-            newState.episodes = action.value;
-            break;
         case 'SET_VIEW':
             newState.view = action.value;
             break;
@@ -56,7 +53,11 @@ const reducer = (state = initialState, action) => {
             break;
         case 'CLEAR_ALL_TITLES':
             newState.allTitles = [];
-            newState.titleDetail = null;   
+            newState.titleDetail = null;
+            break;
+        case 'HANDLE_CHANGE':
+            newState.searchString = action.value.target.value;
+            break;
     }
 
     return newState;
