@@ -6,7 +6,6 @@ import Genres from '../data/genres';
 import {connect} from 'react-redux';
 import * as actionCreator from '../actions/actions';
 
-
 {/*This navbar component links to the following functions
     1. What's New - Displays new content from the past 7 days
     2. Lucky Pick - Gathers content with IMDB rating higher than 8 then picks one from the list
@@ -18,7 +17,7 @@ const NetflixNav = (props) => {
     <Context.Consumer>
          {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performQuickSearch}) => 
         <Navbar bg="dark"  variant="dark" expand="lg">
-        <Navbar.Brand href="#" onClick={() => {props.onClearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
+        <Navbar.Brand href="#" onClick={() => {props.clearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto"> 
@@ -66,7 +65,6 @@ const NetflixNav = (props) => {
         </Navbar>}
     </Context.Consumer>
     )
-
 }
 
 const mapStateToProps = (state) => {
@@ -79,10 +77,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     console.log('mapDispatchToProps', dispatch);
     return {
-
-        onClearAllTitles: () => {
-            const action = {type: 'SET_ALLTITLES', val: []}
-            dispatch(action);
+        clearAllTitles: () => {
+            dispatch(actionCreator.clearAllTitles());
         },
 
          fetchNewTitles: () => {

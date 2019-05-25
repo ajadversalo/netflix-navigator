@@ -76,8 +76,13 @@ export function fetchTitleDetail (id) {
 export function setCurrentYear() {
     let currentYear = new Date();
     currentYear = currentYear.getFullYear();
-    return (dispatch) => {
-        console.log('the current year is: ' + currentYear.toString());
-        dispatch({type:'SET_CURRENT_YEAR', value: currentYear})
-    }
+    return ({type:'SET_CURRENT_YEAR', value: currentYear})
+}
+
+export function clearAllTitles() {
+    return ({type:'CLEAR_ALL_TITLES'})
+}
+
+export function changeView(value) {
+    return ({type:'SET_VIEW', value: value})
 }

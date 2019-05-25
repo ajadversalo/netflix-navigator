@@ -24,14 +24,14 @@ const reducer = (state = initialState, action) => {
     console.log('reducer running', action);
     const newState = {...state};
     switch(action.type) {
-        case 'SET_ALLTITLES':
-            newState.allTitles = action.val;
+        case 'SET_ALL_TITLES':
+            newState.allTitles = action.value;
             break;
         case 'SET_EPISODES':
-            newState.episodes = action.val;
+            newState.episodes = action.value;
             break;
         case 'SET_VIEW':
-            newState.view = action.val;
+            newState.view = action.value;
             break;
         case 'FETCH_NEW_TITLES':
             newState.allTitles = action.value.ITEMS;
@@ -43,14 +43,15 @@ const reducer = (state = initialState, action) => {
             break;
         case 'SET_CURRENT_YEAR':
             newState.currentYear = action.value;
-            console.log(action.value);
             break;
         case 'FETCH_TITLE_DETAIL':
             newState.titleDetail = action.value;
             newState.titleDetailPlot = action.value.imdbinfo.plot;
             newState.titleDetailActors = action.value.people[0].actor;
-            console.log(action.value.imdbinfo.plot);
-            break;    
+            break;
+        case 'CLEAR_ALL_TITLES':
+            newState.allTitles = [];
+            newState.titleDetail = null;   
     }
 
     return newState;

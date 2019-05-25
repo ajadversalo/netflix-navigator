@@ -20,7 +20,7 @@ const FullDetailPage = (props) => {
         <div >
             <hr />
             <div className="d-flex justify-content-end">
-                {/* <Button onClick={() => {clearTitle()}} variant="danger">X</Button> */}
+                <Button onClick={() => {props.clearTitle()}} variant="danger">X</Button>
             </div>   
              <h1>{props.sanitizeString(props.titleDetail.nfinfo.title)}</h1>
             <Row>
@@ -69,16 +69,16 @@ const mapStateToProps = (state) => {
     console.log('mapStateToProps', state);
     return {
         titleDetail: state.titleDetail,
-        titleDetailPlot: state.titleDetailPlot
+        titleDetailPlot: state.titleDetailPlot,
+        titleDetailActors: state.titleDetailActors
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     console.log('mapDispatchToProps', dispatch);
     return {
-
         onClearAllTitles: () => {
-            const action = {type: 'SET_ALLTITLES', val: []}
+            const action = {type: 'SET_ALLTITLES', value: []}
             dispatch(action);
         },
 

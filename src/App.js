@@ -49,7 +49,10 @@ render(){
               {/* {({state}) => state.titleDetail &&  <FullDetailPage/>} */}
               {this.props.titleDetail &&  <FullDetailPage store={Store} sanitizeString={this.sanitizeString}/>}
               {/* </Context.Consumer> */}
-          <Table store={Store}/>
+          <Table 
+            store={Store}
+            sanitizeString={this.sanitizeString}
+          />
         </Container>
       </ContextProvider>
     );

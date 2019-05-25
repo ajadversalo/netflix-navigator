@@ -8,13 +8,9 @@ import Store from '../store/Store';
 import * as actionCreator from '../actions/actions';
 
 /* This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
-
 const Table = (props) => {
     return (     
-        //  <Context.Consumer>
-        //      {({state, changeView, fetchTitleDetail, sanitizeString}) => 
-            <div>
-        
+            <div>     
             {/* View type selection buttons */}
             { props.allTitles.length > 0 &&
             <div>
@@ -48,11 +44,8 @@ const Table = (props) => {
             {
                 props.view === 'detail' &&
                 <div >
-                    {props.allTitles.map(title => <a onClick={()=>{
-                        // fetchTitleDetail(title.netflixid)
-                        }}><TitleDetail title={title} onclick={()=>{
-                            // fetchTitleDetail(title.netflixid)
-                            }}/></a>)}
+                    {props.allTitles.map(title => <a onClick={()=>{props.fetchTitleDetail(title.netflixid)}}>
+                        <TitleDetail title={title} onclick={()=>{props.fetchTitleDetail(title.netflixid)}}/></a>)}
                 </div>
             }
 
@@ -63,15 +56,8 @@ const Table = (props) => {
                     <ol className="list-group">
                         {props.allTitles.map(title => 
                             <li> 
-                                <a href="#" 
-                                    // onClick={()=>{fetchTitleDetail(title.netflixid)}}
-                                    ><b>{ 
-                                        // sanitizeString(title.title)
-                                        }</b>
-                                </a> 
-                                <p>{
-                                    // sanitizeString(title.synopsis)
-                                    }</p>
+                                <a href="#" onClick={()=>{props.fetchTitleDetail(title.netflixid)}}><b>{props.sanitizeString(title.title)}</b></a> 
+                                <p>{props.sanitizeString(title.synopsis)}</p>
                                 <span class="badge badge-warning badge-pill">IMDB Score: {title.rating}</span>
                             </li>
                             )
@@ -79,8 +65,7 @@ const Table = (props) => {
                     </ol>
                 </div>
             }
-            </div>
-            // } </Context.Consumer>     
+            </div> 
     )
 }
 
@@ -93,23 +78,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-
 const mapDispatchToProps = (dispatch) => {
     console.log('mapDispatchToProps', dispatch);
     return {
-        // onIncrementClick: () => {
-        //     const action = { type: 'INCREMENT', val: 10};
-        //     dispatch(action);
-        // },
-        // onDecrementClick: () => {
-        //     dispatch({type:'DECREMENT'});
-        // },
-
         onChangeView: (value) => {
-            const action = {type: 'SET_VIEW', val: value}
-            dispatch(action);
+            dispatch(actionCreator.changeView(value));
         },
-
         fetchTitleDetail: (netflixid) => {
             dispatch(actionCreator.fetchTitleDetail (netflixid))
         }
