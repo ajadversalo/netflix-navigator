@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://ajadversalo.github.io/netflix-navigator",
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "mdbreact": "^4.13.0",
@@ -12,7 +13,10 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
-    "react-scripts": "3.0.0"
+    "react-redux": "^7.0.3",
+    "react-scripts": "3.0.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -3,6 +3,9 @@ import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstr
 import Context from '../contexts/NetflixContext'
 import * as Constants from '../data/Constants';
 import Genres from '../data/genres';
+import {connect} from 'react-redux';
+import * as actionCreator from '../actions/actions';
+
 
 {/*This navbar component links to the following functions
     1. What's New - Displays new content from the past 7 days
@@ -10,15 +13,16 @@ import Genres from '../data/genres';
     3. Filters - Contains content filters for different genres
     4. Quick Search - Enables text input of title, actor or genre */}
 
-let NetflixNav = () => (
+const NetflixNav = (props) => {
+    return (
     <Context.Consumer>
          {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performQuickSearch}) => 
         <Navbar bg="dark"  variant="dark" expand="lg">
-        <Navbar.Brand href="#" onClick={() => {clearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
+        <Navbar.Brand href="#" onClick={() => {props.onClearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto"> 
-                <Nav.Link href="#" onClick={() => {fetchNewTitles()}}>What's New</Nav.Link>
+                <Nav.Link href="#" onClick={() => {props.fetchNewTitles()}}>What's New</Nav.Link>
                 <Nav.Link href="#" onClick={() => {pickRandomTitle()}}>Lucky Pick</Nav.Link>             
                 
                 {/* Maps genre list from the genres json file */}
@@ -61,6 +65,30 @@ let NetflixNav = () => (
         </Navbar.Collapse>
         </Navbar>}
     </Context.Consumer>
-)
+    )
 
-export default NetflixNav;
+}
+
+const mapStateToProps = (state) => {
+    console.log('mapStateToProps', state);
+    return {
+        count: state.count
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    console.log('mapDispatchToProps', dispatch);
+    return {
+
+        onClearAllTitles: () => {
+            const action = {type: 'SET_ALLTITLES', val: []}
+            dispatch(action);
+        },
+
+         fetchNewTitles: () => {
+            dispatch(actionCreator.fetchNewTitles())  
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NetflixNav);
