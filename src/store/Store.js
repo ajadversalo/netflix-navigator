@@ -38,6 +38,11 @@ const reducer = (state = initialState, action) => {
             newState.count = action.value.COUNT;
             newState.titleDetail = null;
             break;
+        case 'FETCH_TITLES':
+            newState.allTitles = action.value.ITEMS;
+            newState.count = action.value.COUNT;
+            newState.titleDetail = null;
+            break;
         case 'FETCH_NEW_EPISODES':
             newState.episodes = action.value.results;
             break;

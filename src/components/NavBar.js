@@ -21,14 +21,16 @@ const NetflixNav = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto"> 
-                <Nav.Link href="#" onClick={() => {props.fetchNewTitles()}}>What's New</Nav.Link>
-                <Nav.Link href="#" onClick={() => {pickRandomTitle()}}>Lucky Pick</Nav.Link>             
+                <Nav.Link href="#" onClick={() => { props.fetchNewTitles()}}>What's New</Nav.Link>
+                <Nav.Link href="#" onClick={() => { props.luckyPick('', Constants.EARLIEST_PRODUCTION_YEAR, props.currentYear,
+                                                                          Constants.ALL_TYPES, Constants.ALL_GENRES, Constants.IMDB_LUCKYPICK_MIN, 
+                                                                          Constants.IMDB_LUCKYPICK_MAX)}}>Lucky Pick</Nav.Link>             
                 
                 {/* Maps genre list from the genres json file */}
                 <NavDropdown title="Filters" id="basic-nav-dropdown" >
                     {Genres.map(genre => 
                         <NavDropdown.Item href="#" 
-                            onClick={() => {fetchTitles('', 
+                            onClick={() => {props.fetchTitles('', 
                             Constants.EARLIEST_PRODUCTION_YEAR,
                             state.currentYear, 
                             Constants.ALL_TYPES, 
@@ -70,7 +72,7 @@ const NetflixNav = (props) => {
 const mapStateToProps = (state) => {
     console.log('mapStateToProps', state);
     return {
-        count: state.count
+        currentYear: state.currentYear
     }
 }
 
@@ -80,10 +82,15 @@ const mapDispatchToProps = (dispatch) => {
         clearAllTitles: () => {
             dispatch(actionCreator.clearAllTitles());
         },
-
-         fetchNewTitles: () => {
+        fetchNewTitles: () => {
             dispatch(actionCreator.fetchNewTitles())  
-        }
+        },
+        fetchTitles: (searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax) => {
+            dispatch(actionCreator.fetchTitles(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax))  
+        },
+        luckyPick: (searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax) => {
+                dispatch(actionCreator.luckyPick(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax))  
+        },
     }
 }
 

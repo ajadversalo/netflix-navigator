@@ -1,34 +1,41 @@
+import NetflixAPI from '../api/NetflixAPI';
 const baseUrl = 'https://unogs-unogs-v1.p.rapidapi.com/';
 const _headers = new Headers();
 _headers.append('X-RapidAPI-Host','unogs-unogs-v1.p.rapidapi.com');
 _headers.append('X-RapidAPI-Key','cf523eed82mshed7e62394e60ba7p1091d6jsn2c974a328b59')
 
-export function fetchNewTitles() {
-    
-    let request = new Request(`${baseUrl}/aaapi.cgi?q=get:new7:CA&p=1&t=ns&st=adv`,  {
-        method: 'GET',
-        headers: _headers,
-        mode: 'cors'
-    });
-
+export const fetchNewTitles = () => {
     return (dispatch) => {
-        fetch(request)
-        .then((response) => {
-            console.log('response: ' + response);
-            response.json()
-                .then((data) => {
-                    console.log(data);
-                    dispatch({type:'FETCH_NEW_TITLES', value: data})              
-                });
-        })
-        .catch((err) => {
-            console.log('error: ' + err);
-        }); 
+        NetflixAPI.getNewTitles((data) => {dispatch({type:'FETCH_NEW_TITLES', value: data})})
     }
 }
 
+const generateRandomIndex = (length) => {
+    let luckyPickIndex = null;
+    luckyPickIndex = Math.floor(Math.random() * length);
+    return luckyPickIndex;
+}
+
+export const luckyPick = (searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax) => {
+    return (dispatch) => {
+        NetflixAPI.getTitles(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax, (data) => {dispatch({type:'FETCH_TITLES', value: data})
+            //pick random title from all titles list
+            let randomTitleIndex = generateRandomIndex(data.ITEMS.length);
+            if (randomTitleIndex >= 0){
+                NetflixAPI.getTitleDetail(data.ITEMS[randomTitleIndex].netflixid, (data) => {dispatch({type:'FETCH_TITLE_DETAIL', value: data})})
+            }     
+        })
+    }
+}
+
+export function fetchTitles(searchString, startYear, endYear, type, genreID, imdbMin, imdbMax) {
+    return (dispatch) => {
+        NetflixAPI.getTitles(searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, 
+                             (data) => {dispatch({type:'FETCH_TITLES', value: data})})
+        }
+}
+
 export function fetchNewEpisodes() {
-    
     let request = new Request(`${baseUrl}/aaapi.cgi?t=weeklynew&cl=CA&q={query}&st=1`,  {
         method: 'GET',
         headers: _headers,
@@ -85,4 +92,8 @@ export function clearAllTitles() {
 
 export function changeView(value) {
     return ({type:'SET_VIEW', value: value})
+}
+
+export function pickRandomTitle(){
+
 }
