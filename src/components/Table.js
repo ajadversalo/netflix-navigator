@@ -56,7 +56,6 @@ const Table = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log('mapStateToProps', state);
     return {
         allTitles: state.allTitles,
         count: state.count,
@@ -65,7 +64,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    console.log('mapDispatchToProps', dispatch);
     return {
         onChangeView: (value) => {
             dispatch(actionCreator.changeView(value));

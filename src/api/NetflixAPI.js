@@ -1,10 +1,10 @@
-let TitleAPI = {};
+let NetflixAPI = {};
 const baseUrl = 'https://unogs-unogs-v1.p.rapidapi.com/';
 const _headers = new Headers();
 _headers.append('X-RapidAPI-Host','unogs-unogs-v1.p.rapidapi.com');
 _headers.append('X-RapidAPI-Key','cf523eed82mshed7e62394e60ba7p1091d6jsn2c974a328b59')
 
-TitleAPI.getNewTitles = (callback) => {
+NetflixAPI.getNewTitles = (callback) => {
     let request = new Request(`${baseUrl}/aaapi.cgi?q=get:new7:CA&p=1&t=ns&st=adv`,  {
         method: 'GET',
         headers: _headers,
@@ -25,7 +25,7 @@ TitleAPI.getNewTitles = (callback) => {
         }); 
 }
 
-TitleAPI.getNewEpisodes = (callback) => {
+NetflixAPI.getNewEpisodes = (callback) => {
     let request = new Request(`${baseUrl}/aaapi.cgi?t=weeklynew&cl=CA&q={query}&st=1`,  {
         method: 'GET',
         headers: _headers,
@@ -46,7 +46,7 @@ TitleAPI.getNewEpisodes = (callback) => {
         }); 
 }
 
-TitleAPI.getTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, callback) => {
+NetflixAPI.getTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, callback) => {
         let request = new Request(`${baseUrl}/aaapi.cgi?q=${searchString}-!${startYear},${endYear}-!0,5-!${imdbMin},${imdbMax}-!${genreID}-!${type}-!english-!Any-!gt0-!{downloadable}&t=ns&cl=33&st=adv&ob=Relevance&p=1&sa=and`, {
         method: 'GET',
         headers: _headers,
@@ -67,7 +67,7 @@ TitleAPI.getTitles = (searchString, startYear, endYear, type, genreID, imdbMin, 
         });
 }
 
-TitleAPI.getTitleDetail = (id, callback) => {
+NetflixAPI.getTitleDetail = (id, callback) => {
     let request = new Request(`${baseUrl}/aaapi.cgi?t=loadvideo&q=${id}`,  {
         method: 'GET',
         headers: _headers,
@@ -88,4 +88,4 @@ TitleAPI.getTitleDetail = (id, callback) => {
         }); 
 }
 
-export default TitleAPI;
+export default NetflixAPI;

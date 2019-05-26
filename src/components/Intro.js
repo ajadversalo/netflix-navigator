@@ -18,14 +18,13 @@ let Intro = (props) => (
             </Col>
             <Col>
                 <h5><Badge variant="danger">DETAILED SEARCH</Badge></h5>   
-                <AdvancedSearch store={Store}></AdvancedSearch>
+                {/* <AdvancedSearch store={Store}></AdvancedSearch> */}
             </Col>
-        </Row>}
+        </Row>
     </Jumbotron>
 )
 
 const mapStateToProps = (state) => {
-    console.log('mapStateToProps', state);
     return {
         episodes: state.episodes
     }

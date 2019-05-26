@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import * as Constants from '../data/Constants';
 import thunk from 'redux-thunk';
 
@@ -30,12 +30,12 @@ const reducer = (state = initialState, action) => {
         case 'SET_VIEW':
             newState.view = action.value;
             break;
-        case 'FETCH_NEW_TITLES':
+        case 'FETCH_TITLES':
             newState.allTitles = action.value.ITEMS;
             newState.count = action.value.COUNT;
             newState.titleDetail = null;
             break;
-        case 'FETCH_TITLES':
+        case 'FETCH_NEW_TITLES':
             newState.allTitles = action.value.ITEMS;
             newState.count = action.value.COUNT;
             newState.titleDetail = null;
@@ -51,18 +51,20 @@ const reducer = (state = initialState, action) => {
             newState.titleDetailPlot = action.value.imdbinfo.plot;
             newState.titleDetailActors = action.value.people[0].actor;
             break;
-        case 'CLEAR_ALL_TITLES':
+        case 'CLEAR_ALL_CONTENT':
             newState.allTitles = [];
+            newState.titleDetail = null;
+            break;
+        case 'CLEAR_SELECTED_TITLE':
             newState.titleDetail = null;
             break;
         case 'HANDLE_CHANGE':
             newState.searchString = action.value.target.value;
             break;
     }
-
     return newState;
 }
-
-const store = createStore(reducer, applyMiddleware(thunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 export default store;

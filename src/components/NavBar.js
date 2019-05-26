@@ -1,6 +1,5 @@
 import React from 'react';
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
-import Context from '../contexts/NetflixContext'
 import * as Constants from '../data/Constants';
 import Genres from '../data/genres';
 import {connect} from 'react-redux';
@@ -14,10 +13,8 @@ import * as actionCreator from '../actions/actions';
 
 const NetflixNav = (props) => {
     return (
-    // <Context.Consumer>
-    //      {({state, fetchTitles, fetchNewTitles, clearTitles, clearAllTitles, handleChange, pickRandomTitle, performQuickSearch}) => 
         <Navbar bg="dark"  variant="dark" expand="lg">
-        <Navbar.Brand href="#" onClick={() => {props.clearAllTitles()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
+        <Navbar.Brand href="#" onClick={() => {props.clearAllContent()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto"> 
@@ -52,31 +49,26 @@ const NetflixNav = (props) => {
                     name="searchString" 
                     value={props.searchString} 
                     onChange={props.handleChange}
-                    onKeyDown={(event) => {
-                        if(event.keyCode === 13){
-                            props.performQuickSearch();
-                        }}
-                    }              
+                    // onKeyDown={(event) => {
+                    //     if(event.keyCode === 13){
+                    //         props.performQuickSearch();
+                    //     }}
+                    // }              
                 />
                 <Button 
                     variant="outline-danger"
                     onClick={() => { 
-                        if (props.searchString === null || props.searchString.length < 3){ 
-                            alert("Minimum search entry is 3 characters."); 
-                        } else { 
-                            props.fetchTitles(props.searchString, 
+                            props.quickSearch(props.searchString, 
                             Constants.EARLIEST_PRODUCTION_YEAR, 
                             props.currentYear, 
                             Constants.ALL_GENRES, 
                             Constants.ALL_TYPES, 
                             Constants.DEFAULT_IMDB_MIN, 
-                            Constants.DEFAULT_IMDB_MAX)}}
-                        }>Search
+                            Constants.DEFAULT_IMDB_MAX)}}>Search
                 </Button>
             </Form>             
         </Navbar.Collapse>
         </Navbar>
-        // }</Context.Consumer>
     )
 }
 
@@ -91,20 +83,27 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     console.log('mapDispatchToProps', dispatch);
     return {
-        clearAllTitles: () => {
-            dispatch(actionCreator.clearAllTitles());
+        clearAllContent: () => {
+            dispatch(actionCreator.clearAllContent());
         },
         fetchNewTitles: () => {
             dispatch(actionCreator.fetchNewTitles())  
         },
-        fetchTitles: (searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax) => {
-            dispatch(actionCreator.fetchTitles(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax))  
+        fetchTitles: (searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax) => {
+            dispatch(actionCreator.fetchTitles(searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax))  
         },
-        luckyPick: (searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax) => {
-            dispatch(actionCreator.luckyPick(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax))  
+        luckyPick: (searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax) => {
+            dispatch(actionCreator.luckyPick(searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax))  
         },
-        handleChange: (e) => {
-            dispatch(actionCreator.handleChange(e))  
+        handleChange: (event) => {
+            dispatch(actionCreator.handleChange(event))  
+        },
+        quickSearch: (searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax) => {
+            if(searchString === null || searchString.length < 3){ 
+                alert("Minimum search entry is 3 characters."); 
+            } else {
+                dispatch(actionCreator.fetchTitles(searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax))
+            }  
         }
     }
 }

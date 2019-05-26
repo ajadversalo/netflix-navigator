@@ -1,6 +1,5 @@
 import React from 'react';
 import {Row, Col, Button} from 'react-bootstrap';
-import Context from '../contexts/NetflixContext';
 import {connect} from 'react-redux';
 import * as actionCreator from '../actions/actions';
 
@@ -20,7 +19,7 @@ const FullDetailPage = (props) => {
         <div >
             <hr />
             <div className="d-flex justify-content-end">
-                <Button onClick={() => {props.clearTitle()}} variant="danger">X</Button>
+                <Button onClick={() => {props.onClearAllTitles()}} variant="danger">X</Button>
             </div>   
              <h1>{props.sanitizeString(props.titleDetail.nfinfo.title)}</h1>
             <Row>
@@ -78,11 +77,11 @@ const mapDispatchToProps = (dispatch) => {
     console.log('mapDispatchToProps', dispatch);
     return {
         onClearAllTitles: () => {
-            const action = {type: 'SET_ALLTITLES', value: []}
+            const action = {type: 'CLEAR_SELECTED_TITLE', value: null}
             dispatch(action);
         },
 
-         fetchNewTitles: () => {
+        fetchNewTitles: () => {
             dispatch(actionCreator.fetchNewTitles())  
         }
     }

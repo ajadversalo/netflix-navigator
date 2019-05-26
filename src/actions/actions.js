@@ -5,9 +5,8 @@ export const fetchNewTitles = () => {
 }
 
 export const fetchTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax) => {
-    return (dispatch) => {
-        NetflixAPI.getTitles(searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, 
-                             (data) => {dispatch({type:'FETCH_TITLES', value: data})})
+    return (dispatch) => { NetflixAPI.getTitles(searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, 
+                           (data) => {dispatch({type:'FETCH_TITLES', value: data})})
     }
 }
 
@@ -43,8 +42,12 @@ export const setCurrentYear = () => {
     return ({type:'SET_CURRENT_YEAR', value: currentYear})
 }
 
-export const clearAllTitles = () => {
-    return ({type:'CLEAR_ALL_TITLES'})
+export const clearAllContent = () => {
+    return ({type:'CLEAR_ALL_CONTENT'})
+}
+
+export const clearSelectedTitle = () => {
+    return ({type:'CLEAR_SELECTED_TITLE'})
 }
 
 export const changeView = (value) => {
