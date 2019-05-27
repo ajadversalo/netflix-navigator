@@ -21,8 +21,7 @@ const NetflixNav = (props) => {
                 <Nav.Link href="#" onClick={() => { props.fetchNewTitles()}}>What's New</Nav.Link>
                 <Nav.Link href="#" onClick={() => { props.luckyPick('', Constants.EARLIEST_PRODUCTION_YEAR, props.currentYear,
                                                                           Constants.ALL_TYPES, Constants.ALL_GENRES, Constants.IMDB_LUCKYPICK_MIN, 
-                                                                          Constants.IMDB_LUCKYPICK_MAX)}}>Lucky Pick</Nav.Link>             
-                
+                                                                          Constants.IMDB_LUCKYPICK_MAX)}}>Lucky Pick</Nav.Link>                        
                 {/* Maps genre list from the genres json file */}
                 <NavDropdown title="Filters" id="basic-nav-dropdown" >
                     {Genres.map(genre => 
@@ -50,20 +49,14 @@ const NetflixNav = (props) => {
                     Constants.ALL_GENRES, 
                     Constants.ALL_TYPES, 
                     Constants.DEFAULT_IMDB_MIN, 
-                    Constants.DEFAULT_IMDB_MAX)
-                
+                    Constants.DEFAULT_IMDB_MAX)             
                 }}>
                 <FormControl className="mr-sm-2"
                     type="text"
                     placeholder="Quick Search"
                     name="searchString" 
                     value={props.searchString} 
-                    onChange={props.handleChange}
-                    // onKeyDown={(event) => {
-                    //     if(event.keyCode === 13){
-                    //         props.performQuickSearch();
-                    //     }}
-                    // }              
+                    onChange={props.handleChange}             
                 />
                 <Button variant="outline-danger" type="submit">Search</Button>
             </Form>             
