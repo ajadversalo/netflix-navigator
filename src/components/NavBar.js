@@ -42,7 +42,17 @@ const NetflixNav = (props) => {
             </Nav>
             
             {/* Quick Search  */}
-            <Form inline onSubmit={e => { e.preventDefault();}}>
+            <Form inline onSubmit = {(e) => { 
+                e.preventDefault();
+                props.quickSearch(props.searchString, 
+                    Constants.EARLIEST_PRODUCTION_YEAR, 
+                    props.currentYear, 
+                    Constants.ALL_GENRES, 
+                    Constants.ALL_TYPES, 
+                    Constants.DEFAULT_IMDB_MIN, 
+                    Constants.DEFAULT_IMDB_MAX)
+                
+                }}>
                 <FormControl className="mr-sm-2"
                     type="text"
                     placeholder="Quick Search"
@@ -55,17 +65,7 @@ const NetflixNav = (props) => {
                     //     }}
                     // }              
                 />
-                <Button 
-                    variant="outline-danger"
-                    onClick={() => { 
-                            props.quickSearch(props.searchString, 
-                            Constants.EARLIEST_PRODUCTION_YEAR, 
-                            props.currentYear, 
-                            Constants.ALL_GENRES, 
-                            Constants.ALL_TYPES, 
-                            Constants.DEFAULT_IMDB_MIN, 
-                            Constants.DEFAULT_IMDB_MAX)}}>Search
-                </Button>
+                <Button variant="outline-danger" type="submit">Search</Button>
             </Form>             
         </Navbar.Collapse>
         </Navbar>
