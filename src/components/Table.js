@@ -28,7 +28,7 @@ const Table = (props) => {
                 </div>
             </div>}
             {/* Welcome page and advanced search */}
-            {props.allTitles.length === 0 && <Intro store={Store}/>}
+            {props.allTitles.length < 1 && <Intro store={Store}/>}
             {/* Icon View */}
             { props.view === 'icon' &&
             <div className="d-flex justify-content-center" style={{ flexWrap: 'wrap'}}>
