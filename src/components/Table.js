@@ -8,6 +8,11 @@ import * as actionCreator from '../actions/actions';
 
 /* This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
 const Table = (props) => {
+
+    if (!props.allTitles) {
+        return null;
+    }
+
     return (     
         <div>     
             {/* View type selection buttons */}
@@ -33,9 +38,9 @@ const Table = (props) => {
             </div>}   
             {/* Detail View */}       
             {props.view === 'detail' &&
-            <div >
+            <div>
                 {props.allTitles.map(title => <a onClick={()=>{props.fetchTitleDetail(title.netflixid)}}>
-                    <TitleDetail title={title} onclick={()=>{props.fetchTitleDetail(title.netflixid)}}/></a>)}
+                    <TitleDetail title={title} sanitizeString={props.sanitizeString} onclick={()=>{props.fetchTitleDetail(title.netflixid)}}/></a>)}
             </div>}
             {/* List View */}
             {props.view === 'list' &&

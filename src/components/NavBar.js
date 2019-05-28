@@ -4,6 +4,8 @@ import * as Constants from '../data/Constants';
 import Genres from '../data/genres';
 import {connect} from 'react-redux';
 import * as actionCreator from '../actions/actions';
+import { clearAllContent, fetchNewTitles, fetchTitles, handleChange, luckyPick} from '../actions/actions';
+import { bindActionCreators } from 'redux';
 
 {/*This navbar component links to the following functions
     1. What's New - Displays new content from the past 7 days
@@ -14,25 +16,28 @@ import * as actionCreator from '../actions/actions';
 const NetflixNav = (props) => {
     return (
         <Navbar bg="dark"  variant="dark" expand="lg">
-        <Navbar.Brand href="#" onClick={() => {props.clearAllContent()}} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
+        <Navbar.Brand href="#" onClick={props.clearAllContent} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto"> 
-                <Nav.Link href="#" onClick={() => { props.fetchNewTitles()}}>What's New</Nav.Link>
-                <Nav.Link href="#" onClick={() => { props.luckyPick('', Constants.EARLIEST_PRODUCTION_YEAR, props.currentYear,
+                <Nav.Link href="#" onClick={ props.fetchNewTitles}>What's New</Nav.Link>
+                <Nav.Link href="#" onClick={ () => props.luckyPick('', Constants.EARLIEST_PRODUCTION_YEAR, props.currentYear,
                                                                           Constants.ALL_TYPES, Constants.ALL_GENRES, Constants.IMDB_LUCKYPICK_MIN, 
-                                                                          Constants.IMDB_LUCKYPICK_MAX)}}>Lucky Pick</Nav.Link>                        
+                                                                          Constants.IMDB_LUCKYPICK_MAX)}>Lucky Pick</Nav.Link>             
+            
                 {/* Maps genre list from the genres json file */}
                 <NavDropdown title="Filters" id="basic-nav-dropdown" >
                     {Genres.map(genre => 
                         <NavDropdown.Item href="#" 
-                            onClick={() => {props.fetchTitles('', 
-                            Constants.EARLIEST_PRODUCTION_YEAR,
-                            props.currentYear, 
-                            Constants.ALL_TYPES, 
-                            genre.id, 
-                            Constants.DEFAULT_IMDB_MIN,  
-                            Constants.DEFAULT_IMDB_MAX)}}>
+                            onClick={()=> {
+                                props.fetchTitles(
+                                    '',
+                                    Constants.EARLIEST_PRODUCTION_YEAR, 
+                                    props.currentYear,
+                                    Constants.ALL_TYPES, 
+                                    genre.id,
+                                    Constants.DEFAULT_IMDB_MIN,  
+                                    Constants.DEFAULT_IMDB_MAX)}}>
                             {genre.title}
                         </NavDropdown.Item>)}
                     <NavDropdown.Divider />
@@ -41,22 +46,22 @@ const NetflixNav = (props) => {
             </Nav>
             
             {/* Quick Search  */}
-            <Form inline onSubmit = {(e) => { 
+            <Form inline onSubmit={e => { 
                 e.preventDefault();
-                props.quickSearch(props.searchString, 
+                props.fetchTitles(props.searchString, 
                     Constants.EARLIEST_PRODUCTION_YEAR, 
                     props.currentYear, 
                     Constants.ALL_GENRES, 
                     Constants.ALL_TYPES, 
                     Constants.DEFAULT_IMDB_MIN, 
-                    Constants.DEFAULT_IMDB_MAX)             
+                    Constants.DEFAULT_IMDB_MAX);
                 }}>
                 <FormControl className="mr-sm-2"
                     type="text"
                     placeholder="Quick Search"
                     name="searchString" 
                     value={props.searchString} 
-                    onChange={props.handleChange}             
+                    onChange={props.handleChange}            
                 />
                 <Button variant="outline-danger" type="submit">Search</Button>
             </Form>             
@@ -75,30 +80,21 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     console.log('mapDispatchToProps', dispatch);
-    return {
-        clearAllContent: () => {
-            dispatch(actionCreator.clearAllContent());
-        },
-        fetchNewTitles: () => {
-            dispatch(actionCreator.fetchNewTitles())  
-        },
-        fetchTitles: (searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax) => {
-            dispatch(actionCreator.fetchTitles(searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax))  
-        },
-        luckyPick: (searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax) => {
-            dispatch(actionCreator.luckyPick(searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax))  
-        },
-        handleChange: (event) => {
-            dispatch(actionCreator.handleChange(event))  
-        },
-        quickSearch: (searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax) => {
-            if(searchString === null || searchString.length < 3){ 
-                alert("Minimum search entry is 3 characters."); 
-            } else {
-                dispatch(actionCreator.fetchTitles(searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax))
-            }  
-        }
-    }
+    return bindActionCreators({
+        clearAllContent: clearAllContent,
+        fetchNewTitles: fetchNewTitles,
+        fetchTitles: fetchTitles,
+        handleChange: handleChange,
+        luckyPick: luckyPick
+    }, dispatch)
+        // quickSearch: (searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax) => {
+        //     if(searchString === null || searchString.length < 3){ 
+        //         alert("Minimum search entry is 3 characters."); 
+        //     } else {
+        //         dispatch(actionCreator.fetchTitles(searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax))
+        //     }  
+        // }
+    //}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NetflixNav);

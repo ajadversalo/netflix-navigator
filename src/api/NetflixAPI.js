@@ -14,11 +14,14 @@ NetflixAPI.getNewTitles = (callback) => {
     fetch(request)
         .then((response) => {
             console.log('response: ' + response);
-            response.json()
-                .then((data) => {
-                    console.log(data);
-                    callback(data);                    
-                });
+            if (response.status !== 200) {
+                callback('An error occured getting the response from the server')
+                return;
+            }
+            response.json().then((data) => {
+                console.log(data);
+                callback(data);                    
+            });
         })
         .catch((err) => {
             console.log('error: ' + err);
@@ -55,6 +58,10 @@ NetflixAPI.getTitles = (searchString, startYear, endYear, type, genreID, imdbMin
 
     fetch(request)
         .then((response) => {
+            if (response.status !== 200) {
+                callback('An error occured getting the response from the server')
+                return;
+            }
             console.log('response: ' + response);
             response.json()
                 .then((data) => {
@@ -76,6 +83,10 @@ NetflixAPI.getTitleDetail = (id, callback) => {
 
     fetch(request)
         .then((response) => {
+            if (response.status !== 200) {
+                callback('An error occured getting the response from the server')
+                return;
+            }
             console.log('response: ' + response);
             response.json()
                 .then((data) => {
