@@ -3,7 +3,6 @@ import {ButtonGroup, Button} from 'react-bootstrap';
 import TitleDetail from './TitleDetail.js'
 import Intro from '../components/Intro.js'
 import {connect} from 'react-redux';
-import Store from '../store/Store';
 import * as actionCreator from '../actions/actions';
 
 /* This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
@@ -28,7 +27,7 @@ const Table = (props) => {
                 </div>
             </div>}
             {/* Welcome page and advanced search */}
-            {props.allTitles.length < 1 && <Intro store={Store}/>}
+            {props.allTitles.length < 1 && <Intro />}
             {/* Icon View */}
             { props.view === 'icon' &&
             <div className="d-flex justify-content-center" style={{ flexWrap: 'wrap'}}>

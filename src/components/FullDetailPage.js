@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Button} from 'react-bootstrap';
+import {Row, Col, Button, Image, Table} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actionCreator from '../actions/actions';
 
@@ -17,48 +17,57 @@ import * as actionCreator from '../actions/actions';
 const FullDetailPage = (props) => {
     return (  
         <div >
-            <hr />
-            <div className="d-flex justify-content-end">
-                <Button onClick={() => {props.onClearAllTitles()}} variant="danger">X</Button>
-            </div>   
-             <h1>{props.sanitizeString(props.titleDetail.nfinfo.title)}</h1>
-            <Row>
-                <Col><img src={props.titleDetail.nfinfo.image1} alt={props.titleDetail.nfinfo.title}></img></Col>
-                <Col>
-                    {/* Only display plot if it's not null */}
-                    { props.titleDetailPlot &&   
-                        <div>
-                            <h5>Plot</h5>
-                            <p>{props.sanitizeString(props.titleDetailPlot)}</p>
-                        </div>
-                    }
-                    <Button
-                        variant="danger" 
-                        href={"https://www.netflix.com/title/" + props.titleDetail.nfinfo.netflixid} 
-                        target="_blank"
-                        >Watch Now
-                    </Button>
-                </Col>
-                <Col>
-                    {/* Only display actor list if it's not null */}
-                    { props.titleDetailActors &&
-                        <div>
-                            <b>Cast</b>
-                            <ol>{props.titleDetail.people[0].actor.map((item) => <li key={item.id}>{item}</li>)}</ol>
-                        </div>
-                    }
-                </Col>
-                <Col>
-                    <b>Produced</b>
-                    <ol>{props.titleDetail.people[1].creator.map((item) => <li key={item.id}>{item}</li>)}</ol>
-                    <b>Directed</b>
-                    <ol>{props.titleDetail.people[2].director.map((item) => <li key={item.id}>{item}</li>)}</ol>                
-                    <p><b>Genre </b>{props.titleDetail.imdbinfo.genre}</p>                  
-                    <p><b>Language </b>{props.titleDetail.imdbinfo.language}</p>                
-                    <a href={"https://www.imdb.com/title/" + props.titleDetail.imdbinfo.imdbid} target="_blank"><p><b>IMDB Rating </b>{props.titleDetail.imdbinfo.rating}</p></a>                   
-                    <p><b>Runtime </b>{props.titleDetail.imdbinfo.runtime}</p>
-                </Col>
+            <Row className="d-flex justify-content-end" style={{margin:'10px'}}>
+                <div >
+                    <Button onClick={() => {props.onClearAllTitles()}} variant="danger">X</Button>
+                </div>
             </Row>
+            <Row >
+                <Col style={{textAlign:'center'}} lg={4} sm={12}>
+                    <h1>{props.sanitizeString(props.titleDetail.nfinfo.title)}</h1>
+                    <a href={"https://www.netflix.com/title/" + props.titleDetail.nfinfo.netflixid} target="_blank">
+                        <Image src={props.titleDetail.nfinfo.image1} alt={props.titleDetail.nfinfo.title} style={{padding: '5px'}}></Image>
+                    </a>
+                </Col>
+                <Col lg={8} sm={12}>
+                    <Table hover>
+                        <tbody>
+                            <tr>
+                                <td><b>Plot</b></td>
+                                <td>{props.sanitizeString(props.titleDetailPlot)}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Cast</b></td>
+                                <td>{props.titleDetail.people[0].actor.map((item) => <label style={{marginRight:'3px'}}> {item}, </label>)}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Produced</b></td>
+                                <td>{props.titleDetail.people[1].creator.map((item) => <label style={{marginRight:'3px'}}> {item}, </label>)}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Directed</b></td>
+                                <td>{props.titleDetail.people[0].actor.map((item) => <label style={{marginRight:'3px'}}> {item}, </label>)}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Language</b></td>
+                                <td>{props.titleDetail.imdbinfo.language}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Genre</b></td>
+                                <td>{props.titleDetail.imdbinfo.genre}</td>
+                            </tr>
+                            <tr>
+                                <td><b>IMDB Rating</b></td>
+                                <td> <a href={"https://www.imdb.com/title/" + props.titleDetail.imdbinfo.imdbid} target="_blank"><p>{props.titleDetail.imdbinfo.rating}</p></a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Runtime</b></td>
+                                <td>{props.titleDetail.imdbinfo.language}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </Col>
+            </Row>         
             <hr />
         </div>
     )

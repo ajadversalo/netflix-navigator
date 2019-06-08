@@ -11,11 +11,11 @@ let Intro = (props) => {
             <Row>
                 <Col>
                     <h1 className="d-flex justify-content-start">Welcome!</h1>
-                    <hr class="my-4"></hr>
+                    <hr className="my-4"></hr>
                     <h5><Badge variant="danger">NEW EPISODES</Badge></h5>
                     { props.episodes &&
                         <div>
-                            {props.episodes.map(title => <li>{title.title}</li>)}
+                            {props.episodes.map(title => <li key={title.title}>{title.title}</li>)}
                         </div>
                     }
                 </Col>

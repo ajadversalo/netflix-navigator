@@ -1,6 +1,6 @@
 import React from 'react';
 
-{/* Renders image with synopsis in the table component*/}
+{/* Renders image with synopsis in the table component */}
 const TitleDetail = (props) => {
     return (
         <div class="media" style={{margin:'10px'}}>

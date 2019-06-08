@@ -28,7 +28,7 @@ const NetflixNav = (props) => {
                 {/* Maps genre list from the genres json file */}
                 <NavDropdown title="Filters" id="basic-nav-dropdown" >
                     {Genres.map(genre => 
-                        <NavDropdown.Item href="#" 
+                        <NavDropdown.Item href="#" key={genre.id}
                             onClick={()=> {
                                 props.fetchTitles(
                                     '',
@@ -60,7 +60,7 @@ const NetflixNav = (props) => {
                     type="text"
                     placeholder="Quick Search"
                     name="searchString" 
-                    value={props.searchString} 
+                    value={props.searchString || ''} 
                     onChange={props.handleChange}            
                 />
                 <Button variant="outline-danger" type="submit">Search</Button>

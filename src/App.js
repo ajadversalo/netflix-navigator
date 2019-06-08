@@ -9,7 +9,6 @@ import {Container} from 'react-bootstrap';
 import NavBar from '../src/components/NavBar';
 import FullDetailPage from '../src/components/FullDetailPage';
 import Table from '../src/components/Table.js';
-import Store from './store/Store';
 import {connect} from 'react-redux';
 import * as actionCreator from '../src/actions/actions';
 
@@ -38,17 +37,11 @@ sanitizeString = (string) => {
 render(){
   return (
     <Container>
-      <NavBar store={Store}/>
+      <NavBar />
       { this.props.titleDetail &&  
-        <FullDetailPage 
-          store={Store} 
-          sanitizeString={this.sanitizeString}
-        />
+        <FullDetailPage sanitizeString={this.sanitizeString}/>
       }
-      <Table 
-        store={Store} 
-        sanitizeString={this.sanitizeString}
-      />      
+      <Table sanitizeString={this.sanitizeString}/>      
     </Container>
     )
   }
