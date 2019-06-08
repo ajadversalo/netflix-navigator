@@ -1,21 +1,22 @@
 import NetflixAPI from '../api/NetflixAPI';
 
 export const fetchNewTitles = () => {
-    return dispatch => { NetflixAPI.getNewTitles((data) => {dispatch({type:'FETCH_NEW_TITLES', value: data})}) }
+    return dispatch => { NetflixAPI.getNewTitles((data) => {dispatch({type:'SET_NEW_TITLES', value: data})}) }
 }
 
 export const fetchTitles = (searchString, startYear, endYear, type, genreID, imdbMin, imdbMax) => {
     return (dispatch) => { NetflixAPI.getTitles(searchString, startYear, endYear, type, genreID, imdbMin, imdbMax, 
-                           (data) => {dispatch({type:'FETCH_TITLES', value: data})})
+                           (data) => {dispatch({type:'SET_TITLES', value: data})})
     }
 }
 
 export const fetchNewEpisodes = () => { 
-    return (dispatch) => { NetflixAPI.getNewEpisodes((data) => {{dispatch({type:'FETCH_NEW_EPISODES', value: data})}}) }
+    // return (dispatch) => { NetflixAPI.getNewEpisodes((data) => {{dispatch({type:'SET_NEW_EPISODES', value: data})}}) }
+    return dispatch => { NetflixAPI.getNewTitles((data) => {dispatch({type:'SET_NEW_EPISODES', value: data})}) }
 }
 
 export const fetchTitleDetail = (id) => {
-    return (dispatch) => { NetflixAPI.getTitleDetail(id, (data) => {dispatch({type:'FETCH_TITLE_DETAIL', value: data})})}
+    return (dispatch) => { NetflixAPI.getTitleDetail(id, (data) => {dispatch({type:'SET_TITLE_DETAIL', value: data})})}
 }
 
 const generateRandomIndex = (length) => {
@@ -28,11 +29,11 @@ export const luckyPick = (searchString, sYear, cYear, allTypes, genreid, imdbMin
     return (dispatch) => {
         NetflixAPI.getTitles(searchString, sYear, cYear, allTypes, genreid, imdbMin, imdbMax, 
             (data) => {
-                dispatch({type:'FETCH_TITLES', value: data});
+                dispatch({type:'SET_TITLES', value: data});
                 let randomTitleIndex = generateRandomIndex(data.ITEMS.length);
                 console.log(randomTitleIndex);
                 if (randomTitleIndex >= 0){
-                    NetflixAPI.getTitleDetail(data.ITEMS[randomTitleIndex].netflixid, (data) => {dispatch({type:'FETCH_TITLE_DETAIL', value: data})})
+                    NetflixAPI.getTitleDetail(data.ITEMS[randomTitleIndex].netflixid, (data) => {dispatch({type:'SET_TITLE_DETAIL', value: data})})
                 }     
             })
     }

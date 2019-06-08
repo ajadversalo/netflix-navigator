@@ -28,23 +28,24 @@ const mainReducer = (state = initialState, action) => {
         case 'SET_VIEW':
             newState.view = action.value;
             break;
-        case 'FETCH_TITLES':
+        case 'SET_TITLES':
             newState.allTitles = action.value.ITEMS;
             newState.count = action.value.COUNT;
             newState.titleDetail = null;
             break;
-        case 'FETCH_NEW_TITLES':
+        case 'SET_NEW_TITLES':
             newState.allTitles = action.value.ITEMS;
             newState.count = action.value.COUNT;
             newState.titleDetail = null;
             break;
-        case 'FETCH_NEW_EPISODES':
-            newState.episodes = action.value.results;
+        case 'SET_NEW_EPISODES':
+            // newState.episodes = action.value.results;
+            newState.episodes = action.value.ITEMS;
             break;
         case 'SET_CURRENT_YEAR':
             newState.currentYear = action.value;
             break;
-        case 'FETCH_TITLE_DETAIL':
+        case 'SET_TITLE_DETAIL':
             newState.titleDetail = action.value;
             newState.titleDetailPlot = action.value.imdbinfo.plot;
             newState.titleDetailActors = action.value.people[0].actor;

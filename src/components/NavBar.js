@@ -23,8 +23,7 @@ const NetflixNav = (props) => {
                 <Nav.Link href="#" onClick={ props.fetchNewTitles}>What's New</Nav.Link>
                 <Nav.Link href="#" onClick={ () => props.luckyPick('', Constants.EARLIEST_PRODUCTION_YEAR, props.currentYear,
                                                                           Constants.ALL_TYPES, Constants.ALL_GENRES, Constants.IMDB_LUCKYPICK_MIN, 
-                                                                          Constants.IMDB_LUCKYPICK_MAX)}>Lucky Pick</Nav.Link>             
-            
+                                                                          Constants.IMDB_LUCKYPICK_MAX)}>Lucky Pick</Nav.Link>
                 {/* Maps genre list from the genres json file */}
                 <NavDropdown title="Filters" id="basic-nav-dropdown" >
                     {Genres.map(genre => 

@@ -37,7 +37,7 @@ NetflixAPI.getNewEpisodes = (callback) => {
 
     fetch(request)
         .then((response) => {
-            console.log('response: ' + response);
+            console.log('new episodes: ' + response);
             response.json()
                 .then((data) => {
                     console.log(data);
