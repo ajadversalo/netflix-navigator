@@ -30,7 +30,7 @@ let Intro = (props) => {
                         slidesPerPage={3}
                         slidesPerScroll={2}
                         animationSpeed={500}
-                        autoPlay={15000}
+                        autoPlay={5000}
                         stopAutoPlayOnHover
                         offset={100}
                         itemWidth={180}
