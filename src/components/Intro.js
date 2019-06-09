@@ -2,14 +2,20 @@ import React from 'react';
 import {Jumbotron, Badge, Row, Col} from 'react-bootstrap';
 import AdvancedSearch from '../components/AdvancedSearch';
 import {connect} from 'react-redux';
-import * as actionCreator from '../actions/actions';
 import * as Constants from '../data/Constants';
 import { fetchNewTitles, luckyPick} from '../actions/actions';
 import Carousel from '../components/Carousel';
 import { bindActionCreators } from 'redux';
 
 {/* Intro page containing a list of the new content and the advanced search form*/}
+
+const submit = (values) => {
+    console.log('submit values',values);
+}
+
 let Intro = (props) => {
+    
+
     return (
         <Jumbotron >
             <Row>
@@ -27,9 +33,13 @@ let Intro = (props) => {
                     <li><b>Filters</b> - Display content categorized by genre</li>
                     <li><b>Quick Search</b> - Search content by title, actor or genre</li>
                     <li><b>Detailed Search</b> - Search using attributes</li>
+                    <li>And best of all, no active Netflix subscription required, browse before signing up!</li>
                 </ul>  
                 <hr /> 
                 </Col>
+                {/* <Col>
+                    <AdvancedSearch onSubmit={submit}/>
+                </Col> */}
             </Row>
             <Row>
                 <Col><Carousel/></Col>

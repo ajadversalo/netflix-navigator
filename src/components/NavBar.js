@@ -40,7 +40,7 @@ const NetflixNav = (props) => {
                             {genre.title}
                         </NavDropdown.Item>)}
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#">Top Rated</NavDropdown.Item>
+                    <NavDropdown.Item className='dropdown-submenu'href="#">Top Rated</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
             
