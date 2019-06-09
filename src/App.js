@@ -7,10 +7,11 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 import NavBar from '../src/components/NavBar';
-import FullDetailPage from '../src/components/FullDetailPage';
-import Table from '../src/components/Table.js';
+import FullTitleDetail from '../src/components/FullTitleDetail';
+import TableContainer from '../src/components/TableContainer.js';
 import {connect} from 'react-redux';
 import * as actionCreator from '../src/actions/actions';
+import style from '../src/index.css';
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ componentDidMount = () => {
   this.props.fetchNewEpisodes();
 }
 
-sanitizeString = (string) => {
+sanitizeString = (string = '-no content-') => {
   let sanitizedString = string;
   sanitizedString = sanitizedString.split("&amp;#39;").join("'");
   sanitizedString = sanitizedString.split("&#39;").join("'");
@@ -36,12 +37,10 @@ sanitizeString = (string) => {
 
 render(){
   return (
-    <Container>
-      <NavBar />
-      { this.props.titleDetail &&  
-        <FullDetailPage sanitizeString={this.sanitizeString}/>
-      }
-      <Table sanitizeString={this.sanitizeString}/>      
+    <Container style={style}>
+      <NavBar/>
+      { this.props.titleDetail && <FullTitleDetail sanitizeString={this.sanitizeString}/> }
+      <TableContainer sanitizeString={this.sanitizeString}/>      
     </Container>
     )
   }

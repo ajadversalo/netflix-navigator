@@ -14,7 +14,7 @@ import * as actionCreator from '../actions/actions';
     8. Runtime
  */}
 
-const FullDetailPage = (props) => {
+const FullTitleDetail = (props) => {
     return (  
         <div >
             <Row className="d-flex justify-content-end" style={{margin:'10px'}}>
@@ -96,4 +96,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default  connect(mapStateToProps, mapDispatchToProps)(FullDetailPage);
+export default  connect(mapStateToProps, mapDispatchToProps)(FullTitleDetail);
