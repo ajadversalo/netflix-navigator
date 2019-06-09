@@ -4,6 +4,7 @@ import TitleDetail from './TitleDetail.js'
 import Intro from '../components/Intro.js'
 import {connect} from 'react-redux';
 import * as actionCreator from '../actions/actions';
+import ProgressiveImage from 'react-progressive-image'
 
 /* This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
 const Table = (props) => {
@@ -32,8 +33,10 @@ const Table = (props) => {
             { props.view === 'icon' &&
             <div className="d-flex justify-content-center" style={{ flexWrap: 'wrap'}}>
                 {props.allTitles.map(title => <a href="#" onClick={()=>{
-                    props.fetchTitleDetail(title.netflixid)
-                    }}><img src={title.image} alt={title.title} style={{margin: '5px' ,width: '120px'}}/></a> )}
+                props.fetchTitleDetail(title.netflixid)
+                }}><ProgressiveImage  src={title.image} placeholder={require('../default.jpg')}>
+                    {src => <img  style={{margin: '5px' ,width: '120px'}} src={src} alt={title.title} />}
+                    </ProgressiveImage></a> )}
             </div>}   
             {/* Detail View */}       
             {props.view === 'detail' &&
