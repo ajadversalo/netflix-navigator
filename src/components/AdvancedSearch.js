@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-import {Form, Button, Col} from 'react-bootstrap';
+import {Button, Col, Form as BootstrapForm} from 'react-bootstrap';
 import Genres from '../data/genres';
 import ContentTypes from '../data/contentTypes';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm, Field, Form} from 'redux-form';
+
 
 {/* Simple component which allows detailed content search using the following data:
     1. Start Year
@@ -16,93 +17,46 @@ import {reduxForm, Field} from 'redux-form';
     6. IMDB Maximum Score */}
 
 
+const required = value => value ? undefined : 'Required'
+const minYear = min => value => value && value < min ? `Min year is ${min}` : undefined
+const maxYear = max => value => value && value > max ? `Max year is ${max}` : undefined
 
-class AdvancedSearch extends Component  {
+const minYear1900 = minYear(1900)  
+const maxYear2019 = maxYear(2019)  
 
-    theSubmit = (values) => {
-        console.log(values);
-    }
-    render() {
-        return (
-        <div> 
-            <Form onSubmit={e => { 
-                e.preventDefault();
-                this.theSubmit()}}>
-            
-                 <Col>
-                     <Form.Label>Start Year: </Form.Label>
-                     <Field 
-                        name="startYear" 
-                       
-                        component="input"
-                        type="text"
-                    />  
-                    <input 
-                        name="startYear" 
-                       
-                        component="input"
-                        type="text"
-                    />        
-                 </Col>
-               
-             <Button
-                type='submit'
-                 variant="danger" 
-                 
-                 
-                //  onClick={()=>{ performAdvancedSearch()}}
-                 >
-                     Search
-            </Button>
-             </Form>
-            
-        {/* // <Form>
-        //     <Form.Row>
-        //         <Col>
-        //             <Form.Label>Start Year: </Form.Label>
-        //             <Form.Control type="text" placeholder="Start Year" defaultValue={state.startYear} name="startYear" onChange={handleChange}/>       
-        //         </Col>
-        //         <Col>
-        //             <Form.Label>End Year: </Form.Label>
-        //             <Form.Control type="text" placeholder="End Year" defaultValue={state.endYear} name="endYear"  onChange={handleChange}/>   
-        //     </Col>
-        //     </Form.Row>
-        //     <Form.Row>
-        //         <Col>
-        //             <Form.Label>Type: </Form.Label>
-        //                 <Form.Control as="select" name ="type" onChange={handleChange}>
-        //                     {ContentTypes.map(type => <option value={type.id}>{type.title}</option>)}              
-        //                 </Form.Control>       
-        //         </Col>
-        //         <Col>
-        //             <Form.Label>Genre: </Form.Label>
-        //             <Form.Control as="select" name="genreID" onChange={handleChange}>
-        //                 {Genres.map(genre => <option value={genre.id}>{genre.title}</option>)}
-        //             </Form.Control>
-        //         </Col>
-        //     </Form.Row>
-        //     <Form.Row>
-        //         <Col>
-        //             <Form.Label>Lowest IMDB Score: </Form.Label>
-        //             <Form.Control type="text" placeholder="Minimum IMDB score" defaultValue={state.imdbMin} name="imdbMin" onChange={handleChange}/>
-        //         </Col>
-        //         <Col>
-        //             <Form.Label>Highest IMDB Score: </Form.Label>
-        //             <Form.Control type="text" placeholder="Maximum IMDB score" defaultValue={state.imdbMax} name="imdbMax"  onChange={handleChange}/>   
-        //     </Col>
-        //     </Form.Row>
-        //     <Button 
-        //         variant="danger" 
-        //         value="Search"
-        //         style ={{marginTop:'10px'}} 
-        //         onClick={()=>{ performAdvancedSearch()}}>
-        //             Search
-        //     </Button>
-        //     </Form> */}
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+    <div style={{display:'flex'}}>
+      <label style={{width: '150px'}}>{label}</label>
+      <div>
+        <input style={{width: '200px'}} {...input} placeholder={label} type={type}/>
+        {touched && ((error && <span style={{color: 'red'}}>{error}</span>) || (warning && <span>{warning}</span>))}
+      </div>
     </div>
-)
-    }
+  )
+
+let AdvancedSearch = (props) =>  {
+    const {handleSubmit, pristine, reset, submitting} = props;
+    return (
+        <div> 
+            
+                <Col>
+                <h6><strong>Advanced Search</strong></h6>
+                <Form onSubmit={handleSubmit}>
+
+                            <Field  name="startYear" label="Start Year" component={renderField} type="text"  validate={[ required, minYear1900, maxYear2019 ]}/>
+                            <Field name="endYear" label="End Year" fullWidth component={renderField} type="text"  validate={[ required ]}/>
+                            <Field name="type" label="Type" component={renderField} type="text"  validate={[ required ]}/>
+                            <Field name="genre" label="Genre" component={renderField} type="text"  validate={[ required ]}/>
+                            <Field name="imdbMin" label="Min IMDB Score" component={renderField} type="text"  validate={[ required ]}/>
+                            <Field name="imdbMax" label="Max IMDB Score" component={renderField} type="text" validate={[ required ]}/>
+                            <Button type='submit' variant='danger'style={{marginTop:'5px'}}>Search</Button>
+                    </Form>
+                </Col>
+              
+        </div>
+    )
 }
+
 // const mapStateToProps = (state) => {
 //     return {
 //         currentYear: state.currentYear,

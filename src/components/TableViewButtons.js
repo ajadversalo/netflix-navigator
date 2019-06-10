@@ -20,8 +20,8 @@ const TableViewButtons = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        view: state.view,
-        count: state.count
+        view: state.main.view,
+        count: state.main.count
     }
 }
 

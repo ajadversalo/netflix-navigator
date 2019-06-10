@@ -10,9 +10,9 @@ import TableViewButtons from './TableViewButtons';
 /* This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
 const TableContainer = (props) => {
 
-    if (!props.allTitles) {
-        return null;
-    }
+    // if (!props.allTitles) {
+    //     return null;
+    // }
 
     return (     
         <div>
@@ -38,8 +38,8 @@ const TableContainer = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        allTitles: state.allTitles,
-        view: state.view
+        allTitles: state.main.allTitles,
+        view: state.main.view
     }
 }
 

@@ -48,7 +48,7 @@ render(){
 
 const mapStateToProps = (state) => {
   return {
-      titleDetail: state.titleDetail,
+      titleDetail: state.main.titleDetail,
   }
 }
 

@@ -19,9 +19,9 @@ const TableIcon = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        allTitles: state.allTitles,
-        count: state.count,
-        view: state.view,
+        allTitles: state.main.allTitles,
+        count: state.main.count,
+        view: state.main.view,
     }
 }
 

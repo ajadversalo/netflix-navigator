@@ -23,7 +23,7 @@ const TableList = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        allTitles: state.allTitles,
+        allTitles: state.main.allTitles,
     }
 }
 

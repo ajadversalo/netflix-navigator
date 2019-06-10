@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import * as actionCreator from '../actions/actions';
 import { clearAllContent, fetchNewTitles, fetchTitles, handleChange, luckyPick} from '../actions/actions';
 import { bindActionCreators } from 'redux';
+import AdvancedSearch from '../components/AdvancedSearch';
 
 {/*This navbar component links to the following functions
     1. What's New - Displays new content from the past 7 days
@@ -42,6 +43,9 @@ const NetflixNav = (props) => {
                     <NavDropdown.Divider />
                     <NavDropdown.Item className='dropdown-submenu'href="#">Top Rated</NavDropdown.Item>
                 </NavDropdown>
+                <NavDropdown title="Advanced Search">
+                       <AdvancedSearch/>
+                </NavDropdown>
             </Nav>
             
             {/* Quick Search  */}
@@ -72,8 +76,8 @@ const NetflixNav = (props) => {
 const mapStateToProps = (state) => {
     console.log('mapStateToProps', state);
     return {
-        currentYear: state.currentYear,
-        searchString: state.searchString
+        currentYear: state.main.currentYear,
+        searchString: state.main.searchString
     }
 }
 

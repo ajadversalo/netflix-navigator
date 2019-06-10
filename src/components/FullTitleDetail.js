@@ -76,9 +76,9 @@ const FullTitleDetail = (props) => {
 const mapStateToProps = (state) => {
     console.log('mapStateToProps', state);
     return {
-        titleDetail: state.titleDetail,
-        titleDetailPlot: state.titleDetailPlot,
-        titleDetailActors: state.titleDetailActors
+        titleDetail: state.main.titleDetail,
+        titleDetailPlot: state.main.titleDetailPlot,
+        titleDetailActors: state.main.titleDetailActors
     }
 }
 

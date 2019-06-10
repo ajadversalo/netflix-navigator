@@ -1,46 +1,58 @@
 import React from 'react';
-import {Jumbotron, Badge, Row, Col} from 'react-bootstrap';
+import {Jumbotron, Badge, Row, Col, Button, OverlayTrigger, Popover} from 'react-bootstrap';
 import AdvancedSearch from '../components/AdvancedSearch';
 import {connect} from 'react-redux';
 import * as Constants from '../data/Constants';
-import { fetchNewTitles, luckyPick} from '../actions/actions';
+import {fetchTitles} from '../actions/actions';
 import Carousel from '../components/Carousel';
 import { bindActionCreators } from 'redux';
 
 {/* Intro page containing a list of the new content and the advanced search form*/}
 
-const submit = (values) => {
-    console.log('submit values',values);
-}
-
 let Intro = (props) => {
-    
 
+     const submit = (values) => {
+        console.log('start Year is:',values);
+            props.fetchTitles('',
+            values.startYear,
+            values.endYear,
+            values.type,
+            values.genre,
+            values.imdbMin,
+            values.imdbMax
+        );
+    }
+    
+    const popover = (
+        <Popover id="popover-basic" title="Features">
+            <strong>What's New</strong>
+            <p>Display new titles added over the past week.</p>
+            <strong>Lucky Pick</strong>
+            <p>Can't decide what to watch? Let us do that for you.</p>
+            <strong>Quick Search</strong> 
+            <p>Search content by title, actor or genre.</p>
+            <strong>Detailed Search</strong>
+            <p>Search using attributes.</p>
+            <strong>And best of all</strong>
+            <p>No active Netflix subscription required, browse before signing up!</p>
+        </Popover>
+    );
+          
     return (
         <Jumbotron >
             <Row>
                 <Col>
                 <h3>Welcome to Netflix Navigator! </h3>
                 <p>Spend less time browsing and more time watching.</p>
-                <hr />
-                <h5><Badge variant="danger">Features:</Badge></h5>
-                <ul>
-                    <li><a href='#' onClick={ props.fetchNewTitles}><b>What's New</b></a> - Display new titles added over the past week.</li>
-                    <li><a href='#' onClick={ () => props.luckyPick('', Constants.EARLIEST_PRODUCTION_YEAR, props.currentYear,
-                                                                          Constants.ALL_TYPES, Constants.ALL_GENRES, Constants.IMDB_LUCKYPICK_MIN, 
-                                                                          Constants.IMDB_LUCKYPICK_MAX)}><b>Lucky Pick</b></a> - Can't decide what to watch? Let us do that for you.
-                    </li>
-                    <li><b>Filters</b> - Display content categorized by genre</li>
-                    <li><b>Quick Search</b> - Search content by title, actor or genre</li>
-                    <li><b>Detailed Search</b> - Search using attributes</li>
-                    <li>And best of all, no active Netflix subscription required, browse before signing up!</li>
-                </ul>  
-                <hr /> 
+                <OverlayTrigger
+                    key={'bottom'}
+                    placement={'right'}
+                    overlay = {popover}>
+                    <Button variant="secondary">Getting Started</Button>
+                </OverlayTrigger>
                 </Col>
-                {/* <Col>
-                    <AdvancedSearch onSubmit={submit}/>
-                </Col> */}
             </Row>
+            <hr />
             <Row>
                 <Col><Carousel/></Col>
             </Row>
@@ -50,14 +62,12 @@ let Intro = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentYear: state.currentYear,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        fetchNewTitles: fetchNewTitles,
-        luckyPick: luckyPick
+        fetchTitles: fetchTitles
     }, dispatch)
 }
 
