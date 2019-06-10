@@ -1,7 +1,6 @@
 import React from 'react';
 import Intro from '../components/Intro.js'
 import {connect} from 'react-redux';
-import * as actionCreator from '../actions/actions';
 import TableIcon from './TableIcon';
 import TableDetail from './TableDetail';
 import TableList from './TableList';
@@ -10,13 +9,12 @@ import TableViewButtons from './TableViewButtons';
 /* This component displays a table with three different formats(Icon, Detail and List) depending on the view property received*/
 const TableContainer = (props) => {
 
-    // if (!props.allTitles) {
-    //     return null;
-    // }
+    if (!props.allTitles) {
+        return null;
+    }
 
     return (     
         <div>
-
             {/* View type selection buttons */}
             { props.allTitles.length > 0 && <TableViewButtons/> }
             
@@ -31,7 +29,6 @@ const TableContainer = (props) => {
            
             {/* List View */}
             {props.view === 'list' && <TableList sanitizeString={props.sanitizeString}/> }
-
         </div> 
     )
 }

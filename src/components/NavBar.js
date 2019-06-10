@@ -17,7 +17,6 @@ import AdvancedSearch from '../components/AdvancedSearch';
 const NetflixNav = (props) => {
 
     const submit = (values) => {
-        console.log('start Year is:',values);
             props.fetchTitles('',
             values.startYear,
             values.endYear,
@@ -103,14 +102,7 @@ const mapDispatchToProps = (dispatch) => {
         handleChange: handleChange,
         luckyPick: luckyPick
     }, dispatch)
-        // quickSearch: (searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax) => {
-        //     if(searchString === null || searchString.length < 3){ 
-        //         alert("Minimum search entry is 3 characters."); 
-        //     } else {
-        //         dispatch(actionCreator.fetchTitles(searchString, startYear, currentYear, allMediaTypes, genreID, imdbMin, imdbMax))
-        //     }  
-        // }
-    //}
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NetflixNav);

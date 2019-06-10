@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import * as actionCreator from '../actions/actions';
-import Icon from 'react-fa';
 import ProgressiveImage from 'react-progressive-image'
 
 const MainCarousel = (props) => {

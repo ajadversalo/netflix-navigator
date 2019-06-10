@@ -10,8 +10,6 @@ import { bindActionCreators } from 'redux';
 {/* Intro page containing a list of the new content and the advanced search form*/}
 
 let Intro = (props) => {
-
-     
     
     const popover = (
         <Popover id="popover-basic" title="Features">

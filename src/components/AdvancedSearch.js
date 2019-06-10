@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-
-import {Button, Col, Form as BootstrapForm} from 'react-bootstrap';
+import React from 'react';
+import {Button, Col} from 'react-bootstrap';
 import Genres from '../data/genres';
 import ContentTypes from '../data/contentTypes';
-import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
 import {reduxForm, Field, Form} from 'redux-form';
 
 
@@ -20,7 +17,6 @@ import {reduxForm, Field, Form} from 'redux-form';
 const required = value => value ? undefined : 'Required'
 const min = min => value => value && value < min ? `Min is ${min}` : undefined
 const max = max => value => value && value > max ? `Max is ${max}` : undefined
-
 const minYear1900 = min(1900)  
 const maxYear2019 = max(2019)  
 const minIMDB0 = min(0);
@@ -51,22 +47,21 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 let AdvancedSearch = (props) =>  {
     const {handleSubmit, pristine, reset, submitting} = props;
     return (
-        <div> 
-            
-                <Col>
-                <h6><strong>Advanced Search</strong></h6>
-                <hr/>
-                <Form onSubmit={handleSubmit}>
-                            <Field  name="startYear" label="Start Year" component={renderField} type="text" validate={[ required, minYear1900, maxYear2019 ]}/>
-                            <Field name="endYear" label="End Year" component={renderField} type="text"  validate={[ required, minYear1900, maxYear2019 ]}/>
-                            <Field name="type" label="Type" component={renderDropdownList} data={ContentTypes} type="text"  validate={[ required ]}/>
-                            <Field name="genre" label="Genre" component={renderDropdownList} data={Genres} type="text" validate={[ required ]}/>
-                            <Field name="imdbMin" label="Min IMDB Score" component={renderField} type="text"  validate={[ required, minIMDB0, maxIMDB10 ]}/>
-                            <Field name="imdbMax" label="Max IMDB Score" component={renderField} type="text" validate={[ required, minIMDB0, maxIMDB10 ]}/>
-                            <hr/>
-                            <Button type='submit' variant='danger'style={{marginTop:'5px'}}>Search</Button>
-                    </Form>
-                </Col>             
+        <div>  
+          <Col>
+            <h6><strong>Advanced Search</strong></h6>
+            <hr/>
+            <Form onSubmit={handleSubmit}>
+              <Field  name="startYear" label="Start Year" component={renderField} type="text" validate={[ required, minYear1900, maxYear2019 ]}/>
+              <Field name="endYear" label="End Year" component={renderField} type="text"  validate={[ required, minYear1900, maxYear2019 ]}/>
+              <Field name="type" label="Type" component={renderDropdownList} data={ContentTypes} type="text"  validate={[ required ]}/>
+              <Field name="genre" label="Genre" component={renderDropdownList} data={Genres} type="text" validate={[ required ]}/>
+              <Field name="imdbMin" label="Min IMDB Score" component={renderField} type="text"  validate={[ required, minIMDB0, maxIMDB10 ]}/>
+              <Field name="imdbMax" label="Max IMDB Score" component={renderField} type="text" validate={[ required, minIMDB0, maxIMDB10 ]}/>
+              <hr/>
+              <Button type='submit' variant='danger'style={{marginTop:'5px'}}>Search</Button>
+            </Form>
+          </Col>             
         </div>
     )
 }
