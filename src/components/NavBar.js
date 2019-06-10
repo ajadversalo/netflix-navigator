@@ -15,6 +15,19 @@ import AdvancedSearch from '../components/AdvancedSearch';
     4. Quick Search - Enables text input of title, actor or genre */}
 
 const NetflixNav = (props) => {
+
+    const submit = (values) => {
+        console.log('start Year is:',values);
+            props.fetchTitles('',
+            values.startYear,
+            values.endYear,
+            values.type,
+            values.genre,
+            values.imdbMin,
+            values.imdbMax
+        );
+    }
+
     return (
         <Navbar bg="dark"  variant="dark" expand="lg">
         <Navbar.Brand href="#" onClick={props.clearAllContent} style={{color:'red'}}>Netflix Navigator</Navbar.Brand>
@@ -44,7 +57,7 @@ const NetflixNav = (props) => {
                     <NavDropdown.Item className='dropdown-submenu'href="#">Top Rated</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Advanced Search">
-                       <AdvancedSearch/>
+                       <AdvancedSearch onSubmit={submit}/>
                 </NavDropdown>
             </Nav>
             

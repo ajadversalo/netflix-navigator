@@ -11,17 +11,7 @@ import { bindActionCreators } from 'redux';
 
 let Intro = (props) => {
 
-     const submit = (values) => {
-        console.log('start Year is:',values);
-            props.fetchTitles('',
-            values.startYear,
-            values.endYear,
-            values.type,
-            values.genre,
-            values.imdbMin,
-            values.imdbMax
-        );
-    }
+     
     
     const popover = (
         <Popover id="popover-basic" title="Features">

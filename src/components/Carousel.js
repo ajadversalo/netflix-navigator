@@ -17,9 +17,6 @@ const MainCarousel = (props) => {
             offset={100}
             itemWidth={180}
             infinite
-            // arrowLeft={<a href="#"><h1 style={{color:'#d33030'}}><Icon className="icon-example" name="arrow-circle-left"/></h1></a>}
-            // arrowRight={<a href="#"><h1 style={{color:'#d33030'}}><Icon className="icon-example" name="arrow-circle-right"/></h1></a>}
-            // addArrowClickHandler
             >
             {props.episodes.map(title => <a href="#" onClick={()=>{props.fetchTitleDetail(title.netflixid)}}>
             <ProgressiveImage  src={title.image} placeholder={require('../default.jpg')}>
