@@ -12,6 +12,7 @@ import TableContainer from '../src/components/TableContainer.js';
 import {connect} from 'react-redux';
 import * as actionCreator from '../src/actions/actions';
 import style from '../src/index.css';
+import Footer from './components/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +41,8 @@ render(){
     <Container style={style}>
       <NavBar/>
       { this.props.titleDetail && <FullTitleDetail sanitizeString={this.sanitizeString}/> }
-      <TableContainer sanitizeString={this.sanitizeString}/>      
+      <TableContainer sanitizeString={this.sanitizeString}/> 
+      <Footer/>
     </Container>
     )
   }

@@ -1,0 +1,29 @@
+.footer {
+    background-color: #F8F8F8;
+    border-top: 1px solid #E7E7E7;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    background-color: white;
+  }
+
+.phantom {
+    display: block;
+    padding: 20px;
+    height: 60px;
+    width: 100%;
+    background-color: #343A40;
+}
+
+a {
+    color:#343A40;   
+}
+
+a:hover {
+    color: #343A40;   
+}
+
