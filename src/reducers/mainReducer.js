@@ -1,4 +1,4 @@
-import * as Constants from '../data/Constants';
+import * as Constants from '../data/constants';
 
 const initialState = {
     allTitles:  [],

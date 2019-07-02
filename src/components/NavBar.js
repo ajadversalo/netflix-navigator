@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
-import * as Constants from '../data/Constants';
+import * as Constants from '../data/constants';
 import Genres from '../data/genres';
 import {connect} from 'react-redux';
 import * as actionCreator from '../actions/actions';

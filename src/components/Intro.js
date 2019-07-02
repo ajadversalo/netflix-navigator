@@ -2,7 +2,7 @@ import React from 'react';
 import {Jumbotron, Badge, Row, Col, Button, OverlayTrigger, Popover} from 'react-bootstrap';
 import AdvancedSearch from '../components/AdvancedSearch';
 import {connect} from 'react-redux';
-import * as Constants from '../data/Constants';
+import * as Constants from '../data/constants';
 import {fetchTitles} from '../actions/actions';
 import Carousel from '../components/Carousel';
 import { bindActionCreators } from 'redux';
@@ -41,9 +41,9 @@ let Intro = (props) => {
                 </Col>
             </Row>
             <hr />
-            <Row>
+            {/* <Row>
                 <Col><Carousel/></Col>
-            </Row>
+            </Row> */}
         </Jumbotron>
     )
 }
