@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/netflix-navigator/static/css/main.4d1bc642.chunk.css",
-    "main.js": "/netflix-navigator/static/js/main.90f41ae3.chunk.js",
-    "main.js.map": "/netflix-navigator/static/js/main.90f41ae3.chunk.js.map",
+    "main.js": "/netflix-navigator/static/js/main.c15f0b00.chunk.js",
+    "main.js.map": "/netflix-navigator/static/js/main.c15f0b00.chunk.js.map",
     "runtime~main.js": "/netflix-navigator/static/js/runtime~main.3cefd054.js",
     "runtime~main.js.map": "/netflix-navigator/static/js/runtime~main.3cefd054.js.map",
     "static/css/2.12f4fb11.chunk.css": "/netflix-navigator/static/css/2.12f4fb11.chunk.css",
     "static/js/2.523a0e5c.chunk.js": "/netflix-navigator/static/js/2.523a0e5c.chunk.js",
     "static/js/2.523a0e5c.chunk.js.map": "/netflix-navigator/static/js/2.523a0e5c.chunk.js.map",
     "index.html": "/netflix-navigator/index.html",
-    "precache-manifest.7457c169b8253fad8357f25007671e1f.js": "/netflix-navigator/precache-manifest.7457c169b8253fad8357f25007671e1f.js",
+    "precache-manifest.0813efe512d6c4b884a27ec113aee0cb.js": "/netflix-navigator/precache-manifest.0813efe512d6c4b884a27ec113aee0cb.js",
     "service-worker.js": "/netflix-navigator/service-worker.js",
     "static/css/2.12f4fb11.chunk.css.map": "/netflix-navigator/static/css/2.12f4fb11.chunk.css.map",
     "static/css/main.4d1bc642.chunk.css.map": "/netflix-navigator/static/css/main.4d1bc642.chunk.css.map"
