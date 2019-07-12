@@ -2,7 +2,7 @@ let NetflixAPI = {};
 const baseUrl = 'https://unogs-unogs-v1.p.rapidapi.com/';
 const _headers = new Headers();
 _headers.append('X-RapidAPI-Host','unogs-unogs-v1.p.rapidapi.com');
-_headers.append('X-RapidAPI-Key','cf523eed82mshed7e62394e60ba7p1091d6jsn2c974a328b5')
+_headers.append('X-RapidAPI-Key','cf523eed82mshed7e62394e60ba7p1091d6jsn2c974a328b59')
 
 NetflixAPI.getNewTitles = (callback) => {
     let request = new Request(`${baseUrl}/aaapi.cgi?q=get:new7:CA&p=1&t=ns&st=adv`,  {

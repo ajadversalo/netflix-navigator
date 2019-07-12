@@ -41,9 +41,9 @@ let Intro = (props) => {
                 </Col>
             </Row>
             <hr />
-            {/* <Row>
+            <Row>
                 <Col><Carousel/></Col>
-            </Row> */}
+            </Row>
         </Jumbotron>
     )
 }
