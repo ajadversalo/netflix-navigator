@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import * as actionCreator from '../src/actions/actions';
 import style from '../src/index.css';
 import Footer from './components/Footer';
+import {Helmet} from 'react-helmet';
 
 class App extends Component {
   constructor(props) {
@@ -38,12 +39,18 @@ sanitizeString = (string = '-no content-') => {
 
 render(){
   return (
-    <Container style={style}>
-      <NavBar/>
-      { this.props.titleDetail && <FullTitleDetail sanitizeString={this.sanitizeString}/> }
-      <TableContainer sanitizeString={this.sanitizeString}/> 
-      <Footer/>
-    </Container>
+    <div>
+      <Helmet>
+          <title>Netflix Navigator</title>
+          <meta name="description" content="Netflix by AJ Adversalo" />
+      </Helmet>
+      <Container style={style}>
+        <NavBar/>
+        { this.props.titleDetail && <FullTitleDetail sanitizeString={this.sanitizeString}/> }
+        <TableContainer sanitizeString={this.sanitizeString}/> 
+        <Footer/>
+      </Container>
+    </div>
     )
   }
 }
