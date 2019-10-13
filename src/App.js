@@ -43,6 +43,7 @@ render(){
       <Helmet>
           <title>Netflix Navigator</title>
           <meta name="description" content="Netflix by AJ Adversalo" />
+          <meta name="author" content="AJ Adversalo" />
       </Helmet>
       <Container style={style}>
         <NavBar/>
