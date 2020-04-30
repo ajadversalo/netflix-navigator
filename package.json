@@ -6,7 +6,7 @@
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.10.17",
     "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mdbreact": "^4.13.0",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
